@@ -6,3 +6,18 @@
 .routeInput {
   @apply w-full;
 }
+
+.RouteWrapper {
+  /*   background-color: black; */
+}
+
+.RouteLabel {
+  padding-bottom: 0.5rem;
+}
+
+.firstPointInput,
+.firstPointMessageInput,
+.secondPointInput,
+.secondPointMessageInput {
+  min-height: 2.5rem;
+}

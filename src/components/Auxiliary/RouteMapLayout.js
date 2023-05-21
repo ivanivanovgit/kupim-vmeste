@@ -79,69 +79,76 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
 
           {/* Форма для добавления маршрутов */}
           <form onSubmit={handleSubmit(handleFormAddRoute)}>
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setFirstPoint}
-              ref={(e) => {
-                setFirstPointRef(e);
-                firstPointRef.current = e;
-              }}
-              placeholder="&nbsp;&nbsp;&nbsp;Введите адрес первой точки маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе первой точки маршрута"
-            />
-            {setFirstPointError && (
-              <div className={layoutStyles.warning}>
-                {setFirstPointError.message}
-              </div>
-            )}
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setMessageFirstPoint}
-              ref={(e) => {
-                setMessageFirstPointRef(e);
-              }}
-              placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение для первой точки маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для первой точки маршрута"
-            />
-            {setMessageFirstPointError && (
-              <div className={layoutStyles.warning}>
-                {setMessageFirstPointError.message}
-              </div>
-            )}
-
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setSecondPoint}
-              ref={(e) => {
-                setSecondPointRef(e);
-                secondPointRef.current = e;
-              }}
-              placeholder="&nbsp;&nbsp;&nbsp;Введите адрес второй точки маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе второй точки маршрута"
-            />
-            {setSecondPointError && (
-              <div className={layoutStyles.warning}>
-                {setSecondPointError.message}
-              </div>
-            )}
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setMessageSecondPoint}
-              ref={(e) => {
-                setMessageSecondPointRef(e);
-              }}
-              placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение для второй точки маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для второй точки маршрута"
-            />
-            {setMessageSecondPointError && (
-              <div className={layoutStyles.warning}>
-                {setMessageSecondPointError.message}
-              </div>
-            )}
+            <div className={layoutStyles.firstPointInput}>
+              <input
+                className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
+                {...setFirstPoint}
+                ref={(e) => {
+                  setFirstPointRef(e);
+                  firstPointRef.current = e;
+                }}
+                placeholder="&nbsp;&nbsp;&nbsp;Введите адрес первой точки маршрута"
+                pattern="^[^<>]+$"
+                title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе первой точки маршрута"
+              />
+              {setFirstPointError && (
+                <div className={layoutStyles.warning}>
+                  {setFirstPointError.message}
+                </div>
+              )}
+            </div>
+            <div className={layoutStyles.firstPointMessageInput}>
+              <input
+                className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
+                {...setMessageFirstPoint}
+                ref={(e) => {
+                  setMessageFirstPointRef(e);
+                }}
+                placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение для первой точки маршрута"
+                pattern="^[^<>]+$"
+                title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для первой точки маршрута"
+              />
+              {setMessageFirstPointError && (
+                <div className={layoutStyles.warning}>
+                  {setMessageFirstPointError.message}
+                </div>
+              )}
+            </div>
+            <div className={layoutStyles.secondPointInput}>
+              <input
+                className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
+                {...setSecondPoint}
+                ref={(e) => {
+                  setSecondPointRef(e);
+                  secondPointRef.current = e;
+                }}
+                placeholder="&nbsp;&nbsp;&nbsp;Введите адрес второй точки маршрута"
+                pattern="^[^<>]+$"
+                title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе второй точки маршрута"
+              />
+              {setSecondPointError && (
+                <div className={layoutStyles.warning}>
+                  {setSecondPointError.message}
+                </div>
+              )}
+            </div>
+            <div className={layoutStyles.secondPointMessageInput}>
+              <input
+                className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
+                {...setMessageSecondPoint}
+                ref={(e) => {
+                  setMessageSecondPointRef(e);
+                }}
+                placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение для второй точки маршрута"
+                pattern="^[^<>]+$"
+                title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для второй точки маршрута"
+              />
+              {setMessageSecondPointError && (
+                <div className={layoutStyles.warning}>
+                  {setMessageSecondPointError.message}
+                </div>
+              )}
+            </div>
             <button className={layoutStyles.mainButtonStyle} type="submit">
               Добавить маршрут на карту c сообщениями
             </button>
