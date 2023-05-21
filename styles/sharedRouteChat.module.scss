@@ -49,3 +49,7 @@ $rightSideColor: white;
   overflow: hidden;
   border-radius: 0.15rem;
 }
+
+.warning {
+  @extend %warning;
+}
