@@ -1,5 +1,5 @@
 import { useRouter } from "next/router";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 
 function ActiveLink({ children, href }) {
   const router = useRouter();

@@ -1,5 +1,5 @@
 import { createTheme } from "@mui/material/styles";
-import { Constants } from "../pages/api/CONSTANTS";
+import { Constants } from "./CONSTANTS";
 
 // Create a theme instance.
 const theme = createTheme({

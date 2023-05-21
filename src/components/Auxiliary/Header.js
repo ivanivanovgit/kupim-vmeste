@@ -3,7 +3,7 @@ import { Box, Grid, useTheme, useMediaQuery } from "@mui/material";
 import DrawerComp from "./DrawerComp";
 import ActiveLink from "./ActiveLink";
 import logo2 from "../../../public/images/logo2.png";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 
 const Header = ({ links }) => {
   const theme = useTheme();

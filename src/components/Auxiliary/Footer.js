@@ -1,5 +1,5 @@
 import { Box } from "@mui/material";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 const Footer = () => {
   return (
     <Box

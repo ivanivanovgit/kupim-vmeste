@@ -1,7 +1,7 @@
 import Header from "./Header";
 import Footer from "./Footer";
 import { Box } from "@mui/material";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 
 const linksArray = [
   { name: "Главная", id: 0, href: "/" },

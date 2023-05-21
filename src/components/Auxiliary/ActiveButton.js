@@ -1,7 +1,7 @@
 import { Button } from "@mui/material";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 
 function ActiveButton({ children, href }) {
   const router = useRouter();

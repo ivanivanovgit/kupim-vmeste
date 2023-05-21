@@ -9,7 +9,7 @@ import {
 import { useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ActiveLink from "./ActiveLink";
-import { Constants } from "../../../pages/api/CONSTANTS";
+import { Constants } from "../../CONSTANTS";
 
 const DrawerComp = ({ links }) => {
   const [open, setOpen] = useState(false);
