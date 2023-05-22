@@ -9,7 +9,7 @@ export const Constants = {
   menuHeight: "3rem",
   footerHeight: "2rem",
   firstFont: "Inter", // _app.js
-  withLogo: "150",
+  widthLogo: "150",
   heightLogo: "30",
 };
 

@@ -10,7 +10,6 @@ function RouteMap({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
-  setMessageSecondPoint,
   setErrorMessage,
 }) {
   const ymaps = useYMaps();
@@ -188,7 +187,7 @@ function RouteMap({
           const secondPlacemark = new ymaps.Placemark(
             secondCoords,
             {
-              balloonContent: setMessageSecondPoint.value,
+              balloonContent: setMessageFirstPoint.value,
             },
             {
               // balloon settings

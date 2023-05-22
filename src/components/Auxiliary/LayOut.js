@@ -6,12 +6,13 @@ import { Constants } from "../../CONSTANTS";
 const linksArray = [
   { name: "Главная", id: 0, href: "/" },
   { name: "Чат на карте", id: 1, href: "/chat-na-karte" },
-  { name: "Где купить", id: 2, href: "/gde-kupit" },
   {
-    name: "Как доставить",
-    id: 3,
+    name: "Поиск попутных машин",
+    id: 2,
     href: "/poisk-poputnyh-mashin-dlya-perevozki-gruza",
   },
+  { name: "Где купить", id: 3, href: "/gde-kupit" },
+  ,
   { name: "Блог", id: 4, href: "/my-blog" },
   ,
 ];

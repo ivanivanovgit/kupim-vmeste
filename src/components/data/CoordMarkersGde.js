@@ -1,3 +1,4 @@
+// CoordMarkersGde.js
 export const markers = [
   {
     idTab: 1,

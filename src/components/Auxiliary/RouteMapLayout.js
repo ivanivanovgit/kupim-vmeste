@@ -5,6 +5,7 @@ import { useForm, useController } from "react-hook-form";
 function RouteMapLayout({ mapRoute, layoutStyles }) {
   const [countMapRoute, setCountMapRoute] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
+  const [submitMessage, setSubmitMessage] = useState(""); //сообщение об успешной отправке формы
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 
@@ -18,17 +19,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
   } = useController({
     name: "firstPoint",
     control,
-    rules: { required: "Введите адрес первой точки маршрута" },
-    defaultValue: "",
-  });
-
-  const {
-    field: { ref: setMessageFirstPointRef, ...setMessageFirstPoint },
-    fieldState: { error: setMessageFirstPointError },
-  } = useController({
-    name: "messageFirstPoint",
-    control,
-    rules: { required: "Введите сообщение для первой точки маршрута" },
+    rules: { required: "Введите адрес пункта отправления" },
     defaultValue: "",
   });
 
@@ -38,23 +29,26 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
   } = useController({
     name: "secondPoint",
     control,
-    rules: { required: "Введите адрес второй точки маршрута" },
+    rules: { required: "Введите адрес пункта назначения" },
     defaultValue: "",
   });
 
   const {
-    field: { ref: setMessageSecondPointRef, ...setMessageSecondPoint },
-    fieldState: { error: setMessageSecondPointError },
+    field: { ref: setMessageFirstPointRef, ...setMessageFirstPoint },
+    fieldState: { error: setMessageFirstPointError },
   } = useController({
-    name: "messageSecondPoint",
+    name: "messageFirstPoint",
     control,
-    rules: { required: "Введите сообщение для второй точки маршрута" },
+    rules: { required: "Введите сообщение для маршрута" },
     defaultValue: "",
   });
 
   const handleFormAddRoute = (data) => {
     if (data) {
       setCountMapRoute((prev) => prev + 1);
+      setSubmitMessage(
+        'Маршрут добавлен, для добавления нового маршрута введите новые адреса, сообщение и нажмите на кнопку "Добавить маршрут"'
+      );
     }
   };
 
@@ -65,7 +59,6 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
     firstPointRef: firstPointRef.current,
     secondPointRef: secondPointRef.current,
     setMessageFirstPoint: setMessageFirstPoint,
-    setMessageSecondPoint: setMessageSecondPoint,
     setErrorMessage: setErrorMessage,
   });
 
@@ -84,30 +77,13 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
                 setFirstPointRef(e);
                 firstPointRef.current = e;
               }}
-              placeholder="&nbsp;Введите адрес первой точки маршрута"
+              placeholder="&nbsp;Адрес пункта отправления"
               pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе первой точки маршрута"
+              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе пункта отправления"
             />
             {setFirstPointError && (
               <div className={layoutStyles.smallWarning}>
                 {setFirstPointError.message}
-              </div>
-            )}
-          </div>
-          <div className={layoutStyles.firstPointMessageInput}>
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setMessageFirstPoint}
-              ref={(e) => {
-                setMessageFirstPointRef(e);
-              }}
-              placeholder="&nbsp;Введите сообщение для первой точки маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для первой точки маршрута"
-            />
-            {setMessageFirstPointError && (
-              <div className={layoutStyles.smallWarning}>
-                {setMessageFirstPointError.message}
               </div>
             )}
           </div>
@@ -119,9 +95,9 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
                 setSecondPointRef(e);
                 secondPointRef.current = e;
               }}
-              placeholder="&nbsp;Введите адрес второй точки маршрута"
+              placeholder="&nbsp;Адрес пункта назначения"
               pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе второй точки маршрута"
+              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе пункта назначения"
             />
             {setSecondPointError && (
               <div className={layoutStyles.smallWarning}>
@@ -129,30 +105,33 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               </div>
             )}
           </div>
-          <div className={layoutStyles.secondPointMessageInput}>
+          <div className={layoutStyles.firstPointMessageInput}>
             <input
               className={`${layoutStyles.mainInput} ${layoutStyles.routeInput}`}
-              {...setMessageSecondPoint}
+              {...setMessageFirstPoint}
               ref={(e) => {
-                setMessageSecondPointRef(e);
+                setMessageFirstPointRef(e);
               }}
-              placeholder="&nbsp;Введите сообщение для второй точки маршрута"
+              placeholder="&nbsp;Сообщение для маршрута"
               pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для второй точки маршрута"
+              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для маршрута"
             />
-            {setMessageSecondPointError && (
+            {setMessageFirstPointError && (
               <div className={layoutStyles.smallWarning}>
-                {setMessageSecondPointError.message}
+                {setMessageFirstPointError.message}
               </div>
             )}
           </div>
           <button className={layoutStyles.mainButtonStyle} type="submit">
-            Добавить маршрут на карту c сообщениями
+            Добавить маршрут
           </button>
         </form>
-        {errorMessage && (
-          <div className={layoutStyles.smallWarning}>{errorMessage}</div>
-        )}
+        <div className={layoutStyles.smallWarning}>
+          {errorMessage && <div>{errorMessage}</div>}
+          {submitMessage && ( // отображение сообщения после отправки
+            <div>{submitMessage}</div>
+          )}
+        </div>
       </div>
       <div className={layoutStyles.rightSide}>
         <div className={layoutStyles.forMap}>{mapRouteWithProps}</div>

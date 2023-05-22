@@ -27,7 +27,7 @@ const Header = ({ links }) => {
             <Image
               src={logo2}
               alt="logo2"
-              width={Constants.withLogo}
+              width={Constants.widthLogo}
               height={Constants.heightLogo}
               priority
             />
@@ -41,7 +41,7 @@ const Header = ({ links }) => {
               <Image
                 src={logo2}
                 alt="logo2"
-                width={Constants.withLogo}
+                width={Constants.widthLogo}
                 height={Constants.heightLogo}
                 priority
               />
