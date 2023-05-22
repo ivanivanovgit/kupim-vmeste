@@ -7,11 +7,12 @@
   @apply w-full;
 }
 
-.RouteWrapper {
-  /*   background-color: black; */
+.leftSide {
+  padding: 0rem;
 }
 
 .RouteLabel {
+  @extend %label;
   padding-bottom: 0.5rem;
 }
 
