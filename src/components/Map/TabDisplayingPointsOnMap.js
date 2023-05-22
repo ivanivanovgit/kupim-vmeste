@@ -73,7 +73,6 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
           ),
           ///
         });
-
         // Добавляем коллекцию меток в кластеризатор
         clusterer.add(marker);
         ///

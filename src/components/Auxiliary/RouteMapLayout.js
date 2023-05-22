@@ -49,6 +49,9 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
       setSubmitMessage(
         'Маршрут добавлен, для добавления нового маршрута введите новые адреса, сообщение и нажмите на кнопку "Добавить маршрут"'
       );
+      setTimeout(() => {
+        setSubmitMessage("");
+      }, 3000); // сбрасываем сообщение после 3 секунды
     }
   };
 

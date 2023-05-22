@@ -4,7 +4,7 @@ import DifferentMaps from "../src/components/Map/DifferentMaps";
 import HorizontTabsGde from "../src/components/Auxiliary/HorizontTabsGde";
 import VerticalTabsGde from "../src/components/Auxiliary/VerticalTabsGde";
 
-const Gdekupit = () => {
+const Gdekupit = ({ markers }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -14,7 +14,7 @@ const Gdekupit = () => {
         title: "Карта торфяных карьеров",
         content: (
           <div>
-            <DifferentMaps st={st} idTab={1} />
+            <DifferentMaps markers={markers} st={st} idTab={1} />
           </div>
         ),
       },
@@ -22,7 +22,7 @@ const Gdekupit = () => {
         title: "Карта производителей винтовых свай",
         content: (
           <div>
-            <DifferentMaps st={st} idTab={2} />
+            <DifferentMaps markers={markers} st={st} idTab={2} />
           </div>
         ),
       },
@@ -100,3 +100,12 @@ const Gdekupit = () => {
 };
 
 export default Gdekupit;
+
+export async function getStaticProps() {
+  const res = await fetch("http://localhost:3000/api/markers");
+  const markers = await res.json();
+
+  return {
+    props: { markers }, // будет передано в компонент в качестве props
+  };
+}

@@ -1,9 +1,9 @@
 // DifferentMaps.js
 import { YMaps } from "@pbe/react-yandex-maps";
-import { markers } from "../data/CoordMarkersGde";
+/* import { markers } from "../data/CoordMarkersGde"; */
 import TabDisplayingPointsOnMap from "./TabDisplayingPointsOnMap";
 
-function DifferentMaps({ st, idTab }) {
+function DifferentMaps({ markers, st, idTab }) {
   return (
     <YMaps
       query={{
