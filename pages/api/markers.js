@@ -1,3 +1,4 @@
+// markers.js
 import pool from "../../src/utils/db";
 
 export default async (_, res) => {
