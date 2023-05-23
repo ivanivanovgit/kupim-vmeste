@@ -102,7 +102,7 @@ const Gdekupit = ({ markers }) => {
 export default Gdekupit;
 
 export async function getStaticProps() {
-  const res = await fetch("http://localhost:3000/api/markers");
+  const res = await fetch(`${process.env.HOST_NAME}/api/markers`);
   const markers = await res.json();
 
   return {
