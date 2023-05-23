@@ -1,6 +1,7 @@
 // RouteMap.js
 import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
+import { getRoutes } from "../../utils/asyncFunctions";
 
 function RouteMap({
   mapStyle,
@@ -18,6 +19,17 @@ function RouteMap({
   const [selectedFirstAddress, setSelectedFirstAddress] = useState("");
   const [selectedSecondAddress, setSelectedSecondAddress] = useState("");
 
+  const [routes, setRoutes] = useState([]);
+
+  useEffect(() => {
+    const fetchRoutes = async () => {
+      const routesFromServer = await getRoutes();
+      setRoutes(routesFromServer);
+    };
+
+    fetchRoutes();
+  }, []);
+
   ///////// useEffect для инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
@@ -34,6 +46,37 @@ function RouteMap({
 
       const searchControl = myMap.controls.get("searchControl");
       searchControl.options.set("noPlacemark", "true");
+
+      routes.forEach((route) => {
+        const firstCoords = [route.first_latitude, route.first_longitude];
+        const secondCoords = [route.second_latitude, route.second_longitude];
+        const routeMessage = route.route_message;
+
+        const multiRoute = new ymaps.multiRouter.MultiRoute(
+          {
+            referencePoints: [firstCoords, secondCoords],
+            params: { routingMode: "auto", results: 1 },
+          },
+          {
+            // Отключаем видимость маркеров пути
+            wayPointVisible: false,
+          }
+        );
+
+        myMapRef.current.geoObjects.add(multiRoute);
+
+        // создаем Placemark для первой и второй точки маршрута
+        const firstPlacemark = new ymaps.Placemark(firstCoords, {
+          balloonContent: routeMessage,
+        });
+        const secondPlacemark = new ymaps.Placemark(secondCoords, {
+          balloonContent: routeMessage,
+        });
+
+        // добавляем Placemark на карту
+        myMapRef.current.geoObjects.add(firstPlacemark);
+        myMapRef.current.geoObjects.add(secondPlacemark);
+      });
 
       return () => {
         if (myMapRef.current) {

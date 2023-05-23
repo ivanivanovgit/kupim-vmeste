@@ -68,7 +68,9 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
   return (
     <div className={layoutStyles.wrapper}>
       <div className={layoutStyles.leftSide}>
-        <div className={layoutStyles.RouteLabel}>Добавьте маршрут на карту</div>
+        <div className={layoutStyles.RouteLabel}>
+          Просмотр и добавление маршрутов на карту
+        </div>
 
         {/* Форма для добавления маршрутов */}
         <form onSubmit={handleSubmit(handleFormAddRoute)}>
