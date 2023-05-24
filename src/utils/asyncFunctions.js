@@ -36,41 +36,6 @@ export async function addRoute(route) {
   }
 }
 
-// Получить информацию о маршруте по ID
-export async function getRouteById(routeId) {
-  try {
-    const response = await axios.get(`/api/routes/${routeId}`);
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-}
-
-// Обновить маршрут
-/* export async function updateRoute(routeId, updatedRoute) {
-  const {
-    first_latitude,
-    first_longitude,
-    second_latitude,
-    second_longitude,
-    message,
-  } = updatedRoute;
-
-  try {
-    const response = await axios.put(`/api/routes/${routeId}`, {
-      first_latitude,
-      first_longitude,
-      second_latitude,
-      second_longitude,
-      message,
-    });
-
-    return response.data;
-  } catch (error) {
-    console.error(error);
-  }
-} */
-
 // Удалить маршрут
 export async function deleteRoute(routeId) {
   try {

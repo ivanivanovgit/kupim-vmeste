@@ -1,6 +1,6 @@
 // /api/routes  index.js
 import pool from "../../../src/utils/db";
-
+/* TODO: перенести сюда функции из [routeId].js */
 export default async function handler(req, res) {
   if (req.method === "GET") {
     try {

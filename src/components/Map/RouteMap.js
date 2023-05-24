@@ -1,7 +1,14 @@
 // RouteMap.js
 import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
-import { getRoutes } from "../../utils/asyncFunctions";
+import { getRoutes, addRoute, deleteRoute } from "../../utils/asyncFunctions";
+
+import {
+  getPlacemarkOptions,
+  balloonContentTemplate,
+  buildFunction,
+  clearFunction,
+} from "../../utils/placemarkOptions";
 
 function RouteMap({
   mapStyle,
@@ -18,17 +25,6 @@ function RouteMap({
   const myMapRef = useRef(null);
   const [selectedFirstAddress, setSelectedFirstAddress] = useState("");
   const [selectedSecondAddress, setSelectedSecondAddress] = useState("");
-
-  const [routes, setRoutes] = useState([]);
-
-  useEffect(() => {
-    const fetchRoutes = async () => {
-      const routesFromServer = await getRoutes();
-      setRoutes(routesFromServer);
-    };
-
-    fetchRoutes();
-  }, []);
 
   ///////// useEffect для инициализации карты
   useEffect(() => {
@@ -47,37 +43,70 @@ function RouteMap({
       const searchControl = myMap.controls.get("searchControl");
       searchControl.options.set("noPlacemark", "true");
 
-      routes.forEach((route) => {
-        const firstCoords = [route.first_latitude, route.first_longitude];
-        const secondCoords = [route.second_latitude, route.second_longitude];
-        const routeMessage = route.route_message;
+      getRoutes().then((routes) => {
+        routes.forEach((route) => {
+          const routeId = route.id;
+          const firstCoords = [route.first_latitude, route.first_longitude];
+          const secondCoords = [route.second_latitude, route.second_longitude];
+          const routeMessage = route.route_message;
 
-        const multiRoute = new ymaps.multiRouter.MultiRoute(
-          {
-            referencePoints: [firstCoords, secondCoords],
-            params: { routingMode: "auto", results: 1 },
-          },
-          {
-            // Отключаем видимость маркеров пути
-            wayPointVisible: false,
-          }
-        );
+          const multiRoute = new ymaps.multiRouter.MultiRoute(
+            {
+              referencePoints: [firstCoords, secondCoords],
+              params: { routingMode: "auto", results: 1 },
+            },
+            {
+              // Отключаем видимость маркеров пути
+              wayPointVisible: false,
+            }
+          );
 
-        myMapRef.current.geoObjects.add(multiRoute);
+          myMapRef.current.geoObjects.add(multiRoute);
 
-        // создаем Placemark для первой и второй точки маршрута
-        const firstPlacemark = new ymaps.Placemark(firstCoords, {
-          balloonContent: routeMessage,
+          // Создаем макет балуна с кнопкой "Удалить маркер"
+          const MyBalloonContentLayout =
+            ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
+              build: buildFunction,
+              clear: clearFunction,
+              onButtonClick: async function () {
+                try {
+                  await deleteRoute(routeId);
+                  myMapRef.current.geoObjects.remove(firstPlacemark);
+                  myMapRef.current.geoObjects.remove(secondPlacemark);
+                  myMapRef.current.geoObjects.remove(multiRoute);
+                } catch (error) {
+                  console.error("Error deleting route: ", error);
+                }
+              },
+              onCloseButtonClick: function () {
+                firstPlacemark.balloon.close();
+                secondPlacemark.balloon.close();
+              },
+            });
+          ///////
+
+          // создаем Placemark для первой и второй точки маршрута
+          const firstPlacemark = new ymaps.Placemark(
+            firstCoords,
+            {
+              balloonContent: routeMessage,
+            },
+            getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+          );
+          const secondPlacemark = new ymaps.Placemark(
+            secondCoords,
+            {
+              balloonContent: routeMessage,
+            },
+            getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+          );
+
+          // добавляем Placemark на карту
+          myMapRef.current.geoObjects.add(firstPlacemark);
+          myMapRef.current.geoObjects.add(secondPlacemark);
         });
-        const secondPlacemark = new ymaps.Placemark(secondCoords, {
-          balloonContent: routeMessage,
-        });
-
-        // добавляем Placemark на карту
-        myMapRef.current.geoObjects.add(firstPlacemark);
-        myMapRef.current.geoObjects.add(secondPlacemark);
       });
-
+      ///
       return () => {
         if (myMapRef.current) {
           myMapRef.current.destroy();
@@ -131,134 +160,86 @@ function RouteMap({
             return;
           }
 
-          const route = new ymaps.multiRouter.MultiRoute(
-            {
-              referencePoints: [firstCoords, secondCoords],
-              params: {
-                routingMode: "auto",
-                results: 1, // Отображаем только один маршрут
-              },
-            },
-            {
-              // Отключаем видимость маркеров пути
-              wayPointVisible: false,
-            }
-          );
-
-          myMapRef.current.geoObjects.add(route);
-
-          // Создаем макет балуна с кнопкой "Удалить маркер"
-          const MyBalloonContentLayout =
-            ymaps.templateLayoutFactory.createClass(
-              '<div class="custom-balloon">' +
-                "$[properties.balloonContent]" +
-                '<div class="button-delete-marker"><button id="delete-marker-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></div>' +
-                '<div class="custom-orange-balloon__close">&times;</div>' +
-                "</div>",
-              {
-                build: function () {
-                  MyBalloonContentLayout.superclass.build.call(this);
-                  const button = this.getParentElement().querySelector(
-                    "#delete-marker-button"
-                  );
-                  button.addEventListener("click", this.onButtonClick);
-
-                  const closeButton = this.getParentElement().querySelector(
-                    ".custom-orange-balloon__close"
-                  );
-                  closeButton.addEventListener(
-                    "click",
-                    this.onCloseButtonClick
-                  );
-                },
-                clear: function () {
-                  const button = this.getParentElement().querySelector(
-                    "#delete-marker-button"
-                  );
-                  button.removeEventListener("click", this.onButtonClick);
-
-                  const closeButton = this.getParentElement().querySelector(
-                    ".custom-orange-balloon__close"
-                  );
-                  closeButton.removeEventListener(
-                    "click",
-                    this.onCloseButtonClick
-                  );
-
-                  MyBalloonContentLayout.superclass.clear.call(this);
-                },
-                onButtonClick: function () {
-                  myMapRef.current.geoObjects.remove(firstPlacemark);
-                  myMapRef.current.geoObjects.remove(secondPlacemark);
-                  myMapRef.current.geoObjects.remove(route);
-                },
-                onCloseButtonClick: function () {
-                  firstPlacemark.balloon.close();
-                  secondPlacemark.balloon.close();
-                },
-              }
-            );
-          ///////
-
-          const firstPlacemark = new ymaps.Placemark(
-            firstCoords,
-            {
-              balloonContent: setMessageFirstPoint.value,
-            },
-            {
-              // balloon settings
-              balloonLayout: "default#imageWithContent",
-              balloonAutoPan: true,
-              balloonPanelMaxMapArea: 0,
-              hideIconOnBalloonOpen: false,
-              balloonOffset: [18, -90],
-              balloonContentLayout: MyBalloonContentLayout,
-              balloonCloseButton: false,
-
-              /// icon settings
-              iconLayout: "default#image",
-              iconImageHref: "images/Orangemarker.png",
-              iconImageSize: [30, 43],
-              iconImageOffset: [-18, -43],
-              iconContentLayout: ymaps.templateLayoutFactory.createClass(
-                "<div>$[properties.iconContent]</div>"
-              ),
+          // Добавляем маршрут в базу данных
+          addRoute({
+            first_latitude: firstCoords[0],
+            first_longitude: firstCoords[1],
+            second_latitude: secondCoords[0],
+            second_longitude: secondCoords[1],
+            message: setMessageFirstPoint.value,
+          })
+            .then(({ id: routeId }) => {
               ///
-            }
-          );
 
-          const secondPlacemark = new ymaps.Placemark(
-            secondCoords,
-            {
-              balloonContent: setMessageFirstPoint.value,
-            },
-            {
-              // balloon settings
-              balloonLayout: "default#imageWithContent",
-              balloonAutoPan: true,
-              balloonPanelMaxMapArea: 0,
-              hideIconOnBalloonOpen: false,
-              balloonOffset: [18, -90],
-              balloonContentLayout: MyBalloonContentLayout,
-              balloonCloseButton: false,
+              const multiRoute = new ymaps.multiRouter.MultiRoute(
+                {
+                  referencePoints: [firstCoords, secondCoords],
+                  params: {
+                    routingMode: "auto",
+                    results: 1, // Отображаем только один маршрут
+                  },
+                },
+                {
+                  // Отключаем видимость маркеров пути
+                  wayPointVisible: false,
+                }
+              );
+              /*  multiRouteRef.current = multiRoute; */
+              myMapRef.current.geoObjects.add(multiRoute);
 
-              /// icon settings
-              iconLayout: "default#image",
-              iconImageHref: "images/Orangemarker.png",
-              iconImageSize: [30, 43],
-              iconImageOffset: [-18, -43],
-              iconContentLayout: ymaps.templateLayoutFactory.createClass(
-                "<div>$[properties.iconContent]</div>"
-              ),
-              ///
-            }
-          );
+              // Создаем макет балуна с кнопкой "Удалить маркер"
+              const MyBalloonContentLayout =
+                ymaps.templateLayoutFactory.createClass(
+                  balloonContentTemplate,
+                  {
+                    build: buildFunction,
+                    clear: clearFunction,
+                    onButtonClick: async function () {
+                      try {
+                        await deleteRoute(routeId);
+                        myMapRef.current.geoObjects.remove(firstPlacemark);
+                        myMapRef.current.geoObjects.remove(secondPlacemark);
+                        myMapRef.current.geoObjects.remove(multiRoute);
+                      } catch (error) {
+                        console.error("Error deleting route: ", error);
+                      }
+                    },
+                    onCloseButtonClick: function () {
+                      firstPlacemark.balloon.close();
+                      secondPlacemark.balloon.close();
+                    },
+                  }
+                );
+              ///////
 
-          myMapRef.current.geoObjects.add(firstPlacemark);
-          myMapRef.current.geoObjects.add(secondPlacemark);
+              const firstPlacemark = new ymaps.Placemark(
+                firstCoords,
+                {
+                  balloonContent: setMessageFirstPoint.value,
+                },
+                getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+              );
 
-          // Центр карты по координатам первой точки
-          myMapRef.current.setCenter(firstCoords);
+              const secondPlacemark = new ymaps.Placemark(
+                secondCoords,
+                {
+                  balloonContent: setMessageFirstPoint.value,
+                },
+                getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+              );
+
+              myMapRef.current.geoObjects.add(firstPlacemark);
+              myMapRef.current.geoObjects.add(secondPlacemark);
+
+              // Центр карты по координатам первой точки
+              myMapRef.current.setCenter(firstCoords);
+              /////
+            })
+            .catch((error) => {
+              // Обработка ошибок при добавлении маршрута в базу данных
+              console.error("Error adding route: ", error);
+            });
+          /// добавляем маршрут в базу данных
         })
         .catch((error) => {
           setErrorMessage(

@@ -130,6 +130,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
           <button className={layoutStyles.mainButtonStyle} type="submit">
             Добавить маршрут
           </button>
+          {/*  TODO: добавить кнопку "Очистить маршрут" */}
         </form>
         <div className={layoutStyles.smallWarning}>
           {errorMessage && <div>{errorMessage}</div>}
