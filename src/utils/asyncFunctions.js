@@ -1,6 +1,21 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Добавить маркер с сообшением
+export const addMarkerToDatabase = async (lat, lng, theme, message_markers) => {
+  try {
+    const response = await axios.post("/api/chat-markers", {
+      lat: lat,
+      lng: lng,
+      theme: theme,
+      message_markers: message_markers,
+    });
+    /*  console.log("Маркер успешно добавлен в БД с id: " + response.data.id); */
+  } catch (error) {
+    console.error("Ошибка при добавлении маркера в БД: ", error);
+  }
+};
+
 // Получить все маршруты
 export async function getRoutes() {
   try {
