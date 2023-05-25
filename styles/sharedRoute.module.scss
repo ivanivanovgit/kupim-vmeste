@@ -7,10 +7,6 @@
   @apply w-full;
 }
 
-.leftSide {
-  padding: 0rem;
-}
-
 .RouteLabel {
   @extend %label;
   margin-bottom: 0.5rem;
@@ -20,4 +16,13 @@
 .firstPointMessageInput,
 .secondPointInput {
   min-height: 2.5rem;
+}
+
+.buttonsRoute {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+.routeButton {
+  margin-bottom: 0.5rem;
 }

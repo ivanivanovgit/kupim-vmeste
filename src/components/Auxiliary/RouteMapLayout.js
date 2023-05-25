@@ -9,7 +9,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 
-  const { control, handleSubmit } = useForm({
+  const { control, handleSubmit, reset } = useForm({
     mode: "onBlur",
   });
 
@@ -53,6 +53,16 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
         setSubmitMessage("");
       }, 3000); // сбрасываем сообщение после 3 секунды
     }
+  };
+
+  const handleClearFields = () => {
+    reset({
+      firstPoint: "",
+      secondPoint: "",
+      messageFirstPoint: "",
+    });
+    setErrorMessage("");
+    setSubmitMessage("");
   };
 
   const mapRouteWithProps = React.cloneElement(mapRoute, {
@@ -127,10 +137,22 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               </div>
             )}
           </div>
-          <button className={layoutStyles.mainButtonStyle} type="submit">
-            Добавить маршрут
-          </button>
-          {/*  TODO: добавить кнопку "Очистить маршрут" */}
+          <div className={layoutStyles.buttonsRoute}>
+            <button
+              className={`${layoutStyles.mainButtonStyle} ${layoutStyles.routeButton}`}
+              type="submit"
+            >
+              Добавить маршрут
+            </button>
+
+            <button
+              className={`${layoutStyles.mainButtonStyle} ${layoutStyles.routeButton}`}
+              type="button"
+              onClick={handleClearFields}
+            >
+              Очистить поля
+            </button>
+          </div>
         </form>
         <div className={layoutStyles.smallWarning}>
           {errorMessage && <div>{errorMessage}</div>}
