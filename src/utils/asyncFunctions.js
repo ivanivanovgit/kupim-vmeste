@@ -1,6 +1,17 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Получить все маркеры с сообщениями
+export async function getMarkersFromDatabase() {
+  try {
+    const response = await axios.get("/api/chat-markers");
+    return response.data;
+  } catch (error) {
+    console.error(`Error in fetchMarkersFromDatabase: ${error.message}`);
+    return [];
+  }
+}
+
 // Добавить маркер с сообшением
 export const addMarkerToDatabase = async (lat, lng, theme, message_markers) => {
   try {
