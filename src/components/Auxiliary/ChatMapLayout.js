@@ -1,6 +1,7 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
 import { Divider, Select, MenuItem, FormControl, Orange } from "@mui/material";
+import { fetchThemes } from "../../../src/utils/asyncFunctions";
 
 function ChatMapLayout({ mapChat, layoutStyles }) {
   const [address, setAddress] = useState("");
@@ -140,6 +141,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     setSearchInput: setSearchInput,
     showAllMarkers: showAllMarkers,
   });
+
+  useEffect(() => {
+    fetchThemes().then((theme) => {
+      /*   console.log("theme", theme); */
+      setThemes(theme);
+    });
+  }, []);
 
   useEffect(() => {
     if (themes.length > 0 && !selectedTheme) {

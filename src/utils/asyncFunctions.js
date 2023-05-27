@@ -1,6 +1,16 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Извлечение тем из БД
+export async function fetchThemes() {
+  try {
+    const response = await axios.get("/api/chat-markers/themes");
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Получить все маркеры с сообщениями
 export async function getMarkersFromDatabase() {
   try {
