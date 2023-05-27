@@ -152,6 +152,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   useEffect(() => {
     if (themes.length > 0 && !selectedTheme) {
       setSelectedTheme(themes[0]);
+      /*  console.log("themes", themes); */
     }
   }, [themes]);
 

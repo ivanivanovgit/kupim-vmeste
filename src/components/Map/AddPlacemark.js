@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import {
   addMarkerToDatabase,
+  fetchMarkersByTheme,
   getMarkersFromDatabase,
 } from "../../utils/asyncFunctions";
 
@@ -190,7 +191,7 @@ function AddPlacemark({
 
     ////
     // Получаем маркеры из базы данных
-    getMarkersFromDatabase().then((markers) => {
+    fetchMarkersByTheme(selectedTheme).then((markers) => {
       const markerPromises = markers.map((marker) => {
         const coords = [marker.lat, marker.lng];
         const theme = marker.theme;
@@ -308,7 +309,7 @@ function AddPlacemark({
       }
     };
     ///////
-  }, [ymaps]);
+  }, [ymaps, selectedTheme]);
 
   //useEffect для добавления нового маркера по кнопке Добавить маркер
   useEffect(() => {

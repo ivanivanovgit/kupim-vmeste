@@ -4,7 +4,7 @@ export default async function themes(req, res) {
   if (req.method === "GET") {
     try {
       const result = await pool.query(
-        "SELECT DISTINCT theme FROM chat_markers"
+        "SELECT DISTINCT theme FROM chat_markers ORDER BY theme ASC"
       );
       res.status(200).json(result.rows.map((row) => row.theme));
     } catch (e) {
