@@ -8,9 +8,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [inputText, setInputText] = useState("");
   const [inputGroupText, setInputGroupText] = useState("");
   const [createMarker, setCreateMarker] = useState(0);
-  const [filtrMapMarker, setFiltrMapMarker] = useState(0);
-  /*  const [markers, setMarkers] = useState([]);  */
-  const [addedMarkers, setAddedMarkers] = useState([]);
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState("");
@@ -28,23 +25,23 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     event.preventDefault();
 
     // Проверяем есть ли маркеры с выбранной темой
-    const hasMarkersWithTheme = addedMarkers.some(
+    /* const hasMarkersWithTheme = addedMarkers.some(
       // TODO доработать проверку удаления темы
       (marker) => marker.themeMarker === selectedTheme
-    );
+    ); */
 
     // Если есть маркеры с выбранной темой, устанавливаем состояние ошибки и не удаляем тему
-    if (hasMarkersWithTheme) {
+    /*  if (hasMarkersWithTheme) {
       setDeleteThemeError(
         "Невозможно удалить тему, так как есть маркеры с этой темой."
       );
       return;
-    }
+    } */
 
-    const newThemes = themes.filter((theme) => theme !== selectedTheme);
+    /*   const newThemes = themes.filter((theme) => theme !== selectedTheme);
     setThemes(newThemes);
     setSelectedTheme(newThemes.length > 0 ? newThemes[0] : "");
-    setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы
+    setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы */
   }
 
   const handleShowAllMarkers = (event) => {
@@ -79,19 +76,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     setSelectedTheme(event.target.value);
   };
 
-  /*  const addMarker = (textTheme, coords, content) => {
-    if (textTheme != undefined && coords != undefined && content != undefined) {
-      setMarkers((prevMarkers) => [
-        ...prevMarkers,
-        {
-          themeMarker: textTheme,
-          coordinates: coords,
-          balloonContent: content,
-        },
-      ]);
-    }
-  };  */
-
   const handleAddressChange = (newAddress) => {
     setAddress(newAddress);
   };
@@ -122,24 +106,15 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     }
   };
 
-  const handleFormFilteredMarkers = (event) => {
-    event.preventDefault();
-    setShowAllMarkers((prevState) => (prevState = false));
-    setFiltrMapMarker((prevFiltrMark) => prevFiltrMark + 1);
-  };
-
   const mapChatWithProps = React.cloneElement(mapChat, {
     onAddressChange: handleAddressChange,
     inputText: inputText,
     createMarker: createMarker,
-    setAddedMarkers: setAddedMarkers,
-    filtrMapMarker: filtrMapMarker,
     selectedTheme: selectedTheme,
     setIsMarkerPlaced: setIsMarkerPlaced,
     searchButtonClick: searchButtonClick,
     searchInputRef: searchInputRef.current,
     setSearchInput: setSearchInput,
-    showAllMarkers: showAllMarkers,
   });
 
   useEffect(() => {
@@ -154,11 +129,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
       /*  console.log("themes", themes); */
     }
   }, [themes]);
-
-  /*  useEffect(() => {
-    console.log("addedMarkers array:", addedMarkers);
-    console.log("******");
-  }, [addedMarkers]); */
 
   /* useEffect(() => {
     console.log("Selected theme:", selectedTheme);
@@ -209,37 +179,12 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
         <Divider />
         {/* Форма для добавления темы*/}
         <div className={layoutStyles.addDeleteThemeWrapper}>
-          <div className={layoutStyles.addThemeLabel}>2. Задайте тему</div>
-          <form onSubmit={handleAddThemeFormSubmit}>
-            <input
-              className={`${layoutStyles.mainInput} ${layoutStyles.stretchInputAddTheme}`}
-              type="text"
-              name="filterTheme"
-              value={inputGroupText}
-              onChange={handleInputGroupChange}
-              placeholder="&nbsp;&nbsp;&nbsp;Введите тему для добавления"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, задайте тему"
-              required
-            />
-            <button className={layoutStyles.mainButtonStyle} type="submit">
-              Добавить
-            </button>
-          </form>
-          {/* Форма для фильтрации маркеров*/}
+          <div className={layoutStyles.addThemeLabel}>
+            2.Выберите или добавьте тему
+          </div>
+
+          {/* Форма для фильтрации маркеров по теме*/}
           <form>
-            <div className={layoutStyles.selectedThemeWrapper}>
-              <div className={layoutStyles.chosenTheme}>Выбранная тема: </div>
-              <div className={layoutStyles.selectedTheme}>
-                {selectedTheme}
-                {!selectedTheme && (
-                  <div className={layoutStyles.addressWarning}>
-                    *Добавьте тему
-                  </div>
-                )}
-              </div>
-            </div>
-            <div className={layoutStyles.listOfTheme}>Список тем:</div>
             <FormControl fullWidth size="small">
               <Select
                 value={selectedTheme}
@@ -269,22 +214,46 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                 ))}
               </Select>
             </FormControl>
-            <div className={layoutStyles.buttonThemeWrapper}>
-              <button
-                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.filtrMarkersButton}`}
-                onClick={handleFormFilteredMarkers}
-              >
-                Отфильтровать маркеры по теме
-              </button>
-              <button
-                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.showMarkersButton}`}
-                onClick={handleShowAllMarkers}
-              >
-                Показать все маркеры
-              </button>
+            <div className={layoutStyles.selectedThemeWrapper}>
+              <div className={layoutStyles.chosenTheme}>Выбранная тема: </div>
+              <div className={layoutStyles.selectedTheme}>
+                {selectedTheme}
+                {!selectedTheme && (
+                  <div className={layoutStyles.addressWarning}>
+                    *Добавьте тему
+                  </div>
+                )}
+              </div>
+            </div>
 
+            <button
+              className={`${layoutStyles.mainButtonStyle} ${layoutStyles.showMarkersButton}`}
+              onClick={handleShowAllMarkers}
+            >
+              Показать маркеры по всем темам
+            </button>
+          </form>
+          <form onSubmit={handleAddThemeFormSubmit}>
+            <input
+              className={`${layoutStyles.mainInput} ${layoutStyles.stretchInputAddTheme}`}
+              type="text"
+              name="filterTheme"
+              value={inputGroupText}
+              onChange={handleInputGroupChange}
+              placeholder="&nbsp;&nbsp;&nbsp;Введите тему для добавления"
+              pattern="^[^<>]+$"
+              title="Пожалуйста, задайте тему"
+              required
+            />
+            <div className={layoutStyles.delAddThemeButtonsWrapper}>
               <button
-                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteThemeButton}`}
+                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
+                type="submit"
+              >
+                Добавить тему
+              </button>
+              <button
+                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
                 onClick={onDeleteTheme}
               >
                 Удалить тему
@@ -317,7 +286,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
         </div>
         {showMessage && (
           <div className={layoutStyles.message}>
-            *Задайте тему и адреc, затем нажмите кнопку "Добавить на карту"
+            *Задайте тему и адреc, затем нажмите на кнопку "Добавить на карту"
           </div>
         )}
         {deleteThemeError && ( // TODO: доделать вывод ошибки

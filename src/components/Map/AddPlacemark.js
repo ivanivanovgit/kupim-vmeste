@@ -12,14 +12,11 @@ function AddPlacemark({
   onAddressChange,
   inputText,
   createMarker,
-  setAddedMarkers,
-  filtrMapMarker,
   selectedTheme,
   setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
   setSearchInput,
-  showAllMarkers,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -29,7 +26,6 @@ function AddPlacemark({
   const clustererRef = useRef(null);
 
   const [selectedAddress, setselectedAddress] = useState("");
-  // const [_, setAddedMarkers] = useState([]);
 
   let MyIconContentLayout;
 
@@ -271,10 +267,6 @@ function AddPlacemark({
             onButtonClick: function () {
               /*  myMapRef.current.geoObjects.remove(addPlacemark); */
               clustererRef.current.remove(addPlacemark);
-              // Обновляем состояние addedMarkers
-              /*  setAddedMarkers((prevMarkers) =>
-                prevMarkers.filter((marker) => marker !== addPlacemark)
-              ); */
             },
             onCloseButtonClick: function () {
               addPlacemark.balloon.close();
@@ -382,10 +374,6 @@ function AddPlacemark({
           onButtonClick: function () {
             /*  myMapRef.current.geoObjects.remove(addPlacemark); */
             clustererRef.current.remove(addPlacemark);
-            // Обновляем состояние addedMarkers
-            setAddedMarkers((prevMarkers) =>
-              prevMarkers.filter((marker) => marker !== addPlacemark)
-            );
           },
           onCloseButtonClick: function () {
             addPlacemark.balloon.close();
@@ -424,46 +412,12 @@ function AddPlacemark({
       /*  myMapRef.current.geoObjects.add(addPlacemark); */
       clustererRef.current.add(addPlacemark);
 
-      // Update addedMarkers state
-      setAddedMarkers((prevMarkers) => [...prevMarkers, addPlacemark]);
       ///////
     });
     /*  if (typeof addMarker === "function") {
       addMarker(selectedTheme, currentCoords.current, inputText);
     } */
   }, [createMarker, ymaps]);
-
-  //useEffect для фильтрации маркеров
-  useEffect(() => {
-    if (filtrMapMarker === 0 || !myMapRef.current || !ymaps) {
-      return;
-    }
-
-    setAddedMarkers((prevMarkers) => {
-      prevMarkers.forEach((marker) => {
-        if (
-          showAllMarkers ||
-          (marker.properties.get("groupTheme") &&
-            marker.properties.get("groupTheme") === selectedTheme)
-        ) {
-          // Если маркер соответствует выбранной теме или showAllMarkers равно true, показываем его
-          if (clustererRef.current.getGeoObjects().indexOf(marker) === -1) {
-            /*   myMapRef.current.geoObjects.add(marker); */
-            clustererRef.current.add(marker);
-          }
-        } else {
-          // Если маркер не соответствует выбранной теме и showAllMarkers равно false, скрываем его
-          if (clustererRef.current.getGeoObjects().indexOf(marker) !== -1) {
-            /*  myMapRef.current.geoObjects.remove(marker); */
-            clustererRef.current.remove(marker);
-          }
-        }
-      });
-      return prevMarkers;
-    });
-
-    /*   console.log(`filtrMapMarker: ${filtrMapMarker}`); */
-  }, [filtrMapMarker, ymaps, showAllMarkers]);
 
   return <div ref={mapRef} className={mapStyle} />;
 }

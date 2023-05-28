@@ -2,7 +2,7 @@
 
 @import "sharedRouteChat.module.scss";
 
-%filtr {
+%adddelshow {
   font-size: 0.85rem;
   min-width: 1rem;
 }
@@ -53,11 +53,12 @@
 .addThemeLabel {
   @extend %label;
   margin-top: 0.4rem;
+  margin-bottom: 00.5rem;
 }
 
 .selectedThemeWrapper {
-  margin-top: 0.3rem;
-  margin-bottom: 0.3rem;
+  /* margin-top: 0.3rem; */
+  /*  margin-bottom: 0.5rem; */
 }
 .chosenTheme {
   font-size: 0.9rem;
@@ -70,9 +71,6 @@
   color: red;
 }
 
-.listOfTheme {
-  font-size: 0.9rem;
-}
 .stretchTheme {
   height: 1.7rem;
   margin-top: 0.3rem;
@@ -90,20 +88,20 @@
   background-color: #b0eced; /* #ade0fb; */ /* #0a93dd; */
 }
 
-.buttonThemeWrapper {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  flex-wrap: wrap;
+.showMarkersButton {
+  @extend %adddelshow;
+  margin-bottom: 0.8rem;
 }
 
-.filtrMarkersButton {
-  @extend %filtr;
-  margin-top: 0.1rem;
+.delAddThemeButtonsWrapper {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  /* margin-top: 0.3rem; */
 }
-.showMarkersButton,
-.deleteThemeButton {
-  @extend %filtr;
+
+.deleteAddThemeButton {
+  @extend %adddelshow;
   margin-top: 0.2rem;
 }
 
@@ -124,6 +122,4 @@
 
 .message {
   @extend %warning;
-
-  margin-left: 1rem;
 }

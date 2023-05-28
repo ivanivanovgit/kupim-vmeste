@@ -8,15 +8,11 @@ export default function MapChat({
   onAddressChange,
   inputText,
   createMarker,
-  /*  addMarker, */
-  setAddedMarkers,
-  filtrMapMarker,
   selectedTheme,
   setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
   setSearchInput,
-  showAllMarkers,
 }) {
   return (
     <YMaps
@@ -31,14 +27,11 @@ export default function MapChat({
         onAddressChange={onAddressChange}
         inputText={inputText}
         createMarker={createMarker}
-        setAddedMarkers={setAddedMarkers}
-        filtrMapMarker={filtrMapMarker}
         selectedTheme={selectedTheme}
         setIsMarkerPlaced={setIsMarkerPlaced}
         searchButtonClick={searchButtonClick}
         searchInputRef={searchInputRef}
         setSearchInput={setSearchInput}
-        showAllMarkers={showAllMarkers}
       />
     </YMaps>
   );
