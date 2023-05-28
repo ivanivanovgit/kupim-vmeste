@@ -144,7 +144,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   useEffect(() => {
     fetchThemes().then((theme) => {
-      /*   console.log("theme", theme); */
       setThemes(theme);
     });
   }, []);
@@ -156,18 +155,18 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     }
   }, [themes]);
 
-  useEffect(() => {
+  /*  useEffect(() => {
     console.log("addedMarkers array:", addedMarkers);
     console.log("******");
-  }, [addedMarkers]);
+  }, [addedMarkers]); */
 
-  useEffect(() => {
+  /* useEffect(() => {
     console.log("Selected theme:", selectedTheme);
-  }, [selectedTheme]);
+  }, [selectedTheme]); */
 
-  useEffect(() => {
+  /*  useEffect(() => {
     console.log("Themes array:", themes);
-  }, [themes]);
+  }, [themes]); */
 
   return (
     <div className={layoutStyles.wrapper}>

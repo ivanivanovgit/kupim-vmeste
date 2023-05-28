@@ -156,7 +156,7 @@ function AddPlacemark({
     if (selectedAddress) {
       setSearchInput(selectedAddress); // Устанавливаем значение поля ввода адреса
     }
-    console.log("selectedAddress", selectedAddress);
+    /*  console.log("selectedAddress", selectedAddress); */
   }, [selectedAddress, ymaps]);
 
   ///////// useEffect для поиска адреса по координатам
@@ -166,7 +166,7 @@ function AddPlacemark({
     }
   }, [searchButtonClick, ymaps]);
 
-  ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты
+  ///////// TODO: useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
       return;
@@ -189,6 +189,40 @@ function AddPlacemark({
     // Добавляем кластер на карту
     myMapRef.current.geoObjects.add(clustererRef.current);
 
+    // Слушаем клик на карте.
+    myMap.events.add("click", function (e) {
+      let coords = e.get("coords");
+      currentCoords.current = coords;
+
+      if (myPlacemarkRef.current) {
+        myPlacemarkRef.current.geometry.setCoordinates(coords);
+      } else {
+        createPlacemark(coords);
+        myMapRef.current.geoObjects.add(myPlacemarkRef.current);
+      }
+
+      getAddress(coords, myPlacemarkRef.current);
+    });
+
+    return () => {
+      if (myMapRef.current) {
+        myMapRef.current.destroy();
+      }
+    };
+    ///////
+  }, [ymaps]);
+
+  ///////// TODO: useEffect для извлечения маркеров на карту согласно выбранной теме
+  useEffect(() => {
+    if (!ymaps) {
+      return;
+    }
+    // Проверяем, существует ли clustererRef.current перед удалением маркеров
+    if (clustererRef.current) {
+      // Удаляем все маркеры из кластера
+      clustererRef.current.removeAll();
+    }
+
     ////
     // Получаем маркеры из базы данных
     fetchMarkersByTheme(selectedTheme).then((markers) => {
@@ -197,9 +231,9 @@ function AddPlacemark({
         const theme = marker.theme;
         const message = marker.message_markers;
 
-        console.log("coords", coords);
+        /*   console.log("coords", coords);
         console.log("theme", theme);
-        console.log("message", message);
+        console.log("message", message); */
         //////
         // Создаем макет балуна с кнопкой "Удалить маркер"
         const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -287,31 +321,10 @@ function AddPlacemark({
     });
     ////
 
-    /////////
-    // Слушаем клик на карте.
-    myMap.events.add("click", function (e) {
-      let coords = e.get("coords");
-      currentCoords.current = coords;
+    //////////////
+  }, [selectedTheme, ymaps]);
 
-      if (myPlacemarkRef.current) {
-        myPlacemarkRef.current.geometry.setCoordinates(coords);
-      } else {
-        createPlacemark(coords);
-        myMapRef.current.geoObjects.add(myPlacemarkRef.current);
-      }
-
-      getAddress(coords, myPlacemarkRef.current);
-    });
-
-    return () => {
-      if (myMapRef.current) {
-        myMapRef.current.destroy();
-      }
-    };
-    ///////
-  }, [ymaps, selectedTheme]);
-
-  //useEffect для добавления нового маркера по кнопке Добавить маркер
+  //  TODO: useEffect для добавления нового маркера по кнопке Добавить маркер
   useEffect(() => {
     if (
       createMarker === 0 ||
@@ -449,7 +462,7 @@ function AddPlacemark({
       return prevMarkers;
     });
 
-    console.log(`filtrMapMarker: ${filtrMapMarker}`);
+    /*   console.log(`filtrMapMarker: ${filtrMapMarker}`); */
   }, [filtrMapMarker, ymaps, showAllMarkers]);
 
   return <div ref={mapRef} className={mapStyle} />;
