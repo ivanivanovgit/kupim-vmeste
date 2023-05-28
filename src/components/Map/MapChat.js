@@ -9,10 +9,13 @@ export default function MapChat({
   inputText,
   createMarker,
   selectedTheme,
+  setSelectedTheme,
   setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
   setSearchInput,
+  showAllMarkers,
+  setShowAllMarkers,
 }) {
   return (
     <YMaps
@@ -28,10 +31,13 @@ export default function MapChat({
         inputText={inputText}
         createMarker={createMarker}
         selectedTheme={selectedTheme}
+        setSelectedTheme={setSelectedTheme}
         setIsMarkerPlaced={setIsMarkerPlaced}
         searchButtonClick={searchButtonClick}
         searchInputRef={searchInputRef}
         setSearchInput={setSearchInput}
+        showAllMarkers={showAllMarkers}
+        setShowAllMarkers={setShowAllMarkers}
       />
     </YMaps>
   );

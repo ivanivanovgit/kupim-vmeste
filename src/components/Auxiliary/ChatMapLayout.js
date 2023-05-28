@@ -111,10 +111,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     inputText: inputText,
     createMarker: createMarker,
     selectedTheme: selectedTheme,
+    setSelectedTheme: setSelectedTheme,
     setIsMarkerPlaced: setIsMarkerPlaced,
     searchButtonClick: searchButtonClick,
     searchInputRef: searchInputRef.current,
     setSearchInput: setSearchInput,
+    showAllMarkers: showAllMarkers,
+    setShowAllMarkers: setShowAllMarkers,
   });
 
   useEffect(() => {
@@ -220,7 +223,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                 {selectedTheme}
                 {!selectedTheme && (
                   <div className={layoutStyles.addressWarning}>
-                    *Добавьте тему
+                    *Выберите или добавьте тему
                   </div>
                 )}
               </div>

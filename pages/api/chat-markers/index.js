@@ -1,3 +1,4 @@
+// api/chat-markers/index.js
 import pool from "../../../src/utils/db";
 
 export default async function chatMarkers(req, res) {
