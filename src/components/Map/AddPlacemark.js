@@ -320,6 +320,7 @@ function AddPlacemark({
   }, [selectedTheme, ymaps]);
 
   //  TODO: useEffect для добавления нового маркера по кнопке Добавить маркер
+  // TODO: добавить проверку одинаковых координат
   useEffect(() => {
     if (
       createMarker === 0 ||

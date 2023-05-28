@@ -249,6 +249,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               required
             />
             <div className={layoutStyles.delAddThemeButtonsWrapper}>
+              {/*  TODO: добавить проверку на пробелы и пустую строку */}
               <button
                 className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
                 type="submit"
