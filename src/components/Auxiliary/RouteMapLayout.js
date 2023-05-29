@@ -93,8 +93,8 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
                 firstPointRef.current = e;
               }}
               placeholder="&nbsp;Адрес пункта отправления"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе пункта отправления"
+              pattern="^[^<>]*\S[^<>]*$"
+              title="Пожалуйста, не используйте < и >"
             />
             {setFirstPointError && (
               <div className={layoutStyles.smallWarning}>
@@ -111,8 +111,8 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
                 secondPointRef.current = e;
               }}
               placeholder="&nbsp;Адрес пункта назначения"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в адресе пункта назначения"
+              pattern="^[^<>]*\S[^<>]*$"
+              title="Пожалуйста, не используйте < и >"
             />
             {setSecondPointError && (
               <div className={layoutStyles.smallWarning}>
@@ -128,8 +128,8 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
                 setMessageFirstPointRef(e);
               }}
               placeholder="&nbsp;Сообщение для маршрута"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, не используйте символы ^[^<>]+$ в сообщении для маршрута"
+              pattern="^[^<>]*\S[^<>]*$"
+              title="Пожалуйста, не используйте < и >"
             />
             {setMessageFirstPointError && (
               <div className={layoutStyles.smallWarning}>

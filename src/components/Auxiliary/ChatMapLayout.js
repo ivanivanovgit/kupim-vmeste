@@ -159,8 +159,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="&nbsp;&nbsp;&nbsp;Введите адрес для поиска"
-              pattern="^[^<>]+$" /* TODO: Доделать патерны от СВО везде по проекту */
-              title="Пожалуйста, введите адрес"
+              pattern="^[^<>]*\S[^<>]*$" /* TODO: Доделать патерны от СВО везде по проекту */
+              title="Пожалуйста, введите адрес. Не используйте < и >"
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">
@@ -244,12 +244,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               value={inputGroupText}
               onChange={handleInputGroupChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите тему для добавления"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, задайте тему"
+              pattern="^[^<>]*\S[^<>]*$"
+              title="Пожалуйста, задайте тему. Не используйте < и >"
               required
             />
             <div className={layoutStyles.delAddThemeButtonsWrapper}>
-              {/*  TODO: добавить проверку на пробелы и пустую строку */}
               <button
                 className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
                 type="submit"
@@ -279,8 +278,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               value={inputText}
               onChange={handleInputChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение"
-              pattern="^[^<>]+$"
-              title="Пожалуйста, введите сообщение"
+              pattern="^[^<>]*\S[^<>]*$"
+              title="Пожалуйста, введите сообщение. Не используйте < и >"
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">

@@ -2,7 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import { getRoutes, addRoute, deleteRoute } from "../../utils/asyncFunctions";
-/* TODO: добавить проверку на пробелы в сообщении */
+
 import {
   getPlacemarkOptions,
   balloonContentTemplate,
