@@ -274,7 +274,7 @@ function AddPlacemark({
                 await removeMarkerFromDB(markerId);
                 clustererRef.current.remove(addPlacemark);
               } catch (error) {
-                console.error("Error deleting route: ", error);
+                console.error("Error deleting marker: ", error);
               }
             },
             onCloseButtonClick: function () {
@@ -347,8 +347,8 @@ function AddPlacemark({
       currentCoords.current[1],
       selectedTheme,
       inputText
-    ).then(({ id }) => {
-      console.log("markerId", id);
+    ).then(({ id: markerId }) => {
+      /*  console.log("markerId", markerId); */
       // Создаем макет балуна с кнопкой "Удалить маркер"
       const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
         '<div class="custom-balloon">' +
@@ -382,13 +382,13 @@ function AddPlacemark({
 
             MyBalloonContentLayout.superclass.clear.call(this);
           },
-          onButtonClick: /* async */ function () {
-            /* try {
+          onButtonClick: async function () {
+            try {
               await removeMarkerFromDB(markerId);
               clustererRef.current.remove(addPlacemark);
             } catch (error) {
-              console.error("Error deleting route: ", error);
-            } */
+              console.error("Error deleting marker: ", error);
+            }
           },
           onCloseButtonClick: function () {
             addPlacemark.balloon.close();
@@ -502,7 +502,7 @@ function AddPlacemark({
                     await removeMarkerFromDB(markerId);
                     clustererRef.current.remove(addPlacemark);
                   } catch (error) {
-                    console.error("Error deleting route: ", error);
+                    console.error("Error deleting marker: ", error);
                   }
                 },
                 onCloseButtonClick: function () {

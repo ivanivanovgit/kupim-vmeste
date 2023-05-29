@@ -53,6 +53,7 @@ export const addMarkerToDatabase = async (lat, lng, theme, message_markers) => {
       theme: theme,
       message_markers: message_markers,
     });
+    return response.data;
     /*  console.log("Маркер успешно добавлен в БД с markerId: " + response.data.markerId); */
   } catch (error) {
     console.error("Ошибка при добавлении маркера в БД: ", error);
