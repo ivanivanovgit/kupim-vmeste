@@ -5,6 +5,7 @@ import {
   addMarkerToDatabase,
   fetchMarkersByTheme,
   getMarkersFromDatabase,
+  removeMarkerFromDB,
 } from "../../utils/asyncFunctions";
 
 function AddPlacemark({
@@ -226,6 +227,7 @@ function AddPlacemark({
     // Получаем маркеры из базы данных
     fetchMarkersByTheme(selectedTheme).then((markers) => {
       const markerPromises = markers.map((marker) => {
+        const markerId = marker.id;
         const coords = [marker.lat, marker.lng];
         const theme = marker.theme;
         const message = marker.message_markers;
@@ -267,9 +269,13 @@ function AddPlacemark({
 
               MyBalloonContentLayout.superclass.clear.call(this);
             },
-            onButtonClick: function () {
-              /*  myMapRef.current.geoObjects.remove(addPlacemark); */
-              clustererRef.current.remove(addPlacemark);
+            onButtonClick: async function () {
+              try {
+                await removeMarkerFromDB(markerId);
+                clustererRef.current.remove(addPlacemark);
+              } catch (error) {
+                console.error("Error deleting route: ", error);
+              }
             },
             onCloseButtonClick: function () {
               addPlacemark.balloon.close();
@@ -341,7 +347,8 @@ function AddPlacemark({
       currentCoords.current[1],
       selectedTheme,
       inputText
-    ).then(() => {
+    ).then(({ id }) => {
+      console.log("markerId", id);
       // Создаем макет балуна с кнопкой "Удалить маркер"
       const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
         '<div class="custom-balloon">' +
@@ -375,9 +382,13 @@ function AddPlacemark({
 
             MyBalloonContentLayout.superclass.clear.call(this);
           },
-          onButtonClick: function () {
-            /*  myMapRef.current.geoObjects.remove(addPlacemark); */
-            clustererRef.current.remove(addPlacemark);
+          onButtonClick: /* async */ function () {
+            /* try {
+              await removeMarkerFromDB(markerId);
+              clustererRef.current.remove(addPlacemark);
+            } catch (error) {
+              console.error("Error deleting route: ", error);
+            } */
           },
           onCloseButtonClick: function () {
             addPlacemark.balloon.close();
@@ -437,6 +448,7 @@ function AddPlacemark({
 
       getMarkersFromDatabase().then((markers) => {
         const markerPromises = markers.map((marker) => {
+          const markerId = marker.id;
           const coords = [marker.lat, marker.lng];
           const theme = marker.theme;
           const message = marker.message_markers;
@@ -485,9 +497,13 @@ function AddPlacemark({
 
                   MyBalloonContentLayout.superclass.clear.call(this);
                 },
-                onButtonClick: function () {
-                  /*  myMapRef.current.geoObjects.remove(addPlacemark); */
-                  clustererRef.current.remove(addPlacemark);
+                onButtonClick: async function () {
+                  try {
+                    await removeMarkerFromDB(markerId);
+                    clustererRef.current.remove(addPlacemark);
+                  } catch (error) {
+                    console.error("Error deleting route: ", error);
+                  }
                 },
                 onCloseButtonClick: function () {
                   addPlacemark.balloon.close();

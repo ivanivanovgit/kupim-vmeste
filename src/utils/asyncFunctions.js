@@ -1,6 +1,18 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Удаление маркера из БД
+export async function removeMarkerFromDB(markerId) {
+  try {
+    const response = await axios.delete(
+      `/api/chat-markers/delete-marker/${markerId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Извлечение записей chat_markers по теме из БД
 export async function fetchMarkersByTheme(theme) {
   try {
@@ -41,7 +53,7 @@ export const addMarkerToDatabase = async (lat, lng, theme, message_markers) => {
       theme: theme,
       message_markers: message_markers,
     });
-    /*  console.log("Маркер успешно добавлен в БД с id: " + response.data.id); */
+    /*  console.log("Маркер успешно добавлен в БД с markerId: " + response.data.markerId); */
   } catch (error) {
     console.error("Ошибка при добавлении маркера в БД: ", error);
   }
