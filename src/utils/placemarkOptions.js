@@ -1,3 +1,4 @@
+// placemarkOptions.js
 export const balloonContentTemplate = `
   <div class="custom-balloon">
     $[properties.balloonContent]
