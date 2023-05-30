@@ -1,6 +1,18 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Проверка наличия маркеров в БД по теме
+export async function checkThemeHasMarkers(theme) {
+  try {
+    const response = await axios.get(`/api/chat-markers/has-markers/${theme}`);
+    const { hasMarkers } = response.data;
+    return hasMarkers;
+  } catch (error) {
+    console.error("Error while checking markers for theme: ", error);
+    throw error;
+  }
+}
+
 // Удаление маркера из БД
 export async function removeMarkerFromDB(markerId) {
   try {

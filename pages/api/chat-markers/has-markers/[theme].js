@@ -1,9 +1,9 @@
-// api/chat-markers/[filtrTheme].js
-import pool from "../../../src/utils/db";
+// api/chat-markers/has-markers/[theme].js
+import pool from "../../../../src/utils/db";
 
-export default async function filtrTheme(req, res) {
+export default async function themeHasMarkers(req, res) {
   if (req.method === "GET") {
-    const theme = req.query.filtrTheme;
+    const theme = req.query.theme;
 
     if (!theme) {
       res.status(400).json({ error: "Missing theme parameter" });
@@ -12,10 +12,10 @@ export default async function filtrTheme(req, res) {
 
     try {
       const result = await pool.query(
-        "SELECT * FROM chat_markers WHERE theme = $1 ORDER BY id ASC",
+        "SELECT COUNT(*) FROM chat_markers WHERE theme = $1",
         [theme]
       );
-      res.status(200).json(result.rows);
+      res.status(200).json({ hasMarkers: result.rows[0].count > 0 });
     } catch (e) {
       res.status(500).json({ error: e.message });
     }

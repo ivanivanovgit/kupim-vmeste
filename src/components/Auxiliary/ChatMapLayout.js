@@ -1,7 +1,10 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
 import { Divider, Select, MenuItem, FormControl, Orange } from "@mui/material";
-import { fetchThemes } from "../../../src/utils/asyncFunctions";
+import {
+  fetchThemes,
+  checkThemeHasMarkers,
+} from "../../../src/utils/asyncFunctions";
 
 function ChatMapLayout({ mapChat, layoutStyles }) {
   const [address, setAddress] = useState("");
@@ -14,34 +17,33 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [_, setThemeWarning] = useState(false);
   // состояние: размещен ли маркер на карте или нет
   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false);
-  const [showMessage, setShowMessage] = useState(false);
+  const [showMessage, setShowMessage] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [searchButtonClick, setSearchButtonClick] = useState(null);
   const searchInputRef = useRef(null);
   const [showAllMarkers, setShowAllMarkers] = useState(false);
   const [deleteThemeError, setDeleteThemeError] = useState("");
 
-  function onDeleteTheme(event) {
+  async function onDeleteTheme(event) {
     event.preventDefault();
 
-    // Проверяем есть ли маркеры с выбранной темой
-    /* const hasMarkersWithTheme = addedMarkers.some(
-      // TODO доработать проверку удаления темы
-      (marker) => marker.themeMarker === selectedTheme
-    ); */
+    const hasMarkers = await checkThemeHasMarkers(selectedTheme);
 
-    // Если есть маркеры с выбранной темой, устанавливаем состояние ошибки и не удаляем тему
-    /*  if (hasMarkersWithTheme) {
-      setDeleteThemeError(
-        "Невозможно удалить тему, так как есть маркеры с этой темой."
-      );
+    if (hasMarkers) {
+      setDeleteThemeError(`Удалите маркеры темы перед её удалением`);
+      setTimeout(() => {
+        setDeleteThemeError("");
+      }, 3000); // сбрасываем сообщение после 3 секунд
       return;
-    } */
+    }
 
-    /*   const newThemes = themes.filter((theme) => theme !== selectedTheme);
+    const newThemes = themes.filter((theme) => theme !== selectedTheme);
     setThemes(newThemes);
     setSelectedTheme(newThemes.length > 0 ? newThemes[0] : "");
-    setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы */
+    setDeleteThemeError(`Тема \"${selectedTheme}\"  удалена успешно.`);
+    setTimeout(() => {
+      setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы
+    }, 3000); // сбрасываем сообщение после 3 секунд
   }
 
   const handleShowAllMarkers = (event) => {
@@ -100,9 +102,12 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     }
 
     if (!isMarkerPlaced || !selectedTheme) {
-      setShowMessage(true);
+      setShowMessage("Задайте адрес и тему");
+      setTimeout(() => {
+        setShowMessage("");
+      }, 3000);
     } else {
-      setShowMessage(false);
+      setShowMessage("");
     }
   };
 
@@ -129,17 +134,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   useEffect(() => {
     if (themes.length > 0 && !selectedTheme) {
       setSelectedTheme(themes[0]);
-      /*  console.log("themes", themes); */
     }
   }, [themes]);
-
-  /* useEffect(() => {
-    console.log("Selected theme:", selectedTheme);
-  }, [selectedTheme]); */
-
-  /*  useEffect(() => {
-    console.log("Themes array:", themes);
-  }, [themes]); */
 
   return (
     <div className={layoutStyles.wrapper}>
@@ -150,7 +146,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           </div>
 
           <form onSubmit={handleSearchButtonClick}>
-            {/*    TODO: Доделать стиль ошибок */}
             <input
               className={`${layoutStyles.mainInput} ${layoutStyles.stretchInput}`}
               type="text"
@@ -180,13 +175,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           )}
         </div>
         <Divider />
-        {/* Форма для добавления темы*/}
+        {/* Форма для выбора и добавления темы*/}
         <div className={layoutStyles.addDeleteThemeWrapper}>
           <div className={layoutStyles.addThemeLabel}>
             2.Выберите или добавьте тему
           </div>
-
-          {/* Форма для фильтрации маркеров по теме*/}
           <form>
             <FormControl fullWidth size="small">
               <Select
@@ -288,12 +281,10 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           </form>
         </div>
         {showMessage && (
-          <div className={layoutStyles.message}>
-            *Задайте тему и адреc, затем нажмите на кнопку "Добавить на карту"
-          </div>
+          <div className={layoutStyles.message}>{showMessage}</div>
         )}
-        {deleteThemeError && ( // TODO: доделать вывод ошибки
-          <div className={layoutStyles.errorMessage}>{deleteThemeError}</div>
+        {deleteThemeError && (
+          <div className={layoutStyles.message}>{deleteThemeError}</div>
         )}
       </div>
       <div className={layoutStyles.rightSide}>

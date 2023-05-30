@@ -66,10 +66,6 @@
 .selectedTheme {
   font-size: 0.8rem;
 }
-.errorMessage {
-  @extend %warning;
-  color: red;
-}
 
 .stretchTheme {
   height: 1.7rem;

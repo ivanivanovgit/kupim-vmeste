@@ -51,7 +51,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
       );
       setTimeout(() => {
         setSubmitMessage("");
-      }, 3000); // сбрасываем сообщение после 3 секунды
+      }, 3000); // сбрасываем сообщение после 3 секунд
     }
   };
 
