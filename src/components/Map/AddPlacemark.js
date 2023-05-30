@@ -8,6 +8,13 @@ import {
   removeMarkerFromDB,
 } from "../../utils/asyncFunctions";
 
+import {
+  getPlacemarkOptions,
+  balloonContentTemplate,
+  buildFunction,
+  clearFunction,
+} from "../../utils/placemarkOptions";
+
 function AddPlacemark({
   mapStyle,
   onAddressChange,
@@ -238,37 +245,10 @@ function AddPlacemark({
         //////
         // Создаем макет балуна с кнопкой "Удалить маркер"
         const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-          '<div class="custom-balloon">' +
-            "$[properties.balloonContent]" +
-            '<div class="button-delete-marker"><button id="delete-marker-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></div>' +
-            '<div class="custom-orange-balloon__close">&times;</div>' +
-            "</div>",
+          balloonContentTemplate,
           {
-            build: function () {
-              MyBalloonContentLayout.superclass.build.call(this);
-              const button = this.getParentElement().querySelector(
-                "#delete-marker-button"
-              );
-              button.addEventListener("click", this.onButtonClick);
-
-              const closeButton = this.getParentElement().querySelector(
-                ".custom-orange-balloon__close"
-              );
-              closeButton.addEventListener("click", this.onCloseButtonClick);
-            },
-            clear: function () {
-              const button = this.getParentElement().querySelector(
-                "#delete-marker-button"
-              );
-              button.removeEventListener("click", this.onButtonClick);
-
-              const closeButton = this.getParentElement().querySelector(
-                ".custom-orange-balloon__close"
-              );
-              closeButton.removeEventListener("click", this.onCloseButtonClick);
-
-              MyBalloonContentLayout.superclass.clear.call(this);
-            },
+            build: buildFunction,
+            clear: clearFunction,
             onButtonClick: async function () {
               try {
                 await removeMarkerFromDB(markerId);
@@ -289,26 +269,7 @@ function AddPlacemark({
             balloonContent: message,
             groupTheme: theme,
           },
-          {
-            // balloon settings
-            balloonLayout: "default#imageWithContent",
-            balloonAutoPan: true,
-            balloonPanelMaxMapArea: 0,
-            hideIconOnBalloonOpen: false,
-            balloonOffset: [18, -90],
-            balloonContentLayout: MyBalloonContentLayout,
-            balloonCloseButton: false,
-
-            /// icon settings
-            iconLayout: "default#image",
-            iconImageHref: "images/Orangemarker.png",
-            iconImageSize: [30, 43],
-            iconImageOffset: [-18, -43],
-            iconContentLayout: ymaps.templateLayoutFactory.createClass(
-              "<div>$[properties.iconContent]</div>"
-            ),
-            ///
-          }
+          getPlacemarkOptions(MyBalloonContentLayout, ymaps)
         );
 
         clustererRef.current.add(addPlacemark);
@@ -316,7 +277,6 @@ function AddPlacemark({
         // Добавляем кластер на карту
         myMapRef.current.geoObjects.add(clustererRef.current);
 
-        /*  myMapRef.current.geoObjects.add(addPlacemark); */
         /////
       });
     });
@@ -337,51 +297,17 @@ function AddPlacemark({
       return;
     }
 
-    /*    console.log("currentCoords.current[0]", currentCoords.current[0]);
-    console.log("currentCoords.current[1]", currentCoords.current[1]);
-    console.log("selectedTheme", selectedTheme);
-    console.log("inputText", inputText); */
-
     addMarkerToDatabase(
       currentCoords.current[0],
       currentCoords.current[1],
       selectedTheme,
       inputText
     ).then(({ id: markerId }) => {
-      /*  console.log("markerId", markerId); */
-      // Создаем макет балуна с кнопкой "Удалить маркер"
       const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-        '<div class="custom-balloon">' +
-          "$[properties.balloonContent]" +
-          '<div class="button-delete-marker"><button id="delete-marker-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></div>' +
-          '<div class="custom-orange-balloon__close">&times;</div>' +
-          "</div>",
+        balloonContentTemplate,
         {
-          build: function () {
-            MyBalloonContentLayout.superclass.build.call(this);
-            const button = this.getParentElement().querySelector(
-              "#delete-marker-button"
-            );
-            button.addEventListener("click", this.onButtonClick);
-
-            const closeButton = this.getParentElement().querySelector(
-              ".custom-orange-balloon__close"
-            );
-            closeButton.addEventListener("click", this.onCloseButtonClick);
-          },
-          clear: function () {
-            const button = this.getParentElement().querySelector(
-              "#delete-marker-button"
-            );
-            button.removeEventListener("click", this.onButtonClick);
-
-            const closeButton = this.getParentElement().querySelector(
-              ".custom-orange-balloon__close"
-            );
-            closeButton.removeEventListener("click", this.onCloseButtonClick);
-
-            MyBalloonContentLayout.superclass.clear.call(this);
-          },
+          build: buildFunction,
+          clear: clearFunction,
           onButtonClick: async function () {
             try {
               await removeMarkerFromDB(markerId);
@@ -402,26 +328,7 @@ function AddPlacemark({
           balloonContent: inputText,
           groupTheme: selectedTheme,
         },
-        {
-          // balloon settings
-          balloonLayout: "default#imageWithContent",
-          balloonAutoPan: true,
-          balloonPanelMaxMapArea: 0,
-          hideIconOnBalloonOpen: false,
-          balloonOffset: [18, -90],
-          balloonContentLayout: MyBalloonContentLayout,
-          balloonCloseButton: false,
-
-          /// icon settings
-          iconLayout: "default#image",
-          iconImageHref: "images/Orangemarker.png",
-          iconImageSize: [30, 43],
-          iconImageOffset: [-18, -43],
-          iconContentLayout: ymaps.templateLayoutFactory.createClass(
-            "<div>$[properties.iconContent]</div>"
-          ),
-          ///
-        }
+        getPlacemarkOptions(MyBalloonContentLayout, ymaps)
       );
 
       /*  myMapRef.current.geoObjects.add(addPlacemark); */
@@ -453,63 +360,24 @@ function AddPlacemark({
           const theme = marker.theme;
           const message = marker.message_markers;
 
-          /*   console.log("coords", coords);
-          console.log("theme", theme);
-          console.log("message", message); */
           //////
           // Создаем макет балуна с кнопкой "Удалить маркер"
           const MyBalloonContentLayout =
-            ymaps.templateLayoutFactory.createClass(
-              '<div class="custom-balloon">' +
-                "$[properties.balloonContent]" +
-                '<div class="button-delete-marker"><button id="delete-marker-button">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</button></div>' +
-                '<div class="custom-orange-balloon__close">&times;</div>' +
-                "</div>",
-              {
-                build: function () {
-                  MyBalloonContentLayout.superclass.build.call(this);
-                  const button = this.getParentElement().querySelector(
-                    "#delete-marker-button"
-                  );
-                  button.addEventListener("click", this.onButtonClick);
-
-                  const closeButton = this.getParentElement().querySelector(
-                    ".custom-orange-balloon__close"
-                  );
-                  closeButton.addEventListener(
-                    "click",
-                    this.onCloseButtonClick
-                  );
-                },
-                clear: function () {
-                  const button = this.getParentElement().querySelector(
-                    "#delete-marker-button"
-                  );
-                  button.removeEventListener("click", this.onButtonClick);
-
-                  const closeButton = this.getParentElement().querySelector(
-                    ".custom-orange-balloon__close"
-                  );
-                  closeButton.removeEventListener(
-                    "click",
-                    this.onCloseButtonClick
-                  );
-
-                  MyBalloonContentLayout.superclass.clear.call(this);
-                },
-                onButtonClick: async function () {
-                  try {
-                    await removeMarkerFromDB(markerId);
-                    clustererRef.current.remove(addPlacemark);
-                  } catch (error) {
-                    console.error("Error deleting marker: ", error);
-                  }
-                },
-                onCloseButtonClick: function () {
-                  addPlacemark.balloon.close();
-                },
-              }
-            );
+            ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
+              build: buildFunction,
+              clear: clearFunction,
+              onButtonClick: async function () {
+                try {
+                  await removeMarkerFromDB(markerId);
+                  clustererRef.current.remove(addPlacemark);
+                } catch (error) {
+                  console.error("Error deleting marker: ", error);
+                }
+              },
+              onCloseButtonClick: function () {
+                addPlacemark.balloon.close();
+              },
+            });
 
           const addPlacemark = new ymaps.Placemark(
             coords,
@@ -517,26 +385,7 @@ function AddPlacemark({
               balloonContent: message,
               groupTheme: theme,
             },
-            {
-              // balloon settings
-              balloonLayout: "default#imageWithContent",
-              balloonAutoPan: true,
-              balloonPanelMaxMapArea: 0,
-              hideIconOnBalloonOpen: false,
-              balloonOffset: [18, -90],
-              balloonContentLayout: MyBalloonContentLayout,
-              balloonCloseButton: false,
-
-              /// icon settings
-              iconLayout: "default#image",
-              iconImageHref: "images/Orangemarker.png",
-              iconImageSize: [30, 43],
-              iconImageOffset: [-18, -43],
-              iconContentLayout: ymaps.templateLayoutFactory.createClass(
-                "<div>$[properties.iconContent]</div>"
-              ),
-              ///
-            }
+            getPlacemarkOptions(MyBalloonContentLayout, ymaps)
           );
 
           clustererRef.current.add(addPlacemark);
