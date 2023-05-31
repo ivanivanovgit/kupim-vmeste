@@ -14,15 +14,16 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState("");
-  const [_, setThemeWarning] = useState(false);
   // состояние: размещен ли маркер на карте или нет
   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false);
   const [showMessage, setShowMessage] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [searchButtonClick, setSearchButtonClick] = useState(null);
-  const searchInputRef = useRef(null);
   const [showAllMarkers, setShowAllMarkers] = useState(false);
   const [deleteThemeError, setDeleteThemeError] = useState("");
+  const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
+    useState("");
+  const searchInputRef = useRef(null);
 
   async function onDeleteTheme(event) {
     event.preventDefault();
@@ -96,9 +97,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     event.preventDefault();
     if (selectedTheme) {
       setCreateMarker((prev) => prev + 1);
-      setThemeWarning(false);
-    } else {
-      setThemeWarning(true);
     }
 
     if (!isMarkerPlaced || !selectedTheme) {
@@ -123,6 +121,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     setSearchInput: setSearchInput,
     showAllMarkers: showAllMarkers,
     setShowAllMarkers: setShowAllMarkers,
+    setCheckDublicateMarkersMesage: setCheckDublicateMarkersMesage,
   });
 
   useEffect(() => {
@@ -285,6 +284,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
         )}
         {deleteThemeError && (
           <div className={layoutStyles.message}>{deleteThemeError}</div>
+        )}
+        {checkDublicateMarkersMesage && (
+          <div className={layoutStyles.message}>
+            {checkDublicateMarkersMesage}
+          </div>
         )}
       </div>
       <div className={layoutStyles.rightSide}>

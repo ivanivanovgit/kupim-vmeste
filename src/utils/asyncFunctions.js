@@ -1,6 +1,22 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Проверка наличия дубликата маркера в БД
+export async function checkDuplicateMarker(lat, lng, message) {
+  try {
+    const response = await axios.post(`/api/chat-markers/check-duplicate`, {
+      lat,
+      lng,
+      message,
+    });
+    const { isDuplicate } = response.data;
+    return isDuplicate;
+  } catch (error) {
+    console.error("Error while checking duplicate markers: ", error);
+    throw error;
+  }
+}
+
 // Проверка наличия маркеров в БД по теме
 export async function checkThemeHasMarkers(theme) {
   try {

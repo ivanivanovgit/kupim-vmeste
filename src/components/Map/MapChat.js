@@ -16,6 +16,7 @@ export default function MapChat({
   setSearchInput,
   showAllMarkers,
   setShowAllMarkers,
+  setCheckDublicateMarkersMesage,
 }) {
   return (
     <YMaps
@@ -38,6 +39,7 @@ export default function MapChat({
         setSearchInput={setSearchInput}
         showAllMarkers={showAllMarkers}
         setShowAllMarkers={setShowAllMarkers}
+        setCheckDublicateMarkersMesage={setCheckDublicateMarkersMesage}
       />
     </YMaps>
   );

@@ -6,6 +6,7 @@ import {
   fetchMarkersByTheme,
   getMarkersFromDatabase,
   removeMarkerFromDB,
+  checkDuplicateMarker,
 } from "../../utils/asyncFunctions";
 
 import {
@@ -28,6 +29,7 @@ function AddPlacemark({
   setSearchInput,
   showAllMarkers,
   setShowAllMarkers,
+  setCheckDublicateMarkersMesage,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -239,9 +241,6 @@ function AddPlacemark({
         const theme = marker.theme;
         const message = marker.message_markers;
 
-        /*   console.log("coords", coords);
-        console.log("theme", theme);
-        console.log("message", message); */
         //////
         // Создаем макет балуна с кнопкой "Удалить маркер"
         const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
@@ -297,48 +296,69 @@ function AddPlacemark({
       return;
     }
 
-    addMarkerToDatabase(
+    // Проверка на дубликат
+    checkDuplicateMarker(
       currentCoords.current[0],
       currentCoords.current[1],
-      selectedTheme,
       inputText
-    ).then(({ id: markerId }) => {
-      const MyBalloonContentLayout = ymaps.templateLayoutFactory.createClass(
-        balloonContentTemplate,
-        {
-          build: buildFunction,
-          clear: clearFunction,
-          onButtonClick: async function () {
-            try {
-              await removeMarkerFromDB(markerId);
-              clustererRef.current.remove(addPlacemark);
-            } catch (error) {
-              console.error("Error deleting marker: ", error);
-            }
-          },
-          onCloseButtonClick: function () {
-            addPlacemark.balloon.close();
-          },
+    )
+      .then((isDuplicate) => {
+        if (isDuplicate) {
+          // Вывод сообщения пользователю
+          setCheckDublicateMarkersMesage(
+            "Маркер с этими координатами и сообщением уже существует"
+          );
+          setTimeout(() => {
+            setCheckDublicateMarkersMesage("");
+          }, 3000);
+          return;
         }
-      );
 
-      const addPlacemark = new ymaps.Placemark(
-        currentCoords.current,
-        {
-          balloonContent: inputText,
-          groupTheme: selectedTheme,
-        },
-        getPlacemarkOptions(MyBalloonContentLayout, ymaps)
-      );
+        // Если дубликат не обнаружен, добавляем новый маркер
 
-      /*  myMapRef.current.geoObjects.add(addPlacemark); */
-      clustererRef.current.add(addPlacemark);
+        addMarkerToDatabase(
+          currentCoords.current[0],
+          currentCoords.current[1],
+          selectedTheme,
+          inputText
+        ).then(({ id: markerId }) => {
+          const MyBalloonContentLayout =
+            ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
+              build: buildFunction,
+              clear: clearFunction,
+              onButtonClick: async function () {
+                try {
+                  await removeMarkerFromDB(markerId);
+                  clustererRef.current.remove(addPlacemark);
+                } catch (error) {
+                  console.error("Error deleting marker: ", error);
+                }
+              },
+              onCloseButtonClick: function () {
+                addPlacemark.balloon.close();
+              },
+            });
 
-      ///////
-    });
-    /*  if (typeof addMarker === "function") {
-      addMarker(selectedTheme, currentCoords.current, inputText);
-    } */
+          const addPlacemark = new ymaps.Placemark(
+            currentCoords.current,
+            {
+              balloonContent: inputText,
+              groupTheme: selectedTheme,
+            },
+            getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+          );
+
+          clustererRef.current.add(addPlacemark);
+
+          ///////
+        });
+        ////
+      })
+      .catch((error) => {
+        console.error("Error while checking for duplicate marker: ", error);
+        // Обработка ошибки и вывод сообщения пользователю
+        alert("Произошла ошибка при проверке на дубликаты. Попробуйте снова.");
+      });
   }, [createMarker, ymaps]);
 
   //////// TODO: useEffect для извлечения всех маркеров на карту
