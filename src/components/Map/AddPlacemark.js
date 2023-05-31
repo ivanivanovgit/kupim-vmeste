@@ -7,6 +7,7 @@ import {
   getMarkersFromDatabase,
   removeMarkerFromDB,
   checkDuplicateMarker,
+  checkDuplicateMarkerCoords,
 } from "../../utils/asyncFunctions";
 
 import {
@@ -314,43 +315,64 @@ function AddPlacemark({
           return;
         }
 
-        // Если дубликат не обнаружен, добавляем новый маркер
-
-        addMarkerToDatabase(
+        // Смещаем немного координаты маркера, чтобы он не совпадал с другими маркерами
+        checkDuplicateMarkerCoords(
           currentCoords.current[0],
-          currentCoords.current[1],
-          selectedTheme,
-          inputText
-        ).then(({ id: markerId }) => {
-          const MyBalloonContentLayout =
-            ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
-              build: buildFunction,
-              clear: clearFunction,
-              onButtonClick: async function () {
-                try {
-                  await removeMarkerFromDB(markerId);
-                  clustererRef.current.remove(addPlacemark);
-                } catch (error) {
-                  console.error("Error deleting marker: ", error);
-                }
+          currentCoords.current[1]
+        ).then((isDuplicateCoords) => {
+          //////////////////////////////
+          console.log("isDuplicateCoords", isDuplicateCoords);
+          if (isDuplicateCoords) {
+            // Вывод сообщения пользователю
+            setCheckDublicateMarkersMesage(
+              "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
+            );
+            // Смещаем координаты на случайное значение в пределах 0.0001 градуса (это примерно 11 метров)
+            currentCoords.current[0] += Math.random() * 0.0001 - 0.00005;
+            currentCoords.current[1] += Math.random() * 0.0001 - 0.00005;
+            setTimeout(() => {
+              setCheckDublicateMarkersMesage("");
+            }, 3000);
+          }
+
+          // Если дубликат не обнаружен, добавляем новый маркер
+          addMarkerToDatabase(
+            currentCoords.current[0],
+            currentCoords.current[1],
+            selectedTheme,
+            inputText
+          ).then(({ id: markerId }) => {
+            const MyBalloonContentLayout =
+              ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
+                build: buildFunction,
+                clear: clearFunction,
+                onButtonClick: async function () {
+                  try {
+                    await removeMarkerFromDB(markerId);
+                    clustererRef.current.remove(addPlacemark);
+                  } catch (error) {
+                    console.error("Error deleting marker: ", error);
+                  }
+                },
+                onCloseButtonClick: function () {
+                  addPlacemark.balloon.close();
+                },
+              });
+
+            const addPlacemark = new ymaps.Placemark(
+              currentCoords.current,
+              {
+                balloonContent: inputText,
+                groupTheme: selectedTheme,
               },
-              onCloseButtonClick: function () {
-                addPlacemark.balloon.close();
-              },
-            });
+              getPlacemarkOptions(MyBalloonContentLayout, ymaps)
+            );
 
-          const addPlacemark = new ymaps.Placemark(
-            currentCoords.current,
-            {
-              balloonContent: inputText,
-              groupTheme: selectedTheme,
-            },
-            getPlacemarkOptions(MyBalloonContentLayout, ymaps)
-          );
+            clustererRef.current.add(addPlacemark);
 
-          clustererRef.current.add(addPlacemark);
-
-          ///////
+            ///////
+          });
+          //////////////////////////
         });
         ////
       })

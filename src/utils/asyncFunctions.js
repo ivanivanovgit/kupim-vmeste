@@ -1,6 +1,27 @@
 // asyncFunctions.js
 import axios from "axios";
 
+// Проверка наличия дубликата маркера с одинаковыми координатами в БД
+export async function checkDuplicateMarkerCoords(lat, lng) {
+  try {
+    const response = await axios.post(
+      `/api/chat-markers/check-duplicate-coords`,
+      {
+        lat,
+        lng,
+      }
+    );
+    const { isDuplicateCoords } = response.data;
+    return isDuplicateCoords;
+  } catch (error) {
+    console.error(
+      "Error while checking duplicate markers with the same coords: ",
+      error
+    );
+    throw error;
+  }
+}
+
 // Проверка наличия дубликата маркера в БД
 export async function checkDuplicateMarker(lat, lng, message) {
   try {
