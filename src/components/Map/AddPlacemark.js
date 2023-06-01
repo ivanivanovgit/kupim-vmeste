@@ -8,7 +8,7 @@ import {
   removeMarkerFromDB,
   checkDuplicateMarker,
   checkDuplicateMarkerCoords,
-} from "../../utils/asyncFunctions";
+} from "../../utils/endPointsHandlers";
 
 import {
   getPlacemarkOptions,
@@ -40,7 +40,10 @@ function AddPlacemark({
   const clustererRef = useRef(null);
 
   const [selectedAddress, setselectedAddress] = useState("");
-  const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(false);
+  const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
+  const [checkCountIsDuplicateCoords, setCheckCountIsDuplicateCoords] =
+    useState(0);
+  const countercheckIsDuplicateCoordsRef = useRef(0);
 
   let MyIconContentLayout;
 
@@ -327,9 +330,16 @@ function AddPlacemark({
             setCheckDublicateMarkersMesage(
               "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
             );
-            // Смещаем координаты на случайное значение в пределах 0.0001 градуса (это примерно 11 метров)
-            currentCoords.current[0] += Math.random() * 0.0001 - 0.00005;
-            currentCoords.current[1] += Math.random() * 0.0001 - 0.00005;
+            setCheckCountIsDuplicateCoords((prev) => prev + 1);
+            countercheckIsDuplicateCoordsRef.current += 1;
+
+            const offset = 3 / 111320; // преобразование 100 метров в градусы (примерно)
+            const angle =
+              countercheckIsDuplicateCoordsRef.current * 1 * (Math.PI / 180); // переводим градусы в радианы
+
+            currentCoords.current[0] += offset * Math.cos(angle);
+            currentCoords.current[1] += offset * Math.sin(angle);
+
             setTimeout(() => {
               setCheckDublicateMarkersMesage("");
             }, 3000);
@@ -369,7 +379,7 @@ function AddPlacemark({
             );
 
             clustererRef.current.add(addPlacemark);
-            setCheckIsDuplicateCoords(isDuplicateCoords);
+            setCheckIsDuplicateCoords(checkCountIsDuplicateCoords);
             ///////
           });
           //////////////////////////

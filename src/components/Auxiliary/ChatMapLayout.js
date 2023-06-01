@@ -4,7 +4,7 @@ import { Divider, Select, MenuItem, FormControl, Orange } from "@mui/material";
 import {
   fetchThemes,
   checkThemeHasMarkers,
-} from "../../../src/utils/asyncFunctions";
+} from "../../../src/utils/endPointsHandlers";
 
 function ChatMapLayout({ mapChat, layoutStyles }) {
   const [address, setAddress] = useState("");

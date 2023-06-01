@@ -1,4 +1,4 @@
-// asyncFunctions.js
+// endPointsHandlers.js
 import axios from "axios";
 
 // Проверка наличия дубликата маркера с одинаковыми координатами в БД

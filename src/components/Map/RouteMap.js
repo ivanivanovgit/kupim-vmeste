@@ -1,7 +1,11 @@
 // RouteMap.js
 import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
-import { getRoutes, addRoute, deleteRoute } from "../../utils/asyncFunctions";
+import {
+  getRoutes,
+  addRoute,
+  deleteRoute,
+} from "../../utils/endPointsHandlers";
 
 import {
   getPlacemarkOptions,
