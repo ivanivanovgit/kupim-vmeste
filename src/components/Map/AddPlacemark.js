@@ -333,7 +333,7 @@ function AddPlacemark({
             setCheckCountIsDuplicateCoords((prev) => prev + 1);
             countercheckIsDuplicateCoordsRef.current += 1;
 
-            const offset = 3 / 111320; // преобразование 100 метров в градусы (примерно)
+            const offset = 3 / 111320; // преобразование 3 метров в градусы (примерно)
             const angle =
               countercheckIsDuplicateCoordsRef.current * 1 * (Math.PI / 180); // переводим градусы в радианы
 
