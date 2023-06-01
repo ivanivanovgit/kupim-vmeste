@@ -40,6 +40,7 @@ function AddPlacemark({
   const clustererRef = useRef(null);
 
   const [selectedAddress, setselectedAddress] = useState("");
+  const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(false);
 
   let MyIconContentLayout;
 
@@ -283,7 +284,7 @@ function AddPlacemark({
     ////
 
     //////////////
-  }, [selectedTheme, ymaps]);
+  }, [selectedTheme, checkIsDuplicateCoords, ymaps]);
 
   //  TODO: useEffect для добавления нового маркера по кнопке Добавить маркер
   // TODO: добавить проверку одинаковых координат
@@ -321,7 +322,6 @@ function AddPlacemark({
           currentCoords.current[1]
         ).then((isDuplicateCoords) => {
           //////////////////////////////
-          console.log("isDuplicateCoords", isDuplicateCoords);
           if (isDuplicateCoords) {
             // Вывод сообщения пользователю
             setCheckDublicateMarkersMesage(
@@ -369,7 +369,7 @@ function AddPlacemark({
             );
 
             clustererRef.current.add(addPlacemark);
-
+            setCheckIsDuplicateCoords(isDuplicateCoords);
             ///////
           });
           //////////////////////////
