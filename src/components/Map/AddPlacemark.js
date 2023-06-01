@@ -43,7 +43,7 @@ function AddPlacemark({
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
   const [checkCountIsDuplicateCoords, setCheckCountIsDuplicateCoords] =
     useState(0);
-  const countercheckIsDuplicateCoordsRef = useRef(0);
+  const counterCheckIsDuplicateCoordsRef = useRef(0);
 
   let MyIconContentLayout;
 
@@ -331,11 +331,11 @@ function AddPlacemark({
               "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
             );
             setCheckCountIsDuplicateCoords((prev) => prev + 1);
-            countercheckIsDuplicateCoordsRef.current += 1;
+            counterCheckIsDuplicateCoordsRef.current += 1;
 
             const offset = 3 / 111320; // преобразование 3 метров в градусы (примерно)
             const angle =
-              countercheckIsDuplicateCoordsRef.current * 1 * (Math.PI / 180); // переводим градусы в радианы
+              counterCheckIsDuplicateCoordsRef.current * 1 * (Math.PI / 180); // переводим градусы в радианы
 
             currentCoords.current[0] += offset * Math.cos(angle);
             currentCoords.current[1] += offset * Math.sin(angle);
