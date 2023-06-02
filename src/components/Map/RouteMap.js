@@ -1,7 +1,11 @@
 // RouteMap.js
+// TODO: сделать проверку одинаковых точек
 import { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setErrorMessage } from "../../redux/slices/routeSlices/errorMessageSlice";
+import {
+  setErrorMessage,
+  setSubmitMessage,
+} from "../../redux/slices/routeSlices/messageSlice";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import {
   getRoutes,
@@ -23,7 +27,6 @@ function RouteMap({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
-  setSubmitMessage,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -146,6 +149,11 @@ function RouteMap({
                 `Адрес "${setFirstPoint.value}" не найден. Проверьте правильность введенного адреса.`
               )
             );
+
+            setTimeout(() => {
+              dispatch(setErrorMessage(""));
+            }, 3000); // сбрасываем сообщение после 3 секунд
+
             return;
           }
           if (!secondGeoObject) {
@@ -154,6 +162,11 @@ function RouteMap({
                 `Адрес "${setSecondPoint.value}" не найден. Проверьте правильность введенного адреса.`
               )
             );
+
+            setTimeout(() => {
+              dispatch(setErrorMessage(""));
+            }, 3000); // сбрасываем сообщение после 3 секунд
+
             return;
           }
           // Сбрасываем сообщение об ошибке, если маршрут успешно обработан
@@ -171,6 +184,11 @@ function RouteMap({
             dispatch(
               setErrorMessage("Произошла ошибка при геокодировании адресов: ")
             );
+
+            setTimeout(() => {
+              dispatch(setErrorMessage(""));
+            }, 3000); // сбрасываем сообщение после 3 секунд
+
             return;
           }
 
@@ -244,7 +262,11 @@ function RouteMap({
 
               myMapRef.current.geoObjects.add(firstPlacemark);
               myMapRef.current.geoObjects.add(secondPlacemark);
-              setSubmitMessage("Маршрут успешно добавлен");
+              dispatch(setSubmitMessage("Маршрут успешно добавлен"));
+              setTimeout(() => {
+                dispatch(setSubmitMessage(""));
+              }, 3000); // сбрасываем сообщение после 3 секунд
+
               // Центр карты по координатам первой точки
               myMapRef.current.setCenter(firstCoords);
               /////
@@ -261,6 +283,10 @@ function RouteMap({
               "Произошла ошибка при геокодировании адресов: " + error
             )
           );
+
+          setTimeout(() => {
+            dispatch(setErrorMessage(""));
+          }, 3000); // сбрасываем сообщение после 3 секунд
         });
     });
   }, [countMapRoute, ymaps]);

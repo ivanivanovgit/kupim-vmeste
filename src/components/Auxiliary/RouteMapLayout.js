@@ -1,17 +1,23 @@
 // RouteMapLayout.js
-import { useState, useRef, cloneElement } from "react";
+import { useRef, cloneElement } from "react";
 import { useForm, useController } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
-import { setErrorMessage } from "../../redux/slices/routeSlices/errorMessageSlice";
+import {
+  setErrorMessage,
+  selectErrorMessage,
+  setSubmitMessage,
+  selectSubmitMessage,
+} from "../../redux/slices/routeSlices/messageSlice";
 import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
 function RouteMapLayout({ mapRoute, layoutStyles }) {
-  const [submitMessage, setSubmitMessage] = useState("");
+  /*  const [submitMessage, setSubmitMessage] = useState(""); */
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 
   const dispatch = useDispatch();
-  const errorMessage = useSelector((state) => state.errorMessage.errorMessage);
+  const errorMessage = useSelector(selectErrorMessage);
+  const submitMessage = useSelector(selectSubmitMessage);
 
   const { control, handleSubmit, reset } = useForm({
     mode: "onBlur",
@@ -50,12 +56,6 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
   const handleFormAddRoute = (data) => {
     if (data) {
       dispatch(incrementCountMapRoute());
-      /*  setSubmitMessage(
-        'Маршрут добавлен, для добавления нового маршрута введите новые адреса, сообщение и нажмите на кнопку "Добавить маршрут"'
-      );
-      setTimeout(() => {
-        setSubmitMessage("");
-      }, 3000); // сбрасываем сообщение после 3 секунд */
     }
   };
 
@@ -66,7 +66,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
       messageFirstPoint: "",
     });
     dispatch(setErrorMessage(""));
-    setSubmitMessage("");
+    dispatch(setSubmitMessage(""));
   };
 
   const mapRouteWithProps = cloneElement(mapRoute, {
@@ -75,7 +75,6 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
     firstPointRef: firstPointRef.current,
     secondPointRef: secondPointRef.current,
     setMessageFirstPoint: setMessageFirstPoint,
-    setSubmitMessage: setSubmitMessage,
   });
 
   return (
