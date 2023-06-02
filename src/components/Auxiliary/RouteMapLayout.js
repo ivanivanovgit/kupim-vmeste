@@ -2,16 +2,16 @@
 import { useState, useRef, cloneElement } from "react";
 import { useForm, useController } from "react-hook-form";
 import { useDispatch, useSelector } from "react-redux";
+import { setErrorMessage } from "../../redux/slices/routeSlices/errorMessageSlice";
 import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
 function RouteMapLayout({ mapRoute, layoutStyles }) {
-  const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState(""); //сообщение об успешной отправке формы
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 
   const dispatch = useDispatch();
-  const countMapRoute = useSelector((state) => state.routeCount.countMapRoute);
+  const errorMessage = useSelector((state) => state.errorMessage.errorMessage);
 
   const { control, handleSubmit, reset } = useForm({
     mode: "onBlur",
@@ -65,7 +65,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
       secondPoint: "",
       messageFirstPoint: "",
     });
-    setErrorMessage("");
+    dispatch(setErrorMessage(""));
     setSubmitMessage("");
   };
 
@@ -75,7 +75,6 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
     firstPointRef: firstPointRef.current,
     secondPointRef: secondPointRef.current,
     setMessageFirstPoint: setMessageFirstPoint,
-    setErrorMessage: setErrorMessage,
   });
 
   return (

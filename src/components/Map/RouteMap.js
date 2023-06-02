@@ -1,6 +1,7 @@
 // RouteMap.js
 import { useRef, useEffect, useState } from "react";
-import { useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
+import { setErrorMessage } from "../../redux/slices/routeSlices/errorMessageSlice";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import {
   getRoutes,
@@ -22,7 +23,6 @@ function RouteMap({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
-  setErrorMessage,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -30,6 +30,7 @@ function RouteMap({
   const [selectedFirstAddress, setSelectedFirstAddress] = useState("");
   const [selectedSecondAddress, setSelectedSecondAddress] = useState("");
 
+  const dispatch = useDispatch();
   const countMapRoute = useSelector((state) => state.routeCount.countMapRoute);
 
   ///////// useEffect для инициализации карты
@@ -139,19 +140,23 @@ function RouteMap({
           const secondGeoObject = results[1].geoObjects.get(0);
 
           if (!firstGeoObject) {
-            setErrorMessage(
-              `Адрес "${setFirstPoint.value}" не найден. Проверьте правильность введенного адреса.`
+            dispatch(
+              setErrorMessage(
+                `Адрес "${setFirstPoint.value}" не найден. Проверьте правильность введенного адреса.`
+              )
             );
             return;
           }
           if (!secondGeoObject) {
-            setErrorMessage(
-              `Адрес "${setSecondPoint.value}" не найден. Проверьте правильность введенного адреса.`
+            dispatch(
+              setErrorMessage(
+                `Адрес "${setSecondPoint.value}" не найден. Проверьте правильность введенного адреса.`
+              )
             );
             return;
           }
           // Сбрасываем сообщение об ошибке, если маршрут успешно обработан
-          setErrorMessage("");
+          dispatch(setErrorMessage(""));
 
           const firstCoords = firstGeoObject.geometry.getCoordinates();
           const secondCoords = secondGeoObject.geometry.getCoordinates();
@@ -162,7 +167,9 @@ function RouteMap({
             !Array.isArray(secondCoords) ||
             secondCoords.length !== 2
           ) {
-            setErrorMessage("Произошла ошибка при геокодировании адресов: ");
+            dispatch(
+              setErrorMessage("Произошла ошибка при геокодировании адресов: ")
+            );
             return;
           }
 
@@ -248,8 +255,10 @@ function RouteMap({
           /// добавляем маршрут в базу данных
         })
         .catch((error) => {
-          setErrorMessage(
-            "Произошла ошибка при геокодировании адресов: " + error
+          dispatch(
+            setErrorMessage(
+              "Произошла ошибка при геокодировании адресов: " + error
+            )
           );
         });
     });

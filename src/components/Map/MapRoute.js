@@ -9,7 +9,6 @@ export default function MapRoute({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
-  setErrorMessage,
 }) {
   return (
     <YMaps
@@ -26,7 +25,6 @@ export default function MapRoute({
         firstPointRef={firstPointRef}
         secondPointRef={secondPointRef}
         setMessageFirstPoint={setMessageFirstPoint}
-        setErrorMessage={setErrorMessage}
       />
     </YMaps>
   );
