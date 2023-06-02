@@ -6,7 +6,7 @@ import { setErrorMessage } from "../../redux/slices/routeSlices/errorMessageSlic
 import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
 function RouteMapLayout({ mapRoute, layoutStyles }) {
-  const [submitMessage, setSubmitMessage] = useState(""); //сообщение об успешной отправке формы
+  const [submitMessage, setSubmitMessage] = useState("");
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 
