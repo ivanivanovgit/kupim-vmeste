@@ -1,3 +1,4 @@
+// _app.js
 import * as React from "react";
 import PropTypes from "prop-types";
 import Head from "next/head";
@@ -9,6 +10,9 @@ import createEmotionCache from "../src/createEmotionCache";
 import LayOut from "../src/components/Auxiliary/LayOut";
 import "../styles/globals.css";
 import localFont from "@next/font/local";
+
+import { Provider } from "react-redux";
+import { store } from "../src/redux/store";
 
 const firstFont = localFont({ src: "./Inter700.ttf" });
 //import { Advent_Pro } from "@next/font/google";
@@ -30,16 +34,18 @@ export default function MyApp(props) {
           {/*  TODO: Доделать фавикон из логотипа */}
           <link rel="icon" href="/favicon.ico" />
         </Head>
-        <ThemeProvider theme={theme}>
-          {/* CssBaseline kickstart an elegant, 
+        <Provider store={store}>
+          <ThemeProvider theme={theme}>
+            {/* CssBaseline kickstart an elegant, 
                 consistent, and simple baseline to
                 build upon. */}
 
-          <CssBaseline />
-          <LayOut>
-            <Component {...pageProps} />
-          </LayOut>
-        </ThemeProvider>
+            <CssBaseline />
+            <LayOut>
+              <Component {...pageProps} />
+            </LayOut>
+          </ThemeProvider>
+        </Provider>
       </CacheProvider>
     </main>
   );

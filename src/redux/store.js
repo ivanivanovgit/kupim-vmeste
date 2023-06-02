@@ -1,10 +1,11 @@
 // store.js
-// TODO:доделать redux
 import { configureStore } from "@reduxjs/toolkit";
-/* import rootReducer from './reducers'; // импорт объединенного редуктора */
+import testReducer from "./slices/testSlice";
 
-/* const store = configureStore({
-  reducer: rootReducer,
+export const store = configureStore({
+  reducer: {
+    test: testReducer,
+  },
 });
 
-export default store; */
+export default store;

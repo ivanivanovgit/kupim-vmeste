@@ -79,7 +79,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     setSelectedTheme(event.target.value);
   };
 
-  const handleAddressChange = (newAddress) => {
+  const onAddressChange = (newAddress) => {
     setAddress(newAddress);
   };
 
@@ -110,7 +110,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   };
 
   const mapChatWithProps = React.cloneElement(mapChat, {
-    onAddressChange: handleAddressChange,
+    onAddressChange: onAddressChange,
     inputText: inputText,
     createMarker: createMarker,
     selectedTheme: selectedTheme,
