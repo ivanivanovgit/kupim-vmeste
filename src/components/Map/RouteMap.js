@@ -23,6 +23,7 @@ function RouteMap({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
+  setSubmitMessage,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -243,7 +244,7 @@ function RouteMap({
 
               myMapRef.current.geoObjects.add(firstPlacemark);
               myMapRef.current.geoObjects.add(secondPlacemark);
-
+              setSubmitMessage("Маршрут успешно добавлен");
               // Центр карты по координатам первой точки
               myMapRef.current.setCenter(firstCoords);
               /////

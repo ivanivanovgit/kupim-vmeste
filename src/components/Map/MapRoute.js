@@ -9,6 +9,7 @@ export default function MapRoute({
   firstPointRef,
   secondPointRef,
   setMessageFirstPoint,
+  setSubmitMessage,
 }) {
   return (
     <YMaps
@@ -25,6 +26,7 @@ export default function MapRoute({
         firstPointRef={firstPointRef}
         secondPointRef={secondPointRef}
         setMessageFirstPoint={setMessageFirstPoint}
+        setSubmitMessage={setSubmitMessage}
       />
     </YMaps>
   );
