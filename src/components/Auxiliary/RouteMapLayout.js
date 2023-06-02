@@ -1,13 +1,17 @@
 // RouteMapLayout.js
-import React, { useState, useRef } from "react";
+import { useState, useRef, cloneElement } from "react";
 import { useForm, useController } from "react-hook-form";
+import { useDispatch, useSelector } from "react-redux";
+import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
 function RouteMapLayout({ mapRoute, layoutStyles }) {
-  const [countMapRoute, setCountMapRoute] = useState(0);
   const [errorMessage, setErrorMessage] = useState("");
   const [submitMessage, setSubmitMessage] = useState(""); //сообщение об успешной отправке формы
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
+
+  const dispatch = useDispatch();
+  const countMapRoute = useSelector((state) => state.routeCount.countMapRoute);
 
   const { control, handleSubmit, reset } = useForm({
     mode: "onBlur",
@@ -45,7 +49,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
 
   const handleFormAddRoute = (data) => {
     if (data) {
-      setCountMapRoute((prev) => prev + 1);
+      dispatch(incrementCountMapRoute());
       setSubmitMessage(
         'Маршрут добавлен, для добавления нового маршрута введите новые адреса, сообщение и нажмите на кнопку "Добавить маршрут"'
       );
@@ -65,8 +69,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
     setSubmitMessage("");
   };
 
-  const mapRouteWithProps = React.cloneElement(mapRoute, {
-    countMapRoute: countMapRoute,
+  const mapRouteWithProps = cloneElement(mapRoute, {
     setFirstPoint: setFirstPoint,
     setSecondPoint: setSecondPoint,
     firstPointRef: firstPointRef.current,

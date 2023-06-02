@@ -1,5 +1,6 @@
 // RouteMap.js
 import { useRef, useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import {
   getRoutes,
@@ -16,7 +17,6 @@ import {
 
 function RouteMap({
   mapStyle,
-  countMapRoute,
   setFirstPoint,
   setSecondPoint,
   firstPointRef,
@@ -29,6 +29,8 @@ function RouteMap({
   const myMapRef = useRef(null);
   const [selectedFirstAddress, setSelectedFirstAddress] = useState("");
   const [selectedSecondAddress, setSelectedSecondAddress] = useState("");
+
+  const countMapRoute = useSelector((state) => state.routeCount.countMapRoute);
 
   ///////// useEffect для инициализации карты
   useEffect(() => {

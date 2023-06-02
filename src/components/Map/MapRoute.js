@@ -4,7 +4,6 @@ import RouteMap from "./RouteMap";
 
 export default function MapRoute({
   mapStyle,
-  countMapRoute,
   setFirstPoint,
   setSecondPoint,
   firstPointRef,
@@ -22,7 +21,6 @@ export default function MapRoute({
     >
       <RouteMap
         mapStyle={mapStyle}
-        countMapRoute={countMapRoute}
         setFirstPoint={setFirstPoint}
         setSecondPoint={setSecondPoint}
         firstPointRef={firstPointRef}
