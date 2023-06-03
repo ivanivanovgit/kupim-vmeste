@@ -55,7 +55,7 @@ function RouteMap({
       searchControl.options.set("noPlacemark", "true");
 
       getRoutes().then((routes) => {
-        routes.forEach((route) => {
+        routes?.forEach((route) => {
           const routeId = route.id;
           const firstCoords = [route.first_latitude, route.first_longitude];
           const secondCoords = [route.second_latitude, route.second_longitude];
@@ -200,8 +200,19 @@ function RouteMap({
             second_longitude: secondCoords[1],
             message: setMessageFirstPoint.value,
           })
-            .then(({ id: routeId }) => {
+            .then((result) => {
               ///
+              console.log("result", result);
+              if (typeof result === "string") {
+                // Это сообщение об ошибке
+                dispatch(setErrorMessage(result));
+                setTimeout(() => {
+                  dispatch(setErrorMessage(""));
+                }, 3000);
+                return;
+              }
+
+              const routeId = result.id;
 
               const multiRoute = new ymaps.multiRouter.MultiRoute(
                 {
@@ -278,6 +289,7 @@ function RouteMap({
           /// добавляем маршрут в базу данных
         })
         .catch((error) => {
+          // Обработка ошибок при геокодировании
           dispatch(
             setErrorMessage(
               "Произошла ошибка при геокодировании адресов: " + error
@@ -287,6 +299,7 @@ function RouteMap({
           setTimeout(() => {
             dispatch(setErrorMessage(""));
           }, 3000); // сбрасываем сообщение после 3 секунд
+          /////
         });
     });
   }, [countMapRoute, ymaps]);

@@ -130,6 +130,21 @@ export async function addRoute(route) {
   } = route;
 
   try {
+    const existingRoutesResponse = await axios.get("/api/routes");
+    const existingRoutes = existingRoutesResponse.data;
+
+    for (let existingRoute of existingRoutes) {
+      if (
+        existingRoute.first_latitude === first_latitude &&
+        existingRoute.first_longitude === first_longitude &&
+        existingRoute.second_latitude === second_latitude &&
+        existingRoute.second_longitude === second_longitude
+      ) {
+        // Маршрут уже существует
+        return "Маршрут с такими координатами уже существует";
+      }
+    }
+
     const response = await axios.post("/api/routes", {
       first_latitude,
       first_longitude,
@@ -141,6 +156,7 @@ export async function addRoute(route) {
     return response.data;
   } catch (error) {
     console.error(error);
+    throw error;
   }
 }
 
