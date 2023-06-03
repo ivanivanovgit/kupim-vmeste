@@ -202,7 +202,7 @@ function RouteMap({
           })
             .then((result) => {
               ///
-              console.log("result", result);
+
               if (typeof result === "string") {
                 // Это сообщение об ошибке
                 dispatch(setErrorMessage(result));
