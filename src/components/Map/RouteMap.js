@@ -1,5 +1,5 @@
 // RouteMap.js
-// TODO: сделать проверку одинаковых точек
+
 import { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
@@ -19,6 +19,9 @@ import {
   buildFunction,
   clearFunction,
 } from "../../utils/placemarkOptions";
+
+import useSetPointRoute from "../../utils/useSetPointRoute";
+import usePointSuggestionRoute from "../../utils/usePointSuggestionRoute";
 
 function RouteMap({
   mapStyle,
@@ -304,53 +307,17 @@ function RouteMap({
     });
   }, [countMapRoute, ymaps]);
 
-  // useEffect для подсказок адреса firstPoint
-  useEffect(() => {
-    if (!ymaps || !firstPointRef) {
-      return;
-    }
+  // для подсказок адреса firstPoint
+  usePointSuggestionRoute(ymaps, firstPointRef, setSelectedFirstAddress);
 
-    // Создаем SuggestView для поля ввода адреса
-    const suggestView = new ymaps.SuggestView(firstPointRef);
+  /////////  для установки значения адреса подсказок в  поле ввода адреса firstPoint
+  useSetPointRoute(selectedFirstAddress, setFirstPoint, ymaps);
 
-    // Обрабатываем выбор подсказки
-    suggestView.events.add("select", (e) => {
-      // Получаем выбранный адрес
-      setSelectedFirstAddress(e.get("item").value);
-    });
-  }, [ymaps, firstPointRef]);
+  // для подсказок адреса secondPoint
+  usePointSuggestionRoute(ymaps, secondPointRef, setSelectedSecondAddress);
 
-  ///////// useEffect для установки значения адреса подсказок в  поле ввода адреса firstPoint
-  useEffect(() => {
-    if (selectedFirstAddress) {
-      /// Устанавливаем значение поля ввода адреса
-      setFirstPoint.onChange(selectedFirstAddress);
-    }
-  }, [selectedFirstAddress, ymaps]);
-
-  // useEffect для подсказок адреса secondPoint
-  useEffect(() => {
-    if (!ymaps || !secondPointRef) {
-      return;
-    }
-
-    // Создаем SuggestView для поля ввода адреса
-    const suggestView = new ymaps.SuggestView(secondPointRef);
-
-    // Обрабатываем выбор подсказки
-    suggestView.events.add("select", (e) => {
-      // Получаем выбранный адрес
-      setSelectedSecondAddress(e.get("item").value);
-    });
-  }, [ymaps, secondPointRef]);
-
-  ///////// useEffect для установки значения адреса подсказок в  поле ввода адреса secondPoint
-  useEffect(() => {
-    if (selectedSecondAddress) {
-      /// Устанавливаем значение поля ввода адреса
-      setSecondPoint.onChange(selectedSecondAddress);
-    }
-  }, [selectedSecondAddress, ymaps]);
+  /////////  для установки значения адреса подсказок в  поле ввода адреса secondPoint
+  useSetPointRoute(selectedSecondAddress, setSecondPoint, ymaps);
 
   ////////////
   return <div ref={mapRef} className={mapStyle} />;

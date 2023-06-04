@@ -11,7 +11,6 @@ import {
 import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
 function RouteMapLayout({ mapRoute, layoutStyles }) {
-  /*  const [submitMessage, setSubmitMessage] = useState(""); */
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
 

@@ -170,7 +170,6 @@ function AddPlacemark({
     if (selectedAddress) {
       setSearchInput(selectedAddress); // Устанавливаем значение поля ввода адреса
     }
-    /*  console.log("selectedAddress", selectedAddress); */
   }, [selectedAddress, ymaps]);
 
   ///////// useEffect для поиска адреса по координатам
