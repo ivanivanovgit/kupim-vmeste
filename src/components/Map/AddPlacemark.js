@@ -18,6 +18,8 @@ import {
 } from "../../utils/placemarkOptions";
 
 import useSelectedAddressChat from "../../utils/useSelectedAddressChat";
+import useSearchButtonClickChat from "../../utils/useSearchButtonClickChat";
+import useAddressSuggestionChat from "../../utils/useAddressSuggestionChat";
 
 function AddPlacemark({
   mapStyle,
@@ -146,36 +148,20 @@ function AddPlacemark({
     }
   };
 
-  // useEffect для подсказок адреса
-  useEffect(() => {
-    if (!ymaps || !searchInputRef) {
-      return;
-    }
-
-    // Создаем SuggestView для поля ввода адреса
-    const suggestView = new ymaps.SuggestView(searchInputRef);
-
-    // Обрабатываем выбор подсказки
-    suggestView.events.add("select", (e) => {
-      // Получаем выбранный адрес
-      setselectedAddress(e.get("item").value);
-
-      // Вызываем функцию searchAddress, которая обрабатывает поиск адреса на карте
-      if (typeof searchAddress === "function") {
-        searchAddress(selectedAddress);
-      }
-    });
-  }, [ymaps, searchInputRef]);
+  //  для подсказок адреса
+  useAddressSuggestionChat(
+    ymaps,
+    searchInputRef,
+    selectedAddress,
+    setselectedAddress,
+    searchAddress
+  );
 
   /////////  для установки значения адреса подсказок в  поле ввода адреса
   useSelectedAddressChat(selectedAddress, setSearchInput, ymaps);
 
-  ///////// useEffect для поиска адреса по координатам
-  useEffect(() => {
-    if (searchButtonClick) {
-      searchAddress(searchButtonClick);
-    }
-  }, [searchButtonClick, ymaps]);
+  ///////// для поиска адреса по координатам
+  useSearchButtonClickChat(searchButtonClick, searchAddress, ymaps);
 
   ///////// TODO: useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
