@@ -57,14 +57,14 @@
 }
 
 .selectedThemeWrapper {
-  /* margin-top: 0.3rem; */
-  /*  margin-bottom: 0.5rem; */
+  margin-top: 0.2rem;
+  margin-bottom: 0.2rem;
 }
 .chosenTheme {
   font-size: 0.9rem;
 }
 .selectedTheme {
-  font-size: 0.8rem;
+  font-size: 0.9rem;
 }
 
 .stretchTheme {
@@ -95,10 +95,12 @@
   flex-wrap: wrap;
   /* margin-top: 0.3rem; */
 }
-
-.deleteAddThemeButton {
-  @extend %adddelshow;
-  margin-top: 0.2rem;
+.closeIcon {
+  width: 1rem;
+  height: 1rem;
+  margin-left: 0.3rem;
+  color: #14c6c9;
+  cursor: pointer;
 }
 
 .addMessageWithMarker {

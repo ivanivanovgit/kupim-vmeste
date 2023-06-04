@@ -12,5 +12,3 @@ export const Constants = {
   widthLogo: "150",
   heightLogo: "30",
 };
-
-/* TODO  "com": "git add . && git commit"   удалить потом в package.json, а этот файл перенести в pages/api */

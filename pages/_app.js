@@ -31,7 +31,7 @@ export default function MyApp(props) {
       <CacheProvider value={emotionCache}>
         <Head>
           <meta name="viewport" content="initial-scale=1, width=device-width" />
-          {/*  TODO: Доделать фавикон из логотипа */}
+
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Provider store={store}>

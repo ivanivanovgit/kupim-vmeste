@@ -1,6 +1,13 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
-import { Divider, Select, MenuItem, FormControl, Orange } from "@mui/material";
+import {
+  Divider,
+  Select,
+  MenuItem,
+  FormControl,
+  ListItemText,
+} from "@mui/material";
+import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import {
   fetchThemes,
   checkThemeHasMarkers,
@@ -153,7 +160,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               value={searchInput}
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="&nbsp;&nbsp;&nbsp;Введите адрес для поиска"
-              pattern="^[^<>]*\S[^<>]*$" /* TODO: Доделать патерны от СВО везде по проекту */
+              pattern="^[^<>]*\S[^<>]*$"
               title="Пожалуйста, введите адрес. Не используйте < и >"
               required
             />
@@ -188,6 +195,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                 name="themeList"
                 displayEmpty
                 color="thirdColor"
+                style={{
+                  textOverflow: "ellipsis",
+                  overflow: "hidden",
+                  whiteSpace: "nowrap",
+                }}
               >
                 {themes.length === 0 && (
                   <MenuItem
@@ -204,15 +216,26 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                     className={layoutStyles.MenuItemStyle}
                     value={theme}
                   >
-                    {theme}
+                    {/* Обертываем текст элемента в ListItemText и применяем стили для переноса слов: */}
+                    <ListItemText
+                      primary={theme}
+                      style={{ wordWrap: "break-word", whiteSpace: "normal" }}
+                    />
                   </MenuItem>
                 ))}
               </Select>
             </FormControl>
+
             <div className={layoutStyles.selectedThemeWrapper}>
               <div className={layoutStyles.chosenTheme}>Выбранная тема: </div>
               <div className={layoutStyles.selectedTheme}>
                 {selectedTheme}
+                {selectedTheme && (
+                  <CancelPresentationIcon
+                    className={layoutStyles.closeIcon}
+                    onClick={onDeleteTheme}
+                  />
+                )}
                 {!selectedTheme && (
                   <div className={layoutStyles.addressWarning}>
                     *Выберите или добавьте тему
@@ -241,17 +264,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               required
             />
             <div className={layoutStyles.delAddThemeButtonsWrapper}>
-              <button
-                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
-                type="submit"
-              >
+              <button className={layoutStyles.mainButtonStyle} type="submit">
                 Добавить тему
-              </button>
-              <button
-                className={`${layoutStyles.mainButtonStyle} ${layoutStyles.deleteAddThemeButton}`}
-                onClick={onDeleteTheme}
-              >
-                Удалить тему
               </button>
             </div>
           </form>
