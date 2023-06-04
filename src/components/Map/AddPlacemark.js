@@ -43,6 +43,8 @@ function AddPlacemark({
   const currentCoords = useRef(null);
   const clustererRef = useRef(null);
 
+  const checkIsDuplicateCoordsRef = useRef(null);
+
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
 
@@ -314,7 +316,8 @@ function AddPlacemark({
             currentCoords.current[0] += offset;
             currentCoords.current[1] += offset;
 
-            setCheckIsDuplicateCoords((prev) => prev + 1);
+            checkIsDuplicateCoordsRef.current += 1;
+            /* setCheckIsDuplicateCoords((prev) => prev + 1); */
 
             setTimeout(() => {
               setCheckDublicateMarkersMesage("");
@@ -355,7 +358,7 @@ function AddPlacemark({
             );
 
             clustererRef.current.add(addPlacemark);
-
+            setCheckIsDuplicateCoords(checkIsDuplicateCoordsRef.current);
             ///////
           });
           //////////////////////////
