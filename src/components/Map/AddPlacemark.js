@@ -17,6 +17,8 @@ import {
   clearFunction,
 } from "../../utils/placemarkOptions";
 
+import useSelectedAddressChat from "../../utils/useSelectedAddressChat";
+
 function AddPlacemark({
   mapStyle,
   onAddressChange,
@@ -165,12 +167,8 @@ function AddPlacemark({
     });
   }, [ymaps, searchInputRef]);
 
-  ///////// useEffect для установки значения адреса подсказок в  поле ввода адреса
-  useEffect(() => {
-    if (selectedAddress) {
-      setSearchInput(selectedAddress); // Устанавливаем значение поля ввода адреса
-    }
-  }, [selectedAddress, ymaps]);
+  /////////  для установки значения адреса подсказок в  поле ввода адреса
+  useSelectedAddressChat(selectedAddress, setSearchInput, ymaps);
 
   ///////// useEffect для поиска адреса по координатам
   useEffect(() => {
