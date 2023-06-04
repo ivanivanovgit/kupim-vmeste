@@ -45,8 +45,6 @@ function AddPlacemark({
 
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
-  const [checkCountIsDuplicateCoords, setCheckCountIsDuplicateCoords] =
-    useState(0);
 
   let MyIconContentLayout;
 
@@ -311,11 +309,12 @@ function AddPlacemark({
             setCheckDublicateMarkersMesage(
               "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
             );
-            setCheckCountIsDuplicateCoords((prev) => prev + 1);
 
             const offset = 3 / 111320;
             currentCoords.current[0] += offset;
             currentCoords.current[1] += offset;
+
+            setCheckIsDuplicateCoords((prev) => prev + 1);
 
             setTimeout(() => {
               setCheckDublicateMarkersMesage("");
@@ -357,7 +356,6 @@ function AddPlacemark({
 
             clustererRef.current.add(addPlacemark);
 
-            setCheckIsDuplicateCoords(checkCountIsDuplicateCoords);
             ///////
           });
           //////////////////////////
