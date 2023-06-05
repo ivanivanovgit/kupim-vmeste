@@ -294,15 +294,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           </form>
         </div>
         {showMessage && (
-          <div className={layoutStyles.message}>{showMessage}</div>
+          <div className={layoutStyles.chatError}>{showMessage}</div>
         )}
         {deleteThemeError && (
-          <div className={layoutStyles.deleteThemeError}>
-            {deleteThemeError}
-          </div>
+          <div className={layoutStyles.chatError}>{deleteThemeError}</div>
         )}
         {checkDublicateMarkersMesage && (
-          <div className={layoutStyles.message}>
+          <div className={layoutStyles.chatError}>
             {checkDublicateMarkersMesage}
           </div>
         )}

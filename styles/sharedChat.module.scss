@@ -118,11 +118,7 @@
   margin-bottom: 0.4rem;
 }
 
-.message {
-  @extend %warning;
-}
-
-.deleteThemeError {
+.chatError {
   @extend %warning;
   color: red;
 }
