@@ -83,7 +83,8 @@
   color: var(--balloon-orange-hover-close-color);
 }
 
-.button-delete-marker {
+.button-delete-marker,
+.button-share-marker {
   margin-top: 0.5rem;
   padding: 0.3rem;
   text-align: center;

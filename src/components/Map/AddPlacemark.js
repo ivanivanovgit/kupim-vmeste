@@ -246,12 +246,25 @@ function AddPlacemark({
             onCloseButtonClick: function () {
               addPlacemark.balloon.close();
             },
+            onShareButtonClick: function () {
+              // Получить ID маркера
+              const markerId = addPlacemark.properties.get("id");
+
+              if (typeof window !== "undefined") {
+                const host_name = window.location.host;
+                // Создать ссылку на маркер
+                const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
+                // Копировать ссылку в буфер обмена
+                navigator.clipboard.writeText(url).then(() => {});
+              }
+            },
           }
         );
 
         const addPlacemark = new ymaps.Placemark(
           coords,
           {
+            id: markerId,
             balloonContent: message,
             groupTheme: theme,
           },
@@ -346,11 +359,24 @@ function AddPlacemark({
                 onCloseButtonClick: function () {
                   addPlacemark.balloon.close();
                 },
+                onShareButtonClick: function () {
+                  // Получить ID маркера
+                  const markerId = addPlacemark.properties.get("id");
+
+                  if (typeof window !== "undefined") {
+                    const host_name = window.location.host;
+                    // Создать ссылку на маркер
+                    const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
+                    // Копировать ссылку в буфер обмена
+                    navigator.clipboard.writeText(url).then(() => {});
+                  }
+                },
               });
 
             const addPlacemark = new ymaps.Placemark(
               currentCoords.current,
               {
+                id: markerId,
                 balloonContent: inputText,
                 groupTheme: selectedTheme,
               },
@@ -408,11 +434,24 @@ function AddPlacemark({
               onCloseButtonClick: function () {
                 addPlacemark.balloon.close();
               },
+              onShareButtonClick: function () {
+                // Получить ID маркера
+                const markerId = addPlacemark.properties.get("id");
+
+                if (typeof window !== "undefined") {
+                  const host_name = window.location.host;
+                  // Создать ссылку на маркер
+                  const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
+                  // Копировать ссылку в буфер обмена
+                  navigator.clipboard.writeText(url).then(() => {});
+                }
+              },
             });
 
           const addPlacemark = new ymaps.Placemark(
             coords,
             {
+              id: markerId,
               balloonContent: message,
               groupTheme: theme,
             },

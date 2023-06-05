@@ -10,8 +10,8 @@ export const balloonContentTemplate = `
     </div>
     <div class="button-share-marker">
       <button id="share-marker-button">
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Поделиться
-        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Поделиться
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
     </div>
     <div class="custom-orange-balloon__close">&times;</div>
@@ -29,7 +29,7 @@ export function buildFunction() {
   const shareButton = this.getParentElement().querySelector(
     "#share-marker-button"
   );
-  shareButton.addEventListener("click", onShareButtonClick);
+  shareButton.addEventListener("click", this.onShareButtonClick);
 
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
@@ -46,7 +46,7 @@ export function clearFunction() {
   const shareButton = this.getParentElement().querySelector(
     "#share-marker-button"
   );
-  shareButton.removeEventListener("click", onShareButtonClick);
+  shareButton.removeEventListener("click", this.onShareButtonClick);
 
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
@@ -54,10 +54,6 @@ export function clearFunction() {
   closeButton.removeEventListener("click", this.onCloseButtonClick);
 
   this.constructor.superclass.clear.call(this);
-}
-
-export function onShareButtonClick() {
-  console.log("Share button clicked");
 }
 
 export function getPlacemarkOptions(MyBalloonContentLayout, ymaps) {
