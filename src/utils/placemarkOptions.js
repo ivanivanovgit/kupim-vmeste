@@ -8,6 +8,12 @@ export const balloonContentTemplate = `
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
     </div>
+    <div class="button-share-marker">
+      <button id="share-marker-button">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Поделиться
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+    </div>
     <div class="custom-orange-balloon__close">&times;</div>
   </div>
 `;
@@ -15,8 +21,15 @@ export const balloonContentTemplate = `
 export function buildFunction() {
   this.constructor.superclass.build.call(this);
 
-  const button = this.getParentElement().querySelector("#delete-marker-button");
-  button.addEventListener("click", this.onButtonClick);
+  const deleteButton = this.getParentElement().querySelector(
+    "#delete-marker-button"
+  );
+  deleteButton.addEventListener("click", this.onButtonClick);
+
+  const shareButton = this.getParentElement().querySelector(
+    "#share-marker-button"
+  );
+  shareButton.addEventListener("click", onShareButtonClick);
 
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
@@ -25,8 +38,15 @@ export function buildFunction() {
 }
 
 export function clearFunction() {
-  const button = this.getParentElement().querySelector("#delete-marker-button");
-  button.removeEventListener("click", this.onButtonClick);
+  const deleteButton = this.getParentElement().querySelector(
+    "#delete-marker-button"
+  );
+  deleteButton.removeEventListener("click", this.onButtonClick);
+
+  const shareButton = this.getParentElement().querySelector(
+    "#share-marker-button"
+  );
+  shareButton.removeEventListener("click", onShareButtonClick);
 
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
@@ -34,6 +54,10 @@ export function clearFunction() {
   closeButton.removeEventListener("click", this.onCloseButtonClick);
 
   this.constructor.superclass.clear.call(this);
+}
+
+export function onShareButtonClick() {
+  console.log("Share button clicked");
 }
 
 export function getPlacemarkOptions(MyBalloonContentLayout, ymaps) {
