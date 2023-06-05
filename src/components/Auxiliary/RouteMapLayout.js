@@ -140,7 +140,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
           </div>
           <div className={layoutStyles.buttonsRoute}>
             <button
-              className={`${layoutStyles.mainButtonStyle} ${layoutStyles.routeButton}`}
+              className={`${layoutStyles.mainButtonStyle} ${layoutStyles.routeButton} ${layoutStyles.addRouteButton}`}
               type="submit"
             >
               Добавить маршрут
@@ -156,7 +156,9 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
           </div>
         </form>
         <div className={layoutStyles.smallWarning}>
-          {errorMessage && <div>{errorMessage}</div>}
+          {errorMessage && (
+            <div className={layoutStyles.errorMessageRoute}>{errorMessage}</div>
+          )}
           {submitMessage && ( // отображение сообщения после отправки
             <div>{submitMessage}</div>
           )}

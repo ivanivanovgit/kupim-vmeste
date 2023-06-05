@@ -297,7 +297,9 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           <div className={layoutStyles.message}>{showMessage}</div>
         )}
         {deleteThemeError && (
-          <div className={layoutStyles.message}>{deleteThemeError}</div>
+          <div className={layoutStyles.deleteThemeError}>
+            {deleteThemeError}
+          </div>
         )}
         {checkDublicateMarkersMesage && (
           <div className={layoutStyles.message}>

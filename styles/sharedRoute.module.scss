@@ -21,8 +21,11 @@
 .buttonsRoute {
   display: flex;
   flex-wrap: wrap;
-  justify-content: space-between;
 }
 .routeButton {
   margin-bottom: 0.5rem;
+}
+
+.addRouteButton {
+  margin-right: 0.5rem;
 }

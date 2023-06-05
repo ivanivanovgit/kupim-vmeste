@@ -121,3 +121,8 @@
 .message {
   @extend %warning;
 }
+
+.deleteThemeError {
+  @extend %warning;
+  color: red;
+}
