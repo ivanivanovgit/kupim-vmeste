@@ -1,5 +1,6 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/router";
 import {
   Divider,
   Select,
@@ -31,6 +32,20 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
     useState("");
   const searchInputRef = useRef(null);
+
+  const router = useRouter();
+
+  useEffect(() => {
+    // получение параметров из URL
+    const { message: urlMessage, theme: urlTheme } = router.query;
+
+    if (urlMessage) {
+      setInputText(urlMessage);
+    }
+    if (urlTheme) {
+      setSelectedTheme(urlTheme);
+    }
+  }, [router.query]);
 
   async function onDeleteTheme(event) {
     event.preventDefault();
