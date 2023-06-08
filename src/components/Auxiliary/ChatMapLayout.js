@@ -43,7 +43,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
     let didCancel = false;
 
-    const { message: urlMessage, theme: urlTheme } = router.query;
+    const { theme: urlTheme } = router.query;
 
     const fetchAndSetThemes = async () => {
       const themesFromDB = await fetchThemes();
@@ -51,10 +51,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
       if (!didCancel) {
         if (themesFromDB.includes(urlTheme)) {
           setSelectedTheme(urlTheme);
-        }
-
-        if (urlMessage) {
-          setInputText(urlMessage);
         }
       }
     };
@@ -167,7 +163,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   useEffect(() => {
     fetchThemes().then((theme) => {
-      console.log("theme", theme);
       setThemes(theme);
     });
   }, []);

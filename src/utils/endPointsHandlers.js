@@ -1,6 +1,18 @@
 // endPointsHandlers.js
 import axios from "axios";
 
+// Получение маркера из БД по id
+export async function getMarkerFromDatabase(markerId) {
+  try {
+    const response = await axios.get(
+      `/api/chat-markers/share-marker/${markerId}`
+    );
+    return response.data;
+  } catch (error) {
+    console.error(error);
+  }
+}
+
 // Проверка наличия дубликата маркера с одинаковыми координатами в БД
 export async function checkDuplicateMarkerCoords(lat, lng) {
   try {

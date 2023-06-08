@@ -1,5 +1,6 @@
 // AddPlacemark.js
 import { useRef, useEffect, useState } from "react";
+import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import {
   addMarkerToDatabase,
@@ -8,6 +9,7 @@ import {
   removeMarkerFromDB,
   checkDuplicateMarker,
   checkDuplicateMarkerCoords,
+  getMarkerFromDatabase,
 } from "../../utils/endPointsHandlers";
 
 import {
@@ -47,6 +49,12 @@ function AddPlacemark({
 
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
+  const [shareMarkerId, setShareMarkerId] = useState(null);
+  const [shareMarkerCoords, setShareMarkerCoords] = useState(null);
+  const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
+
+  // TODO: 1 начало
+  const router = useRouter();
 
   let MyIconContentLayout;
 
@@ -161,6 +169,61 @@ function AddPlacemark({
 
   ///////// для поиска адреса по координатам
   useSearchButtonClickChat(searchButtonClick, searchAddress, ymaps);
+  const [isMapLoaded, setIsMapLoaded] = useState(false);
+
+  // TODO: 2 id и theme из query
+  // useEffect для получения  id и theme из query
+  useEffect(() => {
+    if (Object.keys(router.query).length === 0) {
+      // query ещё не доступен, выходим из useEffect
+      return;
+    }
+
+    let didCancel = false;
+
+    const { theme, id } = router.query;
+
+    if (!didCancel) {
+      if (!theme || !id) {
+        return;
+      }
+      setShareMarkerId(id);
+      setShareMarkerTheme(theme);
+      /*    console.log("theme:", theme);
+      console.log("id:", id);
+      console.log("shareMarkerTheme:", shareMarkerTheme);
+      console.log("shareMarkerId:", shareMarkerId); */
+    }
+
+    return () => {
+      didCancel = true;
+    };
+  }, [router.query, shareMarkerId, shareMarkerTheme]);
+
+  // TODO: 3 загружена карта или нет
+  // useEffect для проверки загружена карта или нет
+  useEffect(() => {
+    if (!ymaps) {
+      return;
+    }
+    ymaps.ready().then(() => {
+      setIsMapLoaded(true);
+    });
+  }, [ymaps]);
+
+  // TODO: 4 балуна маркера
+  // useEffect для открытия соответствующего балуна маркера
+  useEffect(() => {
+    if (!ymaps || !mapRef.current || !isMapLoaded) {
+      return;
+    }
+
+    if (shareMarkerId) {
+      getMarkerFromDatabase(shareMarkerId).then((marker) => {
+        console.log("marker:", marker);
+      });
+    }
+  }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]);
 
   ///////// TODO: useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
@@ -208,7 +271,7 @@ function AddPlacemark({
     ///////
   }, [ymaps]);
 
-  ///////// TODO: useEffect для извлечения маркеров на карту согласно выбранной теме
+  /////////  useEffect для извлечения маркеров на карту согласно // TODO: выбранной теме
   useEffect(() => {
     if (!ymaps) {
       return;
@@ -284,7 +347,7 @@ function AddPlacemark({
     //////////////
   }, [selectedTheme, checkIsDuplicateCoords, ymaps]);
 
-  //  TODO: useEffect для добавления нового маркера по кнопке Добавить маркер
+  //  useEffect для // TODO: добавления нового маркера по кнопке Добавить маркер
   useEffect(() => {
     if (
       createMarker === 0 ||
@@ -398,7 +461,7 @@ function AddPlacemark({
       });
   }, [createMarker, ymaps]);
 
-  //////// TODO: useEffect для извлечения всех маркеров на карту
+  //////// useEffect для // TODO: извлечения всех маркеров на карту
   useEffect(() => {
     if (showAllMarkers) {
       if (!ymaps) {
