@@ -1,6 +1,6 @@
 // MapChat.js
 
-import AddPlacemark from "./AddPlacemark";
+import ChatMap from "./ChatMap";
 import { YMaps } from "@pbe/react-yandex-maps";
 
 export default function MapChat({
@@ -28,7 +28,7 @@ export default function MapChat({
         load: "package.full",
       }}
     >
-      <AddPlacemark
+      <ChatMap
         mapStyle={mapStyle}
         onAddressChange={onAddressChange}
         inputText={inputText}

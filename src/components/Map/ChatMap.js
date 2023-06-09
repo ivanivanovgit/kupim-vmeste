@@ -1,4 +1,4 @@
-// AddPlacemark.js
+// ChatMap.js
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
@@ -23,7 +23,7 @@ import useSelectedAddressChat from "../../utils/useSelectedAddressChat";
 import useSearchButtonClickChat from "../../utils/useSearchButtonClickChat";
 import useAddressSuggestionChat from "../../utils/useAddressSuggestionChat";
 
-function AddPlacemark({
+function ChatMap({
   mapStyle,
   onAddressChange,
   inputText,
@@ -611,4 +611,4 @@ function AddPlacemark({
   return <div ref={mapRef} className={mapStyle} />;
 }
 
-export default AddPlacemark;
+export default ChatMap;
