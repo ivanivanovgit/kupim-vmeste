@@ -55,9 +55,8 @@ function ChatMap({
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
   const [shareMarkerId, setShareMarkerId] = useState(null);
-  const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
+  const [_, setShareMarkerTheme] = useState(null);
 
-  // TODO: 1 начало
   const router = useRouter();
 
   let MyIconContentLayout;
@@ -180,8 +179,8 @@ function ChatMap({
 
   //  для проверки загружена карта или нет
   useMapReady(ymaps, setIsMapLoaded);
-  // TODO: 4 балуна маркера
-  // useEffect для открытия соответствующего балуна маркера
+
+  //  для открытия соответствующего балуна маркера
   useFetchShareMarker(
     shareMarkerId,
     ymaps,
@@ -191,44 +190,7 @@ function ChatMap({
     getShareMarker,
     setOpenAlert
   );
-  /*   useEffect(() => {
-    if (!ymaps || !mapRef.current || !isMapLoaded) {
-      return;
-    }
 
-    if (shareMarkerId) {
-      getShareMarker(shareMarkerId)
-        .then((marker) => {
-          if (marker) {
-            if (myMapRef.current && marker && marker.lat && marker.lng) {
-              myMapRef.current.setCenter([marker.lat, marker.lng]);
-
-              // Проверяем, существует ли clustererRef.current перед поиском маркера
-              if (clustererRef.current) {
-                // Получаем все маркеры из кластера
-                let allMarkers = clustererRef.current.getGeoObjects();
-
-                // Ищем маркер по ID
-                let markerToOpen = allMarkers.find(
-                  (m) => m.properties.get("id") === marker.id
-                );
-
-                // Открываем балун маркера
-                if (markerToOpen) {
-                  markerToOpen.balloon.open();
-                }
-              }
-            }
-          }
-        })
-        .catch((error) => {
-          console.error("Error fetching marker: ", error);
-          setOpenAlert(true);
-        });
-    }
-  }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]); */
-
-  // TODO: 5 перетаскиваемый маркер
   ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
@@ -275,7 +237,7 @@ function ChatMap({
     ///////
   }, [ymaps]);
 
-  /////////  useEffect для извлечения маркеров на карту согласно // TODO: 6 выбранной теме
+  /////////  useEffect для извлечения маркеров на карту согласно выбранной теме
   useEffect(() => {
     if (!ymaps) {
       return;
@@ -368,7 +330,7 @@ function ChatMap({
     //////////////
   }, [selectedTheme, checkIsDuplicateCoords, ymaps]);
 
-  //  useEffect для // TODO: 7 добавления нового маркера по кнопке Добавить маркер
+  //  useEffect для  добавления нового маркера по кнопке Добавить маркер
   useEffect(() => {
     if (
       createMarker === 0 ||
@@ -497,7 +459,7 @@ function ChatMap({
       });
   }, [createMarker, ymaps]);
 
-  //////// useEffect для // TODO: 8 извлечения всех маркеров на карту
+  //////// useEffect для извлечения всех маркеров на карту
   useEffect(() => {
     if (showAllMarkers) {
       if (!ymaps) {
@@ -579,7 +541,6 @@ function ChatMap({
           // Добавляем кластер на карту
           myMapRef.current.geoObjects.add(clustererRef.current);
 
-          /*  myMapRef.current.geoObjects.add(addPlacemark); */
           /////
         });
         ////
