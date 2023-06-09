@@ -22,7 +22,7 @@ export const useFetchShareMarker = (
           if (marker) {
             if (myMapRef.current && marker && marker.lat && marker.lng) {
               myMapRef.current.setCenter([marker.lat, marker.lng]);
-
+              myMapRef.current.setZoom(21);
               // Проверяем, существует ли clustererRef.current перед поиском маркера
               if (clustererRef.current) {
                 // Получаем все маркеры из кластера

@@ -211,6 +211,7 @@ function ChatMap({
     clustererRef.current = new ymaps.Clusterer({
       preset: "islands#orangeClusterIcons",
     });
+
     // Добавляем кластер на карту
     myMapRef.current.geoObjects.add(clustererRef.current);
 
