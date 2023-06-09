@@ -7,7 +7,11 @@ import {
   MenuItem,
   FormControl,
   ListItemText,
+  Alert,
+  Dialog,
+  DialogContent,
 } from "@mui/material";
+
 import CancelPresentationIcon from "@mui/icons-material/CancelPresentation";
 import {
   fetchThemes,
@@ -24,6 +28,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [selectedTheme, setSelectedTheme] = useState("");
   // состояние: размещен ли маркер на карте или нет
   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false);
+  const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
   const [searchInput, setSearchInput] = useState("");
   const [searchButtonClick, setSearchButtonClick] = useState(null);
@@ -31,6 +36,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [deleteThemeError, setDeleteThemeError] = useState("");
   const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
     useState("");
+  const [openAlert, setOpenAlert] = useState(false);
   const searchInputRef = useRef(null);
 
   const router = useRouter();
@@ -137,12 +143,12 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     }
 
     if (!isMarkerPlaced || !selectedTheme) {
-      setShowMessage("Задайте адрес и тему");
+      setWarnNothemeOrAdress("Задайте адрес и тему");
       setTimeout(() => {
-        setShowMessage("");
+        setWarnNothemeOrAdress("");
       }, 3000);
     } else {
-      setShowMessage("");
+      setWarnNothemeOrAdress("");
     }
   };
 
@@ -159,6 +165,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     showAllMarkers: showAllMarkers,
     setShowAllMarkers: setShowAllMarkers,
     setCheckDublicateMarkersMesage: setCheckDublicateMarkersMesage,
+    setOpenAlert: setOpenAlert,
+    setShowMessage: setShowMessage,
   });
 
   useEffect(() => {
@@ -323,8 +331,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
             </button>
           </form>
         </div>
-        {showMessage && (
-          <div className={layoutStyles.chatError}>{showMessage}</div>
+        {warnNothemeOrAdress && (
+          <div className={layoutStyles.chatError}>{warnNothemeOrAdress}</div>
         )}
         {deleteThemeError && (
           <div className={layoutStyles.chatError}>{deleteThemeError}</div>
@@ -334,6 +342,16 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
             {checkDublicateMarkersMesage}
           </div>
         )}
+        {showMessage && (
+          <div className={layoutStyles.chatError}>{showMessage}</div>
+        )}
+        <Dialog open={openAlert} onClose={() => setOpenAlert(false)}>
+          <DialogContent>
+            <Alert severity="error" onClose={() => setOpenAlert(false)}>
+              Маркера с заданной темой и сообщением не существует
+            </Alert>
+          </DialogContent>
+        </Dialog>
       </div>
       <div className={layoutStyles.rightSide}>
         <div className={layoutStyles.forMap}>{mapChatWithProps}</div>

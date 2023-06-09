@@ -9,7 +9,7 @@ import {
   removeMarkerFromDB,
   checkDuplicateMarker,
   checkDuplicateMarkerCoords,
-  getMarkerFromDatabase,
+  getShareMarker,
 } from "../../utils/endPointsHandlers";
 
 import {
@@ -37,6 +37,8 @@ function AddPlacemark({
   showAllMarkers,
   setShowAllMarkers,
   setCheckDublicateMarkersMesage,
+  setOpenAlert,
+  setShowMessage,
 }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
@@ -50,7 +52,6 @@ function AddPlacemark({
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
   const [shareMarkerId, setShareMarkerId] = useState(null);
-  const [shareMarkerCoords, setShareMarkerCoords] = useState(null);
   const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
 
   // TODO: 1 начало
@@ -189,10 +190,6 @@ function AddPlacemark({
       }
       setShareMarkerId(id);
       setShareMarkerTheme(theme);
-      /*    console.log("theme:", theme);
-      console.log("id:", id);
-      console.log("shareMarkerTheme:", shareMarkerTheme);
-      console.log("shareMarkerId:", shareMarkerId); */
     }
 
     return () => {
@@ -219,13 +216,39 @@ function AddPlacemark({
     }
 
     if (shareMarkerId) {
-      getMarkerFromDatabase(shareMarkerId).then((marker) => {
-        console.log("marker:", marker);
-      });
+      getShareMarker(shareMarkerId)
+        .then((marker) => {
+          if (marker) {
+            if (myMapRef.current && marker && marker.lat && marker.lng) {
+              myMapRef.current.setCenter([marker.lat, marker.lng]);
+
+              // Проверяем, существует ли clustererRef.current перед поиском маркера
+              if (clustererRef.current) {
+                // Получаем все маркеры из кластера
+                let allMarkers = clustererRef.current.getGeoObjects();
+
+                // Ищем маркер по ID
+                let markerToOpen = allMarkers.find(
+                  (m) => m.properties.get("id") === marker.id
+                );
+
+                // Открываем балун маркера
+                if (markerToOpen) {
+                  markerToOpen.balloon.open();
+                }
+              }
+            }
+          }
+        })
+        .catch((error) => {
+          console.error("Error fetching marker: ", error);
+          setOpenAlert(true);
+        });
     }
   }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]);
 
-  ///////// TODO: useEffect для добавления перетаскиваемого маркера и инициализации карты
+  // TODO: 5 перетаскиваемый маркер
+  ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
       return;
@@ -271,7 +294,7 @@ function AddPlacemark({
     ///////
   }, [ymaps]);
 
-  /////////  useEffect для извлечения маркеров на карту согласно // TODO: выбранной теме
+  /////////  useEffect для извлечения маркеров на карту согласно // TODO: 6 выбранной теме
   useEffect(() => {
     if (!ymaps) {
       return;
@@ -309,16 +332,33 @@ function AddPlacemark({
             onCloseButtonClick: function () {
               addPlacemark.balloon.close();
             },
-            onShareButtonClick: function () {
+            onShareButtonClick: async function () {
               // Получить ID маркера
               const markerId = addPlacemark.properties.get("id");
 
               if (typeof window !== "undefined") {
-                const host_name = window.location.host;
-                // Создать ссылку на маркер
-                const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
-                // Копировать ссылку в буфер обмена
-                navigator.clipboard.writeText(url).then(() => {});
+                try {
+                  const markerData = await getShareMarker(markerId);
+                  const theme = markerData.theme; // получаем тему маркера
+                  const host_name = window.location.host;
+
+                  // Создаем ссылку на маркер с темой
+                  const url = `${host_name}/chat-na-karte?id=${markerId}&theme=${theme}`;
+
+                  // Копировать ссылку в буфер обмена
+                  navigator.clipboard.writeText(url).then(() => {});
+
+                  setShowMessage("Маркер скопирован в буфер обмена");
+                  // Копировать ссылку в буфер обмена
+                  setTimeout(() => {
+                    setShowMessage("");
+                  }, 3000);
+                } catch (error) {
+                  console.error(
+                    "Ошибка при получении информации о маркере: ",
+                    error
+                  );
+                }
               }
             },
           }
@@ -347,7 +387,7 @@ function AddPlacemark({
     //////////////
   }, [selectedTheme, checkIsDuplicateCoords, ymaps]);
 
-  //  useEffect для // TODO: добавления нового маркера по кнопке Добавить маркер
+  //  useEffect для // TODO: 7 добавления нового маркера по кнопке Добавить маркер
   useEffect(() => {
     if (
       createMarker === 0 ||
@@ -422,16 +462,33 @@ function AddPlacemark({
                 onCloseButtonClick: function () {
                   addPlacemark.balloon.close();
                 },
-                onShareButtonClick: function () {
+                onShareButtonClick: async function () {
                   // Получить ID маркера
                   const markerId = addPlacemark.properties.get("id");
 
                   if (typeof window !== "undefined") {
-                    const host_name = window.location.host;
-                    // Создать ссылку на маркер
-                    const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
-                    // Копировать ссылку в буфер обмена
-                    navigator.clipboard.writeText(url).then(() => {});
+                    try {
+                      const markerData = await getShareMarker(markerId);
+                      const theme = markerData.theme; // получаем тему маркера
+                      const host_name = window.location.host;
+
+                      // Создаем ссылку на маркер с темой
+                      const url = `${host_name}/chat-na-karte?id=${markerId}&theme=${theme}`;
+
+                      // Копировать ссылку в буфер обмена
+                      navigator.clipboard.writeText(url).then(() => {});
+
+                      setShowMessage("Маркер скопирован в буфер обмена");
+
+                      setTimeout(() => {
+                        setShowMessage("");
+                      }, 3000);
+                    } catch (error) {
+                      console.error(
+                        "Ошибка при получении информации о маркере: ",
+                        error
+                      );
+                    }
                   }
                 },
               });
@@ -456,12 +513,10 @@ function AddPlacemark({
       })
       .catch((error) => {
         console.error("Error while checking for duplicate marker: ", error);
-        // Обработка ошибки и вывод сообщения пользователю
-        alert("Произошла ошибка при проверке на дубликаты. Попробуйте снова.");
       });
   }, [createMarker, ymaps]);
 
-  //////// useEffect для // TODO: извлечения всех маркеров на карту
+  //////// useEffect для // TODO: 8 извлечения всех маркеров на карту
   useEffect(() => {
     if (showAllMarkers) {
       if (!ymaps) {
@@ -497,16 +552,33 @@ function AddPlacemark({
               onCloseButtonClick: function () {
                 addPlacemark.balloon.close();
               },
-              onShareButtonClick: function () {
+              onShareButtonClick: async function () {
                 // Получить ID маркера
                 const markerId = addPlacemark.properties.get("id");
 
                 if (typeof window !== "undefined") {
-                  const host_name = window.location.host;
-                  // Создать ссылку на маркер
-                  const url = `${host_name}/api/chat-markers/share-marker/copy/${markerId}`;
-                  // Копировать ссылку в буфер обмена
-                  navigator.clipboard.writeText(url).then(() => {});
+                  try {
+                    const markerData = await getShareMarker(markerId);
+                    const theme = markerData.theme; // получаем тему маркера
+                    const host_name = window.location.host;
+
+                    // Создаем ссылку на маркер с темой
+                    const url = `${host_name}/chat-na-karte?id=${markerId}&theme=${theme}`;
+
+                    // Копировать ссылку в буфер обмена
+                    navigator.clipboard.writeText(url).then(() => {});
+
+                    setShowMessage("Маркер скопирован в буфер обмена");
+
+                    setTimeout(() => {
+                      setShowMessage("");
+                    }, 3000);
+                  } catch (error) {
+                    console.error(
+                      "Ошибка при получении информации о маркере: ",
+                      error
+                    );
+                  }
                 }
               },
             });

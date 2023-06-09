@@ -2,14 +2,20 @@
 import axios from "axios";
 
 // Получение маркера из БД по id
-export async function getMarkerFromDatabase(markerId) {
+export async function getShareMarker(markerId) {
   try {
     const response = await axios.get(
       `/api/chat-markers/share-marker/${markerId}`
     );
+    // Проверяем, есть ли в ответе ошибка
+    if (response.data.error) {
+      throw new Error(response.data.error);
+    }
     return response.data;
   } catch (error) {
     console.error(error);
+    // Если возникла ошибка, возвращаем сообщение об ошибке
+    throw new Error("Маркера с заданной темой и сообщением не существует");
   }
 }
 

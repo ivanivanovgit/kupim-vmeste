@@ -17,6 +17,8 @@ export default function MapChat({
   showAllMarkers,
   setShowAllMarkers,
   setCheckDublicateMarkersMesage,
+  setOpenAlert,
+  setShowMessage,
 }) {
   return (
     <YMaps
@@ -40,6 +42,8 @@ export default function MapChat({
         showAllMarkers={showAllMarkers}
         setShowAllMarkers={setShowAllMarkers}
         setCheckDublicateMarkersMesage={setCheckDublicateMarkersMesage}
+        setOpenAlert={setOpenAlert}
+        setShowMessage={setShowMessage}
       />
     </YMaps>
   );
