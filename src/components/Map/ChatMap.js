@@ -19,9 +19,12 @@ import {
   clearFunction,
 } from "../../utils/placemarkOptions";
 
-import useSelectedAddressChat from "../../utils/useSelectedAddressChat";
-import useSearchButtonClickChat from "../../utils/useSearchButtonClickChat";
-import useAddressSuggestionChat from "../../utils/useAddressSuggestionChat";
+import { useSelectedAddressChat } from "../../utils/useSelectedAddressChat";
+import { useSearchButtonClickChat } from "../../utils/useSearchButtonClickChat";
+import { useAddressSuggestionChat } from "../../utils/useAddressSuggestionChat";
+import { useShareMarker } from "../../utils/useShareMarker";
+import { useMapReady } from "../../utils/useMapReady";
+import { useFetchShareMarker } from "../../utils/useFetchShareMarker";
 
 function ChatMap({
   mapStyle,
@@ -172,45 +175,23 @@ function ChatMap({
   useSearchButtonClickChat(searchButtonClick, searchAddress, ymaps);
   const [isMapLoaded, setIsMapLoaded] = useState(false);
 
-  // TODO: 2 id и theme из query
-  // useEffect для получения  id и theme из query
-  useEffect(() => {
-    if (Object.keys(router.query).length === 0) {
-      // query ещё не доступен, выходим из useEffect
-      return;
-    }
+  // для получения и установки id и theme из query
+  useShareMarker(router, setShareMarkerId, setShareMarkerTheme);
 
-    let didCancel = false;
-
-    const { theme, id } = router.query;
-
-    if (!didCancel) {
-      if (!theme || !id) {
-        return;
-      }
-      setShareMarkerId(id);
-      setShareMarkerTheme(theme);
-    }
-
-    return () => {
-      didCancel = true;
-    };
-  }, [router.query, shareMarkerId, shareMarkerTheme]);
-
-  // TODO: 3 загружена карта или нет
-  // useEffect для проверки загружена карта или нет
-  useEffect(() => {
-    if (!ymaps) {
-      return;
-    }
-    ymaps.ready().then(() => {
-      setIsMapLoaded(true);
-    });
-  }, [ymaps]);
-
+  //  для проверки загружена карта или нет
+  useMapReady(ymaps, setIsMapLoaded);
   // TODO: 4 балуна маркера
   // useEffect для открытия соответствующего балуна маркера
-  useEffect(() => {
+  useFetchShareMarker(
+    shareMarkerId,
+    ymaps,
+    myMapRef,
+    isMapLoaded,
+    clustererRef,
+    getShareMarker,
+    setOpenAlert
+  );
+  /*   useEffect(() => {
     if (!ymaps || !mapRef.current || !isMapLoaded) {
       return;
     }
@@ -245,7 +226,7 @@ function ChatMap({
           setOpenAlert(true);
         });
     }
-  }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]);
+  }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]); */
 
   // TODO: 5 перетаскиваемый маркер
   ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты

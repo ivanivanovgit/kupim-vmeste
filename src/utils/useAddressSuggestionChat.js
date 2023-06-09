@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-const useAddressSuggestionChat = (
+export const useAddressSuggestionChat = (
   ymaps,
   searchInputRef,
   selectedAddress,
@@ -29,5 +29,3 @@ const useAddressSuggestionChat = (
     });
   }, [ymaps, searchInputRef]);
 };
-
-export default useAddressSuggestionChat;
