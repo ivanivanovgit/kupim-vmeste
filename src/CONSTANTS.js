@@ -14,4 +14,5 @@ export const Constants = {
   coordDefault: [55.755864, 37.617698],
   zoomDefault: 10,
   zoomMax: 21,
+  offset: 3 / 111320,
 };

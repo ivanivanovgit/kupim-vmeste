@@ -324,7 +324,7 @@ function ChatMap({
               "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
             );
 
-            const offset = 3 / 111320;
+            const offset = Constants.offset;
             currentCoords.current[0] += offset;
             currentCoords.current[1] += offset;
 
