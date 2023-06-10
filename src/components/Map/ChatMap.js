@@ -29,6 +29,7 @@ import { useMapReady } from "../../utils/useMapReady";
 import { useFetchShareMarker } from "../../utils/useFetchShareMarker";
 import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
+import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({
   mapStyle,
@@ -71,38 +72,6 @@ function ChatMap({
     );
   }
 
-  // Определяем адрес по координатам (обратное геокодирование).
-  function getAddress(coords, myPlacemark) {
-    if (!myPlacemark) {
-      return;
-    }
-    /*  myPlacemark.properties.set("iconCaption", "Поиск..."); */
-    ymaps.geocode(coords).then(function (res) {
-      var firstGeoObject = res.geoObjects.get(0);
-
-      const address = [
-        firstGeoObject.getLocalities().length
-          ? firstGeoObject.getLocalities()
-          : firstGeoObject.getAdministrativeAreas(),
-        firstGeoObject.getThoroughfare() || firstGeoObject.getPremise() || "",
-      ]
-        .filter(Boolean) // <-- Фильтруем все значения, которые не являются true
-        .join(", ");
-
-      myPlacemark.properties.set({
-        // Формируем строку с данными об объекте.
-        iconCaption: address,
-      });
-
-      if (typeof onAddressChange === "function" && !selectedAddress) {
-        onAddressChange(address);
-      }
-      if (typeof setIsMarkerPlaced === "function") {
-        setIsMarkerPlaced(true);
-      }
-    });
-  }
-
   //  Функция для поиска адреса
   const searchAddress = async (address) => {
     if (!ymaps || !myMapRef.current || !address) {
@@ -127,7 +96,15 @@ function ChatMap({
         myMapRef.current.geoObjects.add(myPlacemarkRef.current);
       }
 
-      getAddress(coords, myPlacemarkRef.current);
+      getAddress(
+        ymaps,
+        coords,
+        myPlacemarkRef.current,
+        onAddressChange,
+        selectedAddress,
+        setIsMarkerPlaced
+      );
+
       onAddressChange(address);
       // Центрирование карты на найденных координатах
       myMapRef.current.setCenter(coords, myMapRef.current.getZoom(), {
@@ -221,7 +198,14 @@ function ChatMap({
         myMapRef.current.geoObjects.add(myPlacemarkRef.current);
       }
 
-      getAddress(coords, myPlacemarkRef.current);
+      getAddress(
+        ymaps,
+        coords,
+        myPlacemarkRef.current,
+        onAddressChange,
+        selectedAddress,
+        setIsMarkerPlaced
+      );
     });
 
     return () => {
