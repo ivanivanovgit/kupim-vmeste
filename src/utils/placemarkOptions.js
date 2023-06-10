@@ -77,3 +77,36 @@ export function getPlacemarkOptions(MyBalloonContentLayout, ymaps) {
     ),
   };
 }
+
+// Получить ID маркера и поделиться ссылкой на маркер
+export async function shareMarker(
+  addPlacemark,
+  getShareMarker,
+  setShowMessage
+) {
+  if (!addPlacemark || !getShareMarker || !setShowMessage) return;
+
+  const markerId = addPlacemark.properties.get("id");
+
+  if (typeof window !== "undefined") {
+    try {
+      const markerData = await getShareMarker(markerId);
+      const theme = markerData.theme; // получаем тему маркера
+      const host_name = window.location.host;
+
+      // Создаем ссылку на маркер с темой
+      const url = `${host_name}/chat-na-karte?id=${markerId}&theme=${theme}`;
+
+      // Копировать ссылку в буфер обмена
+      navigator.clipboard.writeText(url).then(() => {});
+
+      setShowMessage("Маркер скопирован в буфер обмена");
+
+      setTimeout(() => {
+        setShowMessage("");
+      }, 3000);
+    } catch (error) {
+      console.error("Ошибка при получении информации о маркере: ", error);
+    }
+  }
+}
