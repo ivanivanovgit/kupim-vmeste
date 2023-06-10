@@ -436,7 +436,7 @@ function ChatMap({
       }
 
       getMarkersFromDatabase().then((markers) => {
-        const markerPromises = markers.map((marker) => {
+        markers.map((marker) => {
           const markerId = marker.id;
           const coords = [marker.lat, marker.lng];
           const theme = marker.theme;
