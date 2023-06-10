@@ -28,6 +28,7 @@ import { useShareMarker } from "../../utils/useShareMarker";
 import { useMapReady } from "../../utils/useMapReady";
 import { useFetchShareMarker } from "../../utils/useFetchShareMarker";
 import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
+import { createPlacemark } from "../../utils/createPlacemark";
 
 function ChatMap({
   mapStyle,
@@ -68,36 +69,6 @@ function ChatMap({
     MyIconContentLayout = ymaps.templateLayoutFactory.createClass(
       '<div style="min-width: 10rem; text-align: left;">$[properties.iconCaption]</div>'
     );
-  }
-  // функция для создания метки
-  function createPlacemark(coords) {
-    const placemark = new ymaps.Placemark(
-      coords,
-      {
-        ///
-        /*  iconCaption: "Поиск...", */
-        ///
-      },
-      {
-        ///
-        // Опции.
-        // Необходимо указать данный тип макета.
-        iconLayout: "default#imageWithContent",
-        // Своё изображение иконки метки.
-        iconImageHref: "images/marker.png",
-        // Размеры метки.
-        iconImageSize: [30, 43],
-        // Смещение левого верхнего угла иконки относительно
-        // её "ножки" (точки привязки).
-        iconImageOffset: [-18, -43],
-        // Смещение слоя с содержимым относительно слоя с картинкой.
-        iconContentOffset: [35, -10],
-        // Макет содержимого.
-        iconContentLayout: MyIconContentLayout,
-        ///
-      }
-    );
-    myPlacemarkRef.current = placemark;
   }
 
   // Определяем адрес по координатам (обратное геокодирование).
@@ -148,7 +119,11 @@ function ChatMap({
       if (myPlacemarkRef.current) {
         myPlacemarkRef.current.geometry.setCoordinates(coords);
       } else {
-        createPlacemark(coords);
+        myPlacemarkRef.current = createPlacemark(
+          ymaps,
+          coords,
+          MyIconContentLayout
+        );
         myMapRef.current.geoObjects.add(myPlacemarkRef.current);
       }
 
@@ -238,7 +213,11 @@ function ChatMap({
       if (myPlacemarkRef.current) {
         myPlacemarkRef.current.geometry.setCoordinates(coords);
       } else {
-        createPlacemark(coords);
+        myPlacemarkRef.current = createPlacemark(
+          ymaps,
+          coords,
+          MyIconContentLayout
+        );
         myMapRef.current.geoObjects.add(myPlacemarkRef.current);
       }
 
