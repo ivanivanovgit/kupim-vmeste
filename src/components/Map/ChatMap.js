@@ -2,6 +2,7 @@
 import { useRef, useEffect, useState } from "react";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
+import { Constants } from "../../CONSTANTS";
 import {
   addMarkerToDatabase,
   fetchMarkersByTheme,
@@ -25,6 +26,7 @@ import { useAddressSuggestionChat } from "../../utils/useAddressSuggestionChat";
 import { useShareMarker } from "../../utils/useShareMarker";
 import { useMapReady } from "../../utils/useMapReady";
 import { useFetchShareMarker } from "../../utils/useFetchShareMarker";
+import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 
 function ChatMap({
   mapStyle,
@@ -55,7 +57,7 @@ function ChatMap({
   const [selectedAddress, setselectedAddress] = useState("");
   const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
   const [shareMarkerId, setShareMarkerId] = useState(null);
-  const [_, setShareMarkerTheme] = useState(null);
+  const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
 
   const router = useRouter();
 
@@ -197,14 +199,26 @@ function ChatMap({
       return;
     }
 
+    let coords = Constants.coordDefault;
+    let zoom = Constants.zoomDefault;
+
+    getShareCoordsZoom(
+      shareMarkerId,
+      shareMarkerTheme,
+      getShareMarker,
+      coords,
+      zoom,
+      Constants.zoomMax
+    );
+
     const myMap = new ymaps.Map(mapRef.current, {
-      center: [55.755864, 37.617698],
-      zoom: 10,
+      center: coords,
+      zoom: zoom,
     });
 
     myMapRef.current = myMap;
 
-    const searchControl = myMap.controls.get("searchControl");
+    const searchControl = myMapRef.current.controls.get("searchControl");
     searchControl.options.set("noPlacemark", "true");
 
     // Создаем кластер
@@ -216,7 +230,7 @@ function ChatMap({
     myMapRef.current.geoObjects.add(clustererRef.current);
 
     // Слушаем клик на карте.
-    myMap.events.add("click", function (e) {
+    myMapRef.current.events.add("click", function (e) {
       let coords = e.get("coords");
       currentCoords.current = coords;
 
