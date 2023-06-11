@@ -1,6 +1,7 @@
 // TabDisplayingPointsOnMap.js
 import { useRef, useEffect } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
+import { Constants } from "../../CONSTANTS";
 
 const createTabDisplayingPointsOnMap = (idTabMap) => {
   /* const idTab = tabMapName; ////// number of tab */
@@ -16,7 +17,7 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
 
       const myMap = new ymaps.Map(mapRef.current, {
         center: markers[0].coords,
-        zoom: 12,
+        zoom: Constants.zoomDefault,
       });
 
       const searchControl = myMap.controls.get("searchControl");

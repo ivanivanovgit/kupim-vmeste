@@ -2,6 +2,7 @@
 
 import { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
+import { Constants } from "../../CONSTANTS";
 import {
   setErrorMessage,
   setSubmitMessage,
@@ -48,8 +49,8 @@ function RouteMap({
 
     ymaps.ready(() => {
       const myMap = new ymaps.Map(mapRef.current, {
-        center: [55.755864, 37.617698],
-        zoom: 10,
+        center: Constants.coordDefault,
+        zoom: Constants.zoomDefault,
       });
 
       myMapRef.current = myMap;
