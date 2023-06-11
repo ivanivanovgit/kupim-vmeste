@@ -108,6 +108,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Адрес пункта отправления"
               pattern="^[^<>]*\S[^<>]*$"
+              maxLength={200}
               title="Пожалуйста, введите адрес пункта отправления."
             />
             {setFirstPointError && (
@@ -126,6 +127,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Адрес пункта назначения"
               pattern="^[^<>]*\S[^<>]*$"
+              maxLength={200}
               title="Пожалуйста, введите адрес пункта назначения."
             />
             {setSecondPointError && (
@@ -143,7 +145,8 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Сообщение для маршрута"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, введите сообщение для маршрута. Данное сообщение будет у пунктов отправления и назначения."
+              maxLength={100}
+              title="Пожалуйста, введите сообщение для маршрута. Данное сообщение будет у пунктов отправления и назначения. Длина сообщения не должна превышать 100 символов."
               onChange={(e) =>
                 handleInputChange(setMessageFirstPoint.onChange, e.target.value)
               }

@@ -315,7 +315,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={handleInputGroupChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите тему для добавления"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, добавьте тему. По данной теме вы сможете добавить маркеры с сообщением или посмотреть другие маркеры с данной тематикой. Удалить тему можно только после удаления маркеров."
+              title="Пожалуйста, добавьте тему. По данной теме вы сможете добавить маркеры с сообщением или посмотреть другие маркеры с данной тематикой. Удалить тему можно только после удаления маркеров. Длина темы не должна превышать 100 символов."
+              maxLength={100}
               required
             />
             <div className={layoutStyles.delAddThemeButtonsWrapper}>
@@ -340,7 +341,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={handleInputChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, введите сообщение. Данное сообщение будет у добавленного вами маркера."
+              title="Пожалуйста, введите сообщение. Данное сообщение будет у добавленного вами маркера. Длина сообщения не должна превышать 100 символов."
+              maxLength={100}
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">
