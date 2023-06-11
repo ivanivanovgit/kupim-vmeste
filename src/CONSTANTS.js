@@ -15,4 +15,5 @@ export const Constants = {
   zoomDefault: 10,
   zoomMax: 21,
   offset: 3 / 111320,
+  bannedWords: ["война", "Путин"],
 };

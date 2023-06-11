@@ -1,5 +1,6 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
+import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
 import {
   Divider,
@@ -90,6 +91,21 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     }, 3000); // сбрасываем сообщение после 3 секунд
   }
 
+  // Универсальный обработчик ввода
+  const handleInput = (setterFunction, event) => {
+    let userInput = event.target.value;
+
+    const validation = validateInput(userInput);
+
+    if (!validation.valid) {
+      setterFunction("");
+      setShowMessage(validation.errorMessage);
+    } else {
+      setterFunction(validation.text);
+      setShowMessage("");
+    }
+  };
+
   const handleShowAllMarkers = (event) => {
     event.preventDefault();
     setShowAllMarkers(true);
@@ -128,12 +144,12 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   // Обработчик события изменения текста в поле ввода
   const handleInputChange = (event) => {
-    setInputText(event.target.value);
+    handleInput(setInputText, event);
   };
 
   // Обработчик события изменения текста в группе
   const handleInputGroupChange = (event) => {
-    setInputGroupText(event.target.value);
+    handleInput(setInputGroupText, event);
   };
 
   const handleFormSubmitmessage = (event) => {
