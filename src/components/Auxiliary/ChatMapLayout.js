@@ -42,33 +42,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const router = useRouter();
 
-  useEffect(() => {
-    if (Object.keys(router.query).length === 0) {
-      // query ещё не доступен, выходим из useEffect
-      return;
-    }
-
-    let didCancel = false;
-
-    const { theme: urlTheme } = router.query;
-
-    const fetchAndSetThemes = async () => {
-      const themesFromDB = await fetchThemes();
-
-      if (!didCancel) {
-        if (themesFromDB.includes(urlTheme)) {
-          setSelectedTheme(urlTheme);
-        }
-      }
-    };
-
-    fetchAndSetThemes();
-
-    return () => {
-      didCancel = true;
-    };
-  }, [router.query]);
-
   async function onDeleteTheme(event) {
     event.preventDefault();
 
@@ -115,12 +88,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     event.preventDefault();
     setSearchButtonClick(searchInput);
   };
-
-  useEffect(() => {
-    if (searchButtonClick) {
-      setSearchButtonClick(null);
-    }
-  }, [searchButtonClick]);
 
   // Обработчик события нажатия кнопки "Добавить тему"
   const handleAddThemeFormSubmit = (event) => {
@@ -186,6 +153,39 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   });
 
   useEffect(() => {
+    if (Object.keys(router.query).length === 0) {
+      // query ещё не доступен, выходим из useEffect
+      return;
+    }
+
+    let didCancel = false;
+
+    const { theme: urlTheme } = router.query;
+
+    const fetchAndSetThemes = async () => {
+      const themesFromDB = await fetchThemes();
+
+      if (!didCancel) {
+        if (themesFromDB.includes(urlTheme)) {
+          setSelectedTheme(urlTheme);
+        }
+      }
+    };
+
+    fetchAndSetThemes();
+
+    return () => {
+      didCancel = true;
+    };
+  }, [router.query]);
+
+  useEffect(() => {
+    if (searchButtonClick) {
+      setSearchButtonClick(null);
+    }
+  }, [searchButtonClick]);
+
+  useEffect(() => {
     fetchThemes().then((theme) => {
       setThemes(theme);
     });
@@ -215,7 +215,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={(e) => setSearchInput(e.target.value)}
               placeholder="&nbsp;&nbsp;&nbsp;Введите адрес для поиска"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, введите адрес. Не используйте < и >"
+              title="Пожалуйста, введите адрес для поиска. По данному адресу будет размещен маркер с сообщением в заданной теме."
+              maxLength={200}
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">
@@ -314,7 +315,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={handleInputGroupChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите тему для добавления"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, задайте тему. Не используйте < и >"
+              title="Пожалуйста, добавьте тему. По данной теме вы сможете добавить маркеры с сообщением или посмотреть другие маркеры с данной тематикой. Удалить тему можно только после удаления маркеров."
               required
             />
             <div className={layoutStyles.delAddThemeButtonsWrapper}>
@@ -339,7 +340,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={handleInputChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, введите сообщение. Не используйте < и >"
+              title="Пожалуйста, введите сообщение. Данное сообщение будет у добавленного вами маркера."
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">

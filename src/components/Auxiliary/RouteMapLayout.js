@@ -10,6 +10,8 @@ import {
 } from "../../redux/slices/routeSlices/messageSlice";
 import { incrementCountMapRoute } from "../../redux/slices/routeSlices/routeSlice";
 
+import { validateInput } from "../../utils/validateInput";
+
 function RouteMapLayout({ mapRoute, layoutStyles }) {
   const firstPointRef = useRef(null);
   const secondPointRef = useRef(null);
@@ -51,6 +53,17 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
     rules: { required: "Введите сообщение для маршрута" },
     defaultValue: "",
   });
+
+  const handleInputChange = (setter, value) => {
+    const validation = validateInput(value);
+
+    if (!validation.valid) {
+      dispatch(setErrorMessage(validation.errorMessage));
+    } else {
+      setter(validation.text);
+      dispatch(setErrorMessage(""));
+    }
+  };
 
   const handleFormAddRoute = (data) => {
     if (data) {
@@ -95,7 +108,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Адрес пункта отправления"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, не используйте < и >"
+              title="Пожалуйста, введите адрес пункта отправления."
             />
             {setFirstPointError && (
               <div className={layoutStyles.smallWarning}>
@@ -113,7 +126,7 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Адрес пункта назначения"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, не используйте < и >"
+              title="Пожалуйста, введите адрес пункта назначения."
             />
             {setSecondPointError && (
               <div className={layoutStyles.smallWarning}>
@@ -130,7 +143,10 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Сообщение для маршрута"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, не используйте < и >"
+              title="Пожалуйста, введите сообщение для маршрута. Данное сообщение будет у пунктов отправления и назначения."
+              onChange={(e) =>
+                handleInputChange(setMessageFirstPoint.onChange, e.target.value)
+              }
             />
             {setMessageFirstPointError && (
               <div className={layoutStyles.smallWarning}>
