@@ -7,6 +7,7 @@ const initialState = {
   inputGroupText: "",
   address: "",
   createMarker: 0,
+  selectedTheme: "",
 };
 
 export const chatMapSlice = createSlice({
@@ -25,6 +26,9 @@ export const chatMapSlice = createSlice({
     incrementCountAddMarker: (state) => {
       state.createMarker += 1;
     },
+    setSelectedTheme: (state, action) => {
+      state.selectedTheme = action.payload;
+    },
   },
 });
 
@@ -33,6 +37,7 @@ export const {
   setInputGroupText,
   setAddress,
   incrementCountAddMarker,
+  setSelectedTheme,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;

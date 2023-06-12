@@ -5,6 +5,7 @@ import {
   setInputText,
   setInputGroupText,
   incrementCountAddMarker,
+  setSelectedTheme,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -30,11 +31,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const inputText = useSelector((state) => state.chatMap.inputText);
   const inputGroupText = useSelector((state) => state.chatMap.inputGroupText);
   const address = useSelector((state) => state.chatMap.address);
-
+  const selectedTheme = useSelector((state) => state.chatMap.selectedTheme);
   /*  const [createMarker, incrementCountAddMarker] = useState(0); */
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
-  const [selectedTheme, setSelectedTheme] = useState("");
+  /*   const [selectedTheme, setSelectedTheme] = useState(""); */
   // состояние: размещен ли маркер на карте или нет
   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
@@ -65,7 +66,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
     const newThemes = themes.filter((theme) => theme !== selectedTheme);
     setThemes(newThemes);
-    setSelectedTheme(newThemes.length > 0 ? newThemes[0] : "");
+    dispatch(setSelectedTheme(newThemes.length > 0 ? newThemes[0] : ""));
     setDeleteThemeError(`Тема \"${selectedTheme}\"  удалена успешно.`);
     setTimeout(() => {
       setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы
@@ -103,13 +104,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
     if (!themeExists) {
       setThemes((prevThemes) => [...prevThemes, inputGroupText]);
-      setSelectedTheme(inputGroupText);
+      dispatch(setSelectedTheme(inputGroupText));
     }
   };
 
   // Обработчик события изменения выбранной темы в элементе select
   const handleSelectThemeChange = (event) => {
-    setSelectedTheme(event.target.value);
+    dispatch(setSelectedTheme(event.target.value));
   };
 
   // Обработчик события изменения текста в поле ввода
@@ -139,8 +140,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   };
 
   const mapChatWithProps = React.cloneElement(mapChat, {
-    selectedTheme: selectedTheme,
-    setSelectedTheme: setSelectedTheme,
     setIsMarkerPlaced: setIsMarkerPlaced,
     searchButtonClick: searchButtonClick,
     searchInputRef: searchInputRef.current,
@@ -167,7 +166,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
       if (!didCancel) {
         if (themesFromDB.includes(urlTheme)) {
-          setSelectedTheme(urlTheme);
+          dispatch(setSelectedTheme(urlTheme));
         }
       }
     };
@@ -193,7 +192,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   useEffect(() => {
     if (themes.length > 0 && !selectedTheme) {
-      setSelectedTheme(themes[0]);
+      dispatch(setSelectedTheme(themes[0]));
     }
   }, [themes]);
 

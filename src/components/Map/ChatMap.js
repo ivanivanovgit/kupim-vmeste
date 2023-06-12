@@ -1,7 +1,10 @@
 // ChatMap.js
 import { useRef, useEffect, useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setAddress } from "../../redux/slices/chatSlices/chatMapSlice";
+import {
+  setAddress,
+  setSelectedTheme,
+} from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import { Constants } from "../../CONSTANTS";
@@ -35,8 +38,6 @@ import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({
   mapStyle,
-  selectedTheme,
-  setSelectedTheme,
   setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
@@ -66,6 +67,7 @@ function ChatMap({
   const dispatch = useDispatch();
   const inputText = useSelector((state) => state.chatMap.inputText);
   const createMarker = useSelector((state) => state.chatMap.createMarker);
+  const selectedTheme = useSelector((state) => state.chatMap.selectedTheme);
 
   let MyIconContentLayout;
 
@@ -454,7 +456,7 @@ function ChatMap({
         });
         ////
         setShowAllMarkers(false);
-        setSelectedTheme("");
+        dispatch(setSelectedTheme(""));
       });
     }
   }, [showAllMarkers]);

@@ -5,8 +5,6 @@ import { YMaps } from "@pbe/react-yandex-maps";
 
 export default function MapChat({
   mapStyle,
-  selectedTheme,
-  setSelectedTheme,
   setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
@@ -27,8 +25,6 @@ export default function MapChat({
     >
       <ChatMap
         mapStyle={mapStyle}
-        selectedTheme={selectedTheme}
-        setSelectedTheme={setSelectedTheme}
         setIsMarkerPlaced={setIsMarkerPlaced}
         searchButtonClick={searchButtonClick}
         searchInputRef={searchInputRef}
