@@ -11,6 +11,7 @@ const initialState = {
   isMarkerPlaced: false,
   searchButtonClick: null,
   searchInput: "",
+  showAllMarkers: false,
 };
 
 export const chatMapSlice = createSlice({
@@ -41,6 +42,9 @@ export const chatMapSlice = createSlice({
     setSearchInput: (state, action) => {
       state.searchInput = action.payload;
     },
+    setShowAllMarkers: (state, action) => {
+      state.showAllMarkers = action.payload;
+    },
   },
 });
 
@@ -53,6 +57,7 @@ export const {
   setIsMarkerPlaced,
   setSearchButtonClick,
   setSearchInput,
+  setShowAllMarkers,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;

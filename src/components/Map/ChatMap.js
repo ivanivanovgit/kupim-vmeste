@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from "react-redux";
 import {
   setAddress,
   setSelectedTheme,
+  setShowAllMarkers,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
@@ -39,8 +40,6 @@ import { getAddress } from "../../utils/getAddress";
 function ChatMap({
   mapStyle,
   searchInputRef,
-  showAllMarkers,
-  setShowAllMarkers,
   setCheckDublicateMarkersMesage,
   setOpenAlert,
   setShowMessage,
@@ -68,6 +67,7 @@ function ChatMap({
   const searchButtonClick = useSelector(
     (state) => state.chatMap.searchButtonClick
   );
+  const showAllMarkers = useSelector((state) => state.chatMap.showAllMarkers);
 
   let MyIconContentLayout;
 
@@ -455,7 +455,7 @@ function ChatMap({
           /////
         });
         ////
-        setShowAllMarkers(false);
+        dispatch(setShowAllMarkers(false));
         dispatch(setSelectedTheme(""));
       });
     }

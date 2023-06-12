@@ -8,6 +8,7 @@ import {
   setSelectedTheme,
   setSearchButtonClick,
   setSearchInput,
+  setShowAllMarkers,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -39,14 +40,14 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     (state) => state.chatMap.searchButtonClick
   );
   const searchInput = useSelector((state) => state.chatMap.searchInput);
+
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   // состояние: размещен ли маркер на карте или нет
   /*   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false); */
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
-  /*  const [searchInput, setSearchInput] = useState(""); */
-  const [showAllMarkers, setShowAllMarkers] = useState(false);
+  /*  const [showAllMarkers, setShowAllMarkers] = useState(false); */
   const [deleteThemeError, setDeleteThemeError] = useState("");
   const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
     useState("");
@@ -93,7 +94,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const handleShowAllMarkers = (event) => {
     event.preventDefault();
-    setShowAllMarkers(true);
+    dispatch(setShowAllMarkers(true));
   };
 
   const handleSearchButtonClick = (event) => {
@@ -145,8 +146,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    showAllMarkers: showAllMarkers,
-    setShowAllMarkers: setShowAllMarkers,
     setCheckDublicateMarkersMesage: setCheckDublicateMarkersMesage,
     setOpenAlert: setOpenAlert,
     setShowMessage: setShowMessage,
