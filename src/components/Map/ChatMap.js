@@ -5,6 +5,7 @@ import {
   setAddress,
   setSelectedTheme,
   setShowAllMarkers,
+  setCheckDublicateMarkersMesage,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
@@ -37,13 +38,7 @@ import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
-function ChatMap({
-  mapStyle,
-  searchInputRef,
-  setCheckDublicateMarkersMesage,
-  setOpenAlert,
-  setShowMessage,
-}) {
+function ChatMap({ mapStyle, searchInputRef, setOpenAlert, setShowMessage }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
   const myMapRef = useRef(null);
@@ -313,11 +308,13 @@ function ChatMap({
       .then((isDuplicate) => {
         if (isDuplicate) {
           // Вывод сообщения пользователю
-          setCheckDublicateMarkersMesage(
-            "Маркер с этими координатами и сообщением уже существует"
+          dispatch(
+            setCheckDublicateMarkersMesage(
+              "Маркер с этими координатами и сообщением уже существует"
+            )
           );
           setTimeout(() => {
-            setCheckDublicateMarkersMesage("");
+            dispatch(setCheckDublicateMarkersMesage(""));
           }, 3000);
           return;
         }
@@ -330,8 +327,10 @@ function ChatMap({
           //////////////////////////////
           if (isDuplicateCoords) {
             // Вывод сообщения пользователю
-            setCheckDublicateMarkersMesage(
-              "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
+            dispatch(
+              setCheckDublicateMarkersMesage(
+                "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
+              )
             );
 
             const offset = Constants.offset;
@@ -342,7 +341,7 @@ function ChatMap({
             /* setCheckIsDuplicateCoords((prev) => prev + 1); */
 
             setTimeout(() => {
-              setCheckDublicateMarkersMesage("");
+              dispatch(setCheckDublicateMarkersMesage(""));
             }, 3000);
           }
 

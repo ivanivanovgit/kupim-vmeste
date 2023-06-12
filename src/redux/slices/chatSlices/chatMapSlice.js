@@ -12,6 +12,7 @@ const initialState = {
   searchButtonClick: null,
   searchInput: "",
   showAllMarkers: false,
+  checkDublicateMarkersMesage: "",
 };
 
 export const chatMapSlice = createSlice({
@@ -45,6 +46,9 @@ export const chatMapSlice = createSlice({
     setShowAllMarkers: (state, action) => {
       state.showAllMarkers = action.payload;
     },
+    setCheckDublicateMarkersMesage: (state, action) => {
+      state.checkDublicateMarkersMesage = action.payload;
+    },
   },
 });
 
@@ -58,6 +62,7 @@ export const {
   setSearchButtonClick,
   setSearchInput,
   setShowAllMarkers,
+  setCheckDublicateMarkersMesage,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;

@@ -40,17 +40,16 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     (state) => state.chatMap.searchButtonClick
   );
   const searchInput = useSelector((state) => state.chatMap.searchInput);
-
+  const checkDublicateMarkersMesage = useSelector(
+    (state) => state.chatMap.checkDublicateMarkersMesage
+  );
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
-  // состояние: размещен ли маркер на карте или нет
-  /*   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false); */
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
-  /*  const [showAllMarkers, setShowAllMarkers] = useState(false); */
   const [deleteThemeError, setDeleteThemeError] = useState("");
-  const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
-    useState("");
+  /*  const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
+    useState(""); */
   const [openAlert, setOpenAlert] = useState(false);
   const searchInputRef = useRef(null);
 
@@ -146,7 +145,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    setCheckDublicateMarkersMesage: setCheckDublicateMarkersMesage,
     setOpenAlert: setOpenAlert,
     setShowMessage: setShowMessage,
   });
