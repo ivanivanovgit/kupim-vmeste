@@ -32,12 +32,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const inputGroupText = useSelector((state) => state.chatMap.inputGroupText);
   const address = useSelector((state) => state.chatMap.address);
   const selectedTheme = useSelector((state) => state.chatMap.selectedTheme);
-  /*  const [createMarker, incrementCountAddMarker] = useState(0); */
+  const isMarkerPlaced = useSelector((state) => state.chatMap.isMarkerPlaced);
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
-  /*   const [selectedTheme, setSelectedTheme] = useState(""); */
   // состояние: размещен ли маркер на карте или нет
-  const [isMarkerPlaced, setIsMarkerPlaced] = useState(false);
+  /*   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false); */
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
   const [searchInput, setSearchInput] = useState("");
@@ -140,7 +139,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   };
 
   const mapChatWithProps = React.cloneElement(mapChat, {
-    setIsMarkerPlaced: setIsMarkerPlaced,
     searchButtonClick: searchButtonClick,
     searchInputRef: searchInputRef.current,
     setSearchInput: setSearchInput,

@@ -38,7 +38,6 @@ import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({
   mapStyle,
-  setIsMarkerPlaced,
   searchButtonClick,
   searchInputRef,
   setSearchInput,
@@ -112,7 +111,7 @@ function ChatMap({
         myPlacemarkRef.current,
         onAddressChange,
         selectedAddress,
-        setIsMarkerPlaced
+        dispatch
       );
 
       onAddressChange(address);
@@ -214,7 +213,7 @@ function ChatMap({
         myPlacemarkRef.current,
         onAddressChange,
         selectedAddress,
-        setIsMarkerPlaced
+        dispatch
       );
     });
 

@@ -8,6 +8,7 @@ const initialState = {
   address: "",
   createMarker: 0,
   selectedTheme: "",
+  isMarkerPlaced: false,
 };
 
 export const chatMapSlice = createSlice({
@@ -29,6 +30,9 @@ export const chatMapSlice = createSlice({
     setSelectedTheme: (state, action) => {
       state.selectedTheme = action.payload;
     },
+    setIsMarkerPlaced: (state, action) => {
+      state.isMarkerPlaced = action.payload;
+    },
   },
 });
 
@@ -38,6 +42,7 @@ export const {
   setAddress,
   incrementCountAddMarker,
   setSelectedTheme,
+  setIsMarkerPlaced,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;
