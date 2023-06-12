@@ -39,22 +39,6 @@ import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({ mapStyle, searchInputRef }) {
-  const ymaps = useYMaps();
-  const mapRef = useRef(null);
-  const myMapRef = useRef(null);
-  const myPlacemarkRef = useRef(null);
-  const currentCoords = useRef(null);
-  const clustererRef = useRef(null);
-
-  const checkIsDuplicateCoordsRef = useRef(null);
-
-  const [selectedAddress, setselectedAddress] = useState("");
-  const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
-  const [shareMarkerId, setShareMarkerId] = useState(null);
-  const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
-
-  const router = useRouter();
-
   const dispatch = useDispatch();
   const inputText = useSelector((state) => state.chatMap.inputText);
   const createMarker = useSelector((state) => state.chatMap.createMarker);
@@ -63,6 +47,22 @@ function ChatMap({ mapStyle, searchInputRef }) {
     (state) => state.chatMap.searchButtonClick
   );
   const showAllMarkers = useSelector((state) => state.chatMap.showAllMarkers);
+  // useState
+  const [selectedAddress, setselectedAddress] = useState("");
+  const [checkIsDuplicateCoords, setCheckIsDuplicateCoords] = useState(0);
+  const [shareMarkerId, setShareMarkerId] = useState(null);
+  const [shareMarkerTheme, setShareMarkerTheme] = useState(null);
+  // useRef
+  const mapRef = useRef(null);
+  const myMapRef = useRef(null);
+  const myPlacemarkRef = useRef(null);
+  const currentCoords = useRef(null);
+  const clustererRef = useRef(null);
+  const checkIsDuplicateCoordsRef = useRef(null);
+
+  const router = useRouter();
+
+  const ymaps = useYMaps();
 
   let MyIconContentLayout;
 
