@@ -1,4 +1,6 @@
 // placemarkOptions.js
+import { setShowMessage } from "../redux/slices/chatSlices/chatMapSlice";
+
 export const balloonContentTemplate = `
   <div class="custom-balloon">
     $[properties.balloonContent]
@@ -79,11 +81,7 @@ export function getPlacemarkOptions(MyBalloonContentLayout, ymaps) {
 }
 
 // Получить ID маркера и поделиться ссылкой на маркер
-export async function shareMarker(
-  addPlacemark,
-  getShareMarker,
-  setShowMessage
-) {
+export async function shareMarker(addPlacemark, getShareMarker, dispatch) {
   if (!addPlacemark || !getShareMarker || !setShowMessage) return;
 
   const markerId = addPlacemark.properties.get("id");
@@ -100,10 +98,10 @@ export async function shareMarker(
       // Копировать ссылку в буфер обмена
       navigator.clipboard.writeText(url).then(() => {});
 
-      setShowMessage("Маркер скопирован в буфер обмена");
+      dispatch(setShowMessage("Маркер скопирован в буфер обмена"));
 
       setTimeout(() => {
-        setShowMessage("");
+        dispatch(setShowMessage(""));
       }, 3000);
     } catch (error) {
       console.error("Ошибка при получении информации о маркере: ", error);

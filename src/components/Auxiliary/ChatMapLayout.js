@@ -10,6 +10,7 @@ import {
   setSearchInput,
   setShowAllMarkers,
   setOpenAlert,
+  setShowMessage,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -45,10 +46,10 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     (state) => state.chatMap.checkDublicateMarkersMesage
   );
   const openAlert = useSelector((state) => state.chatMap.openAlert);
+  const showMessage = useSelector((state) => state.chatMap.showMessage);
   // useState
   const [themes, setThemes] = useState([]);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
-  const [showMessage, setShowMessage] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
   // useRef
   const searchInputRef = useRef(null);
@@ -84,10 +85,10 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
     if (!validation.valid) {
       dispatchFunction("");
-      setShowMessage(validation.errorMessage);
+      dispatch(setShowMessage(validation.errorMessage));
     } else {
       dispatchFunction(validation.text);
-      setShowMessage("");
+      dispatch(setShowMessage(""));
     }
   };
 
@@ -145,7 +146,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    setShowMessage: setShowMessage,
   });
 
   useEffect(() => {

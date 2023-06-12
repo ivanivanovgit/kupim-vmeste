@@ -38,7 +38,7 @@ import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
-function ChatMap({ mapStyle, searchInputRef, setShowMessage }) {
+function ChatMap({ mapStyle, searchInputRef }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
   const myMapRef = useRef(null);
@@ -260,7 +260,7 @@ function ChatMap({ mapStyle, searchInputRef, setShowMessage }) {
               addPlacemark.balloon.close();
             },
             onShareButtonClick: function () {
-              shareMarker(addPlacemark, getShareMarker, setShowMessage);
+              shareMarker(addPlacemark, getShareMarker, dispatch);
             },
           }
         );
@@ -368,7 +368,7 @@ function ChatMap({ mapStyle, searchInputRef, setShowMessage }) {
                   addPlacemark.balloon.close();
                 },
                 onShareButtonClick: function () {
-                  shareMarker(addPlacemark, getShareMarker, setShowMessage);
+                  shareMarker(addPlacemark, getShareMarker, dispatch);
                 },
               });
 
@@ -432,7 +432,7 @@ function ChatMap({ mapStyle, searchInputRef, setShowMessage }) {
                 addPlacemark.balloon.close();
               },
               onShareButtonClick: function () {
-                shareMarker(addPlacemark, getShareMarker, setShowMessage);
+                shareMarker(addPlacemark, getShareMarker, dispatch);
               },
             });
 

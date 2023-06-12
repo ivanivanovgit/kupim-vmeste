@@ -3,7 +3,7 @@
 import ChatMap from "./ChatMap";
 import { YMaps } from "@pbe/react-yandex-maps";
 
-export default function MapChat({ mapStyle, searchInputRef, setShowMessage }) {
+export default function MapChat({ mapStyle, searchInputRef }) {
   return (
     <YMaps
       query={{
@@ -12,11 +12,7 @@ export default function MapChat({ mapStyle, searchInputRef, setShowMessage }) {
         load: "package.full",
       }}
     >
-      <ChatMap
-        mapStyle={mapStyle}
-        searchInputRef={searchInputRef}
-        setShowMessage={setShowMessage}
-      />
+      <ChatMap mapStyle={mapStyle} searchInputRef={searchInputRef} />
     </YMaps>
   );
 }
