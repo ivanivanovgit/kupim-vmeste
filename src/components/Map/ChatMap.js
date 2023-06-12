@@ -38,7 +38,7 @@ import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
-function ChatMap({ mapStyle, searchInputRef, setOpenAlert, setShowMessage }) {
+function ChatMap({ mapStyle, searchInputRef, setShowMessage }) {
   const ymaps = useYMaps();
   const mapRef = useRef(null);
   const myMapRef = useRef(null);
@@ -148,7 +148,7 @@ function ChatMap({ mapStyle, searchInputRef, setOpenAlert, setShowMessage }) {
     isMapLoaded,
     clustererRef,
     getShareMarker,
-    setOpenAlert
+    dispatch
   );
 
   ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты

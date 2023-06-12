@@ -1,7 +1,7 @@
 // useFetchShareMarker.js
 
 import { useEffect } from "react";
-
+import { setOpenAlert } from "../redux/slices/chatSlices/chatMapSlice";
 export const useFetchShareMarker = (
   shareMarkerId,
   ymaps,
@@ -9,7 +9,7 @@ export const useFetchShareMarker = (
   isMapLoaded,
   clustererRef,
   getShareMarker,
-  setOpenAlert
+  dispatch
 ) => {
   useEffect(() => {
     if (!ymaps || !myMapRef.current || !isMapLoaded) {
@@ -43,7 +43,7 @@ export const useFetchShareMarker = (
         })
         .catch((error) => {
           console.error("Error fetching marker: ", error);
-          setOpenAlert(true);
+          dispatch(setOpenAlert(true));
         });
     }
   }, [shareMarkerId, ymaps, myMapRef.current, isMapLoaded]);

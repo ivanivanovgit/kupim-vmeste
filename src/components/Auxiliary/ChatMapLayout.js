@@ -9,6 +9,7 @@ import {
   setSearchButtonClick,
   setSearchInput,
   setShowAllMarkers,
+  setOpenAlert,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -43,14 +44,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const checkDublicateMarkersMesage = useSelector(
     (state) => state.chatMap.checkDublicateMarkersMesage
   );
-  // Добавляем состояние для хранения массива тем
+  const openAlert = useSelector((state) => state.chatMap.openAlert);
+  // useState
   const [themes, setThemes] = useState([]);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
-  /*  const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
-    useState(""); */
-  const [openAlert, setOpenAlert] = useState(false);
+  // useRef
   const searchInputRef = useRef(null);
 
   const router = useRouter();
@@ -145,7 +145,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    setOpenAlert: setOpenAlert,
     setShowMessage: setShowMessage,
   });
 
@@ -361,9 +360,12 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
         {showMessage && (
           <div className={layoutStyles.chatError}>{showMessage}</div>
         )}
-        <Dialog open={openAlert} onClose={() => setOpenAlert(false)}>
+        <Dialog open={openAlert} onClose={() => dispatch(setOpenAlert(false))}>
           <DialogContent>
-            <Alert severity="error" onClose={() => setOpenAlert(false)}>
+            <Alert
+              severity="error"
+              onClose={() => dispatch(setOpenAlert(false))}
+            >
               Маркера с заданной темой и сообщением не существует
             </Alert>
           </DialogContent>
