@@ -38,7 +38,6 @@ import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({
   mapStyle,
-  searchButtonClick,
   searchInputRef,
   setSearchInput,
   showAllMarkers,
@@ -67,6 +66,9 @@ function ChatMap({
   const inputText = useSelector((state) => state.chatMap.inputText);
   const createMarker = useSelector((state) => state.chatMap.createMarker);
   const selectedTheme = useSelector((state) => state.chatMap.selectedTheme);
+  const searchButtonClick = useSelector(
+    (state) => state.chatMap.searchButtonClick
+  );
 
   let MyIconContentLayout;
 

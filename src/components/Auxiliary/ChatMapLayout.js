@@ -6,6 +6,7 @@ import {
   setInputGroupText,
   incrementCountAddMarker,
   setSelectedTheme,
+  setSearchButtonClick,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -33,6 +34,9 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const address = useSelector((state) => state.chatMap.address);
   const selectedTheme = useSelector((state) => state.chatMap.selectedTheme);
   const isMarkerPlaced = useSelector((state) => state.chatMap.isMarkerPlaced);
+  const searchButtonClick = useSelector(
+    (state) => state.chatMap.searchButtonClick
+  );
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   // состояние: размещен ли маркер на карте или нет
@@ -40,7 +44,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
   const [searchInput, setSearchInput] = useState("");
-  const [searchButtonClick, setSearchButtonClick] = useState(null);
+  /*  const [searchButtonClick, setSearchButtonClick] = useState(null); */
   const [showAllMarkers, setShowAllMarkers] = useState(false);
   const [deleteThemeError, setDeleteThemeError] = useState("");
   const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
@@ -93,7 +97,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const handleSearchButtonClick = (event) => {
     event.preventDefault();
-    setSearchButtonClick(searchInput);
+    dispatch(setSearchButtonClick(searchInput));
   };
 
   // Обработчик события нажатия кнопки "Добавить тему"
@@ -139,7 +143,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   };
 
   const mapChatWithProps = React.cloneElement(mapChat, {
-    searchButtonClick: searchButtonClick,
     searchInputRef: searchInputRef.current,
     setSearchInput: setSearchInput,
     showAllMarkers: showAllMarkers,
@@ -178,7 +181,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   useEffect(() => {
     if (searchButtonClick) {
-      setSearchButtonClick(null);
+      dispatch(setSearchButtonClick(null));
     }
   }, [searchButtonClick]);
 
