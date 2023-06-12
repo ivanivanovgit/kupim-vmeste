@@ -1,15 +1,12 @@
 // useSelectedAddressChat
 
 import { useEffect } from "react";
+import { setSearchInput } from "../redux/slices/chatSlices/chatMapSlice";
 
-export const useSelectedAddressChat = (
-  selectedAddress,
-  setSearchInput,
-  ymaps
-) => {
+export const useSelectedAddressChat = (selectedAddress, dispatch, ymaps) => {
   useEffect(() => {
     if (selectedAddress) {
-      setSearchInput(selectedAddress); // Устанавливаем значение поля ввода адреса
+      dispatch(setSearchInput(selectedAddress)); // Устанавливаем значение поля ввода адреса
     }
   }, [selectedAddress, ymaps]);
 };

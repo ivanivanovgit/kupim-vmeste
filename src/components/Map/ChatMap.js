@@ -39,7 +39,6 @@ import { getAddress } from "../../utils/getAddress";
 function ChatMap({
   mapStyle,
   searchInputRef,
-  setSearchInput,
   showAllMarkers,
   setShowAllMarkers,
   setCheckDublicateMarkersMesage,
@@ -134,7 +133,7 @@ function ChatMap({
   );
 
   /////////  для установки значения адреса подсказок в  поле ввода адреса
-  useSelectedAddressChat(selectedAddress, setSearchInput, ymaps);
+  useSelectedAddressChat(selectedAddress, dispatch, ymaps);
 
   ///////// для поиска адреса по координатам
   useSearchButtonClickChat(searchButtonClick, searchAddress, ymaps);

@@ -7,6 +7,7 @@ import {
   incrementCountAddMarker,
   setSelectedTheme,
   setSearchButtonClick,
+  setSearchInput,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
@@ -37,14 +38,14 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const searchButtonClick = useSelector(
     (state) => state.chatMap.searchButtonClick
   );
+  const searchInput = useSelector((state) => state.chatMap.searchInput);
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   // состояние: размещен ли маркер на карте или нет
   /*   const [isMarkerPlaced, setIsMarkerPlaced] = useState(false); */
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [showMessage, setShowMessage] = useState("");
-  const [searchInput, setSearchInput] = useState("");
-  /*  const [searchButtonClick, setSearchButtonClick] = useState(null); */
+  /*  const [searchInput, setSearchInput] = useState(""); */
   const [showAllMarkers, setShowAllMarkers] = useState(false);
   const [deleteThemeError, setDeleteThemeError] = useState("");
   const [checkDublicateMarkersMesage, setCheckDublicateMarkersMesage] =
@@ -144,7 +145,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    setSearchInput: setSearchInput,
     showAllMarkers: showAllMarkers,
     setShowAllMarkers: setShowAllMarkers,
     setCheckDublicateMarkersMesage: setCheckDublicateMarkersMesage,
@@ -212,7 +212,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               name="search"
               ref={searchInputRef}
               value={searchInput}
-              onChange={(e) => setSearchInput(e.target.value)}
+              onChange={(e) => dispatch(setSearchInput(e.target.value))}
               placeholder="&nbsp;&nbsp;&nbsp;Введите адрес для поиска"
               pattern="^[^<>]*\S[^<>]*$"
               title="Пожалуйста, введите адрес для поиска. По данному адресу будет размещен маркер с сообщением в заданной теме."

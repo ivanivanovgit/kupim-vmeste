@@ -10,6 +10,7 @@ const initialState = {
   selectedTheme: "",
   isMarkerPlaced: false,
   searchButtonClick: null,
+  searchInput: "",
 };
 
 export const chatMapSlice = createSlice({
@@ -37,6 +38,9 @@ export const chatMapSlice = createSlice({
     setSearchButtonClick: (state, action) => {
       state.searchButtonClick = action.payload;
     },
+    setSearchInput: (state, action) => {
+      state.searchInput = action.payload;
+    },
   },
 });
 
@@ -48,6 +52,7 @@ export const {
   setSelectedTheme,
   setIsMarkerPlaced,
   setSearchButtonClick,
+  setSearchInput,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;

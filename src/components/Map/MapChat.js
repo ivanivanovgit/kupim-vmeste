@@ -6,7 +6,6 @@ import { YMaps } from "@pbe/react-yandex-maps";
 export default function MapChat({
   mapStyle,
   searchInputRef,
-  setSearchInput,
   showAllMarkers,
   setShowAllMarkers,
   setCheckDublicateMarkersMesage,
@@ -24,7 +23,6 @@ export default function MapChat({
       <ChatMap
         mapStyle={mapStyle}
         searchInputRef={searchInputRef}
-        setSearchInput={setSearchInput}
         showAllMarkers={showAllMarkers}
         setShowAllMarkers={setShowAllMarkers}
         setCheckDublicateMarkersMesage={setCheckDublicateMarkersMesage}
