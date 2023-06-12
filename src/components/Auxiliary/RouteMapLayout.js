@@ -145,8 +145,8 @@ function RouteMapLayout({ mapRoute, layoutStyles }) {
               }}
               placeholder="&nbsp;Сообщение для маршрута"
               pattern="^[^<>]*\S[^<>]*$"
-              maxLength={100}
-              title="Пожалуйста, введите сообщение для маршрута. Данное сообщение будет у пунктов отправления и назначения. Длина сообщения не должна превышать 100 символов."
+              maxLength={300}
+              title="Пожалуйста, введите сообщение для маршрута. Данное сообщение будет у пунктов отправления и назначения. Длина сообщения не должна превышать 300 символов."
               onChange={(e) =>
                 handleInputChange(setMessageFirstPoint.onChange, e.target.value)
               }

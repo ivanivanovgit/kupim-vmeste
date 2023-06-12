@@ -341,8 +341,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               onChange={handleInputChange}
               placeholder="&nbsp;&nbsp;&nbsp;Введите сообщение"
               pattern="^[^<>]*\S[^<>]*$"
-              title="Пожалуйста, введите сообщение. Данное сообщение будет у добавленного вами маркера. Длина сообщения не должна превышать 100 символов."
-              maxLength={100}
+              title="Пожалуйста, введите сообщение. Данное сообщение будет у добавленного вами маркера. Длина сообщения не должна превышать 300 символов."
+              maxLength={300}
               required
             />
             <button className={layoutStyles.mainButtonStyle} type="submit">
