@@ -1,5 +1,7 @@
 // ChatMap.js
 import { useRef, useEffect, useState } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import { setAddress } from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import { Constants } from "../../CONSTANTS";
@@ -33,9 +35,6 @@ import { getAddress } from "../../utils/getAddress";
 
 function ChatMap({
   mapStyle,
-  onAddressChange,
-  inputText,
-  createMarker,
   selectedTheme,
   setSelectedTheme,
   setIsMarkerPlaced,
@@ -64,6 +63,10 @@ function ChatMap({
 
   const router = useRouter();
 
+  const dispatch = useDispatch();
+  const inputText = useSelector((state) => state.chatMap.inputText);
+  const createMarker = useSelector((state) => state.chatMap.createMarker);
+
   let MyIconContentLayout;
 
   if (ymaps) {
@@ -71,6 +74,11 @@ function ChatMap({
       '<div style="min-width: 10rem; text-align: left;">$[properties.iconCaption]</div>'
     );
   }
+
+  // Обновляем адрес
+  const onAddressChange = (newAddress) => {
+    dispatch(setAddress(newAddress));
+  };
 
   //  Функция для поиска адреса
   const searchAddress = async (address) => {

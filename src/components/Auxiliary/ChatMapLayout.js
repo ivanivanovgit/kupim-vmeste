@@ -1,5 +1,11 @@
 // ChatMapLayout.js
 import React, { useState, useEffect, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setInputText,
+  setInputGroupText,
+  incrementCountAddMarker,
+} from "../../redux/slices/chatSlices/chatMapSlice";
 import { validateInput } from "../../utils/validateInput";
 import { useRouter } from "next/router";
 import {
@@ -20,10 +26,12 @@ import {
 } from "../../../src/utils/endPointsHandlers";
 
 function ChatMapLayout({ mapChat, layoutStyles }) {
-  const [address, setAddress] = useState("");
-  const [inputText, setInputText] = useState("");
-  const [inputGroupText, setInputGroupText] = useState("");
-  const [createMarker, setCreateMarker] = useState(0);
+  const dispatch = useDispatch();
+  const inputText = useSelector((state) => state.chatMap.inputText);
+  const inputGroupText = useSelector((state) => state.chatMap.inputGroupText);
+  const address = useSelector((state) => state.chatMap.address);
+
+  /*  const [createMarker, incrementCountAddMarker] = useState(0); */
   // Добавляем состояние для хранения массива тем
   const [themes, setThemes] = useState([]);
   const [selectedTheme, setSelectedTheme] = useState("");
@@ -65,16 +73,15 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   }
 
   // Универсальный обработчик ввода
-  const handleInput = (setterFunction, event) => {
+  const handleInput = (dispatchFunction, event) => {
     let userInput = event.target.value;
-
     const validation = validateInput(userInput);
 
     if (!validation.valid) {
-      setterFunction("");
+      dispatchFunction("");
       setShowMessage(validation.errorMessage);
     } else {
-      setterFunction(validation.text);
+      dispatchFunction(validation.text);
       setShowMessage("");
     }
   };
@@ -105,24 +112,20 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     setSelectedTheme(event.target.value);
   };
 
-  const onAddressChange = (newAddress) => {
-    setAddress(newAddress);
-  };
-
   // Обработчик события изменения текста в поле ввода
   const handleInputChange = (event) => {
-    handleInput(setInputText, event);
+    handleInput((value) => dispatch(setInputText(value)), event);
   };
 
   // Обработчик события изменения текста в группе
   const handleInputGroupChange = (event) => {
-    handleInput(setInputGroupText, event);
+    handleInput((value) => dispatch(setInputGroupText(value)), event);
   };
 
   const handleFormSubmitmessage = (event) => {
     event.preventDefault();
     if (selectedTheme) {
-      setCreateMarker((prev) => prev + 1);
+      dispatch(incrementCountAddMarker());
     }
 
     if (!isMarkerPlaced || !selectedTheme) {
@@ -136,9 +139,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   };
 
   const mapChatWithProps = React.cloneElement(mapChat, {
-    onAddressChange: onAddressChange,
-    inputText: inputText,
-    createMarker: createMarker,
     selectedTheme: selectedTheme,
     setSelectedTheme: setSelectedTheme,
     setIsMarkerPlaced: setIsMarkerPlaced,
