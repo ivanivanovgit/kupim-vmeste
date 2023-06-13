@@ -1,13 +1,7 @@
 // my-blog.jsx
-import TestComponent from "../src/components/Auxiliary/TestComponent";
 
 const MyBlog = () => {
-  return (
-    <div>
-      Блог
-      <TestComponent />
-    </div>
-  );
+  return <div>Блог</div>;
 };
 
 export default MyBlog;
