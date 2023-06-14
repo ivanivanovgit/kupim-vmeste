@@ -1,5 +1,6 @@
 // my-blog.jsx
 
+import Link from "next/link";
 import cities from "../src/data/cities";
 
 const MyBlog = () => {
@@ -9,7 +10,13 @@ const MyBlog = () => {
       <ul>
         {cities.map((city, index) => (
           <li key={index}>
-            {city.city}, {city.region}
+            <Link
+              href={`/${encodeURIComponent(city.region)}/${encodeURIComponent(
+                city.city
+              )}`}
+            >
+              {city.city}, {city.region}
+            </Link>
           </li>
         ))}
       </ul>
