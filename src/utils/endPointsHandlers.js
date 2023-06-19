@@ -1,5 +1,6 @@
 // endPointsHandlers.js
-import axios from "axios";
+
+import axios from "./axiosBaseURL";
 
 // Получение маркера из БД по id
 export async function getShareMarker(markerId) {

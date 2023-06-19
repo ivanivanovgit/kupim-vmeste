@@ -1,4 +1,5 @@
 // gde-kupit.jsx
+import axios from "../src/utils/axiosBaseURL";
 import { useTheme, useMediaQuery } from "@mui/material";
 import DifferentMaps from "../src/components/Map/DifferentMaps";
 import HorizontTabsGde from "../src/components/Auxiliary/HorizontTabsGde";
@@ -102,10 +103,10 @@ const Gdekupit = ({ markers }) => {
 export default Gdekupit;
 
 export async function getStaticProps() {
-  const res = await fetch(`${process.env.REACT_APP_HOST_NAME}/api/markers`);
-  const markers = await res.json();
+  const res = await axios.get("/api/markers");
+  const markers = res.data;
 
   return {
-    props: { markers }, // будет передано в компонент в качестве props
+    props: { markers },
   };
 }
