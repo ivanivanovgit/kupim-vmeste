@@ -1,3 +1,8 @@
+import addMessage from "../public/images/add-message.gif";
+import delMessage from "../public/images/delete-message.gif";
+import Image from "next/image";
+import { Constants } from "../src/CONSTANTS";
+
 export default function Home() {
   return (
     <div>
@@ -41,6 +46,22 @@ export default function Home() {
       темам: Предоставляет возможность просмотреть все маркеры, связанные с
       выбранной темой. Добавление сообщений: Для этого нужно выбрать тему и
       ввести текст сообщения, который затем отображается на карте.
+      <br></br>
+      Добавление сообщения на карту
+      <Image
+        src={addMessage}
+        alt="Чат на карте: добавление сообщения"
+        width={Constants.widthInstMessChat}
+        height={Constants.heightInstMessChat}
+      />
+      <br></br>
+      Удаление сообщений с карты
+      <Image
+        src={delMessage}
+        alt="Чат на карте: просмотр и удаление сообщения с карты "
+        width={Constants.widthInstMessChat}
+        height={Constants.heightInstMessChat}
+      />
       <br></br>
       На вкладке "Поиск попутных машин" Вы можете посмотреть или добавить
       информацию о попутных машинах. На вкладке используются два поля для ввода
