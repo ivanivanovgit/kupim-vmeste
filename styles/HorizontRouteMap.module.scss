@@ -3,18 +3,18 @@
 
 //main classes
 .wrapper {
-  @apply flex;
+  display: flex;
   padding: $paddingMain;
 }
 
 .leftSide {
-  @apply basis-2/5;
+  flex-basis: 40%;
   padding: $paddingAdd;
   padding-right: $paddingMain + $paddingAdd;
 }
 
 .rightSide {
-  @apply basis-3/5;
+  flex-basis: 60%;
   padding: 0.15rem;
   background-color: $rightSideColor;
 }

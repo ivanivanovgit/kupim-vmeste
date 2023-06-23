@@ -1,0 +1,39 @@
+// Home.module.scss
+@import "sharedRouteChat.module.scss";
+
+.container {
+  padding: $paddingMain + $paddingMain/2;
+}
+
+.title {
+  @apply text-3xl mb-5 font-bold text-center;
+}
+
+/* .sectionTitle {
+  @apply text-2xl my-4 font-semibold;
+}
+
+.subsectionTitle {
+  @apply text-xl my-3 font-medium;
+}
+
+.text {
+  @apply text-lg text-justify mb-5;
+}
+
+.numberedList {
+  @apply list-decimal list-inside;
+}
+
+.bulletList {
+  @apply list-disc list-inside;
+}
+
+.imageContainer {
+  @apply my-8 flex justify-center;
+}
+
+.image {
+  @apply shadow-lg;
+}
+ */
