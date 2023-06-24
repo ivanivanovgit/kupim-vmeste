@@ -51,7 +51,9 @@ export default function Home() {
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
         попутных машин" и "Где купить.
       </p>
+
       <div className={stylesHome.subsectionTitle}>Вкладка "Чат на карте"</div>
+
       <p className={stylesHome.text}>
         Вкладка "Чат на карте" позволяет обмениваться сообщениями, размещая их
         на карте. Основные функции включают:
@@ -85,8 +87,10 @@ export default function Home() {
           width={Constants.widthInstMessChat}
           height={Constants.heightInstMessChat}
         />
+        <div className={stylesHome.imageCaption}>
+          Добавление сообщения на карту
+        </div>
       </div>
-      Добавление сообщения на карту
       <div className={stylesHome.imageContainer}>
         <Image
           src={delMessage}
@@ -94,8 +98,11 @@ export default function Home() {
           width={Constants.widthInstMessChat}
           height={Constants.heightInstMessChat}
         />
+        <div className={stylesHome.imageCaption}>
+          Удаление сообщений с карты
+        </div>
       </div>
-      Удаление сообщений с карты
+
       <div className={stylesHome.subsectionTitle}>
         Вкладка "Поиск попутных машин"
       </div>

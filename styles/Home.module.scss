@@ -30,9 +30,12 @@
 }
 
 .imageContainer {
-  @apply my-5 flex justify-center;
+  @apply my-5 flex justify-center flex-col items-center;
 }
 
+.imageCaption {
+  @apply mt-1 font-medium;
+}
 .image {
   @apply shadow-lg;
 }
