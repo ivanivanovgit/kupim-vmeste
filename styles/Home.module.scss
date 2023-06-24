@@ -6,19 +6,19 @@
 }
 
 .title {
-  @apply text-3xl mb-5 font-bold text-center;
+  @apply text-xl mb-1 font-bold text-center;
 }
 
-/* .sectionTitle {
-  @apply text-2xl my-4 font-semibold;
+.sectionTitle {
+  @apply text-lg my-4 font-semibold;
 }
 
 .subsectionTitle {
-  @apply text-xl my-3 font-medium;
+  @apply text-lg my-3 font-medium;
 }
 
 .text {
-  @apply text-lg text-justify mb-5;
+  @apply text-justify;
 }
 
 .numberedList {
@@ -30,10 +30,9 @@
 }
 
 .imageContainer {
-  @apply my-8 flex justify-center;
+  @apply my-5 flex justify-center;
 }
 
 .image {
   @apply shadow-lg;
 }
- */
