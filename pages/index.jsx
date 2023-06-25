@@ -146,23 +146,6 @@ export default function Home() {
           сервиса."
         </div>
       </Accordion>
-
-      <Accordion
-        id="accordion-4"
-        title={
-          <div className={stylesHome.subsectionTitle}>Возможно вы искали:</div>
-        }
-        open={false}
-      >
-        <CityList
-          phrases={[
-            "Чат на карте в CITY",
-            "Гид по CITY",
-            "Туристический маршрут по CITY",
-          ]}
-          param="sortBegin"
-        />
-      </Accordion>
     </div>
   );
 }
