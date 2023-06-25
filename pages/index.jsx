@@ -6,6 +6,7 @@ import Image from "next/image";
 import { Constants } from "../src/CONSTANTS";
 import stylesHome from "../styles/Home.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
+import CityList from "../src/components/Auxiliary/CityList";
 
 export default function Home() {
   return (
@@ -145,6 +146,13 @@ export default function Home() {
           сервиса."
         </div>
       </Accordion>
+      <CityList
+        phrases={[
+          "Чат на карте в CITY",
+          "Гид по CITY",
+          "Туристический маршрут по CITY",
+        ]}
+      />
     </div>
   );
 }
