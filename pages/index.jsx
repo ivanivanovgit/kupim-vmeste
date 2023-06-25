@@ -6,7 +6,7 @@ import Image from "next/image";
 import { Constants } from "../src/CONSTANTS";
 import stylesHome from "../styles/Home.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
-import CityList from "../src/components/Auxiliary/CityList";
+import mainMap from "../public/images/main-map.png";
 
 export default function Home() {
   return (
@@ -18,6 +18,15 @@ export default function Home() {
         с друзьями, соседями и знакомыми в общих чатах и группах, ведь от его
         использования выигрывают все.
       </p>
+      <div className={stylesHome.imageContainer}>
+        <Image
+          src={mainMap}
+          alt="Чат на карте: карты онлайн с чатом"
+          width={Constants.widthMainMap}
+          height="auto"
+          priority
+        />
+      </div>
       <div className={stylesHome.sectionTitle}>
         Примеры использования сервиса.
       </div>

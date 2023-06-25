@@ -16,7 +16,7 @@ const Accordion = ({ title, children, open = true }) => {
       >
         <div>
           <KeyboardDoubleArrowDownIcon
-            className={`transition-all duration-1000 ease-in-out transform ${
+            className={`transition-all duration-500 ease-in-out transform ${
               isOpen ? "" : "rotate-[-90deg]"
             } `}
           />
@@ -25,7 +25,7 @@ const Accordion = ({ title, children, open = true }) => {
       </div>
       <div
         style={{ maxHeight: isOpen ? "2000rem" : "0" }}
-        className={`transition-all duration-1000 ease-in-out overflow-hidden`}
+        className={`transition-all duration-500 ease-in-out overflow-hidden`}
       >
         {children}
       </div>
