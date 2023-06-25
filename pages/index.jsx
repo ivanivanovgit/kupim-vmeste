@@ -5,6 +5,10 @@ import delMessage from "../public/images/delete-message.gif";
 import Image from "next/image";
 import { Constants } from "../src/CONSTANTS";
 import stylesHome from "../styles/Home.module.scss";
+import { StyledAccordion } from "../src/components/Auxiliary/StyledAccordion";
+import { AccordionDetails } from "@mui/material";
+import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import { StyledAccordionSummary } from "../src/components/Auxiliary/StyledAccordionSummary";
 
 export default function Home() {
   return (
@@ -51,58 +55,67 @@ export default function Home() {
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
         попутных машин" и "Где купить.
       </p>
-
-      <div className={stylesHome.subsectionTitle}>Вкладка "Чат на карте"</div>
-
-      <p className={stylesHome.text}>
-        Вкладка "Чат на карте" позволяет обмениваться сообщениями, размещая их
-        на карте. Основные функции включают:
-      </p>
-      <ul className={stylesHome.bulletList}>
-        <li>
-          Добавление тем: Пользователи могут создавать темы для обсуждения и
-          добавлять маркеры с сообщениями.
-        </li>
-        <li>
-          Удаление тем: Можно удалить тему, но только после удаления всех
-          связанных с ней маркеров.
-        </li>
-        <li>
-          Выбор тем: Пользователи могут выбрать из существующих тем. Если тема
-          не выбрана, система предупреждает об этом.
-        </li>
-        <li>
-          Просмотр маркеров по темам: Предоставляет возможность просмотреть все
-          маркеры, связанные с выбранной темой.
-        </li>
-        <li>
-          Добавление сообщений: Для этого нужно выбрать тему и ввести текст
-          сообщения, который затем отображается на карте.
-        </li>
-      </ul>
-      <div className={stylesHome.imageContainer}>
-        <Image
-          src={addMessage}
-          alt="Чат на карте: добавление сообщения"
-          width={Constants.widthInstMessChat}
-          height={Constants.heightInstMessChat}
-        />
-        <div className={stylesHome.imageCaption}>
-          Добавление сообщения на карту
-        </div>
-      </div>
-      <div className={stylesHome.imageContainer}>
-        <Image
-          src={delMessage}
-          alt="Чат на карте: просмотр и удаление сообщения с карты "
-          width={Constants.widthInstMessChat}
-          height={Constants.heightInstMessChat}
-        />
-        <div className={stylesHome.imageCaption}>
-          Удаление сообщений с карты
-        </div>
-      </div>
-
+      <StyledAccordion>
+        <StyledAccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <div className={stylesHome.subsectionTitle}>
+            Вкладка "Чат на карте"
+          </div>
+        </StyledAccordionSummary>
+        <AccordionDetails>
+          <p className={stylesHome.text}>
+            Вкладка "Чат на карте" позволяет обмениваться сообщениями, размещая
+            их на карте. Основные функции включают:
+          </p>
+          <ul className={stylesHome.bulletList}>
+            <li>
+              Добавление тем: Пользователи могут создавать темы для обсуждения и
+              добавлять маркеры с сообщениями.
+            </li>
+            <li>
+              Удаление тем: Можно удалить тему, но только после удаления всех
+              связанных с ней маркеров.
+            </li>
+            <li>
+              Выбор тем: Пользователи могут выбрать из существующих тем. Если
+              тема не выбрана, система предупреждает об этом.
+            </li>
+            <li>
+              Просмотр маркеров по темам: Предоставляет возможность просмотреть
+              все маркеры, связанные с выбранной темой.
+            </li>
+            <li>
+              Добавление сообщений: Для этого нужно выбрать тему и ввести текст
+              сообщения, который затем отображается на карте.
+            </li>
+          </ul>
+          <div className={stylesHome.imageContainer}>
+            <Image
+              src={addMessage}
+              alt="Чат на карте: добавление сообщения"
+              width={Constants.widthInstMessChat}
+              height={Constants.heightInstMessChat}
+            />
+            <div className={stylesHome.imageCaption}>
+              Добавление сообщения на карту
+            </div>
+          </div>
+          <div className={stylesHome.imageContainer}>
+            <Image
+              src={delMessage}
+              alt="Чат на карте: просмотр и удаление сообщения с карты "
+              width={Constants.widthInstMessChat}
+              height={Constants.heightInstMessChat}
+            />
+            <div className={stylesHome.imageCaption}>
+              Удаление сообщений с карты
+            </div>
+          </div>
+        </AccordionDetails>
+      </StyledAccordion>
       <div className={stylesHome.subsectionTitle}>
         Вкладка "Поиск попутных машин"
       </div>
