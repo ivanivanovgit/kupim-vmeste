@@ -4,30 +4,27 @@ import citiesData from "../../data/cities";
 import { shuffleArray } from "../../utils/shuffleArray";
 import { useEffect, useState } from "react";
 
-function CityList({ phrases }) {
+function CityList({ phrases, param }) {
   const [cityPhrasePairs, setCityPhrasePairs] = useState([]);
 
   useEffect(() => {
-    const shuffledCities = [...citiesData];
-    shuffleArray(shuffledCities);
+    const shuffledCities = shuffleArray([...citiesData], param);
 
-    const shuffledPhrases = [...phrases];
-    shuffleArray(shuffledPhrases);
+    const shuffledPhrases = shuffleArray([...phrases], param);
 
-    // Создаем пары город-фраза
     const pairs = shuffledCities.map((city, index) => ({
       city: city.city,
       phrase: shuffledPhrases[index % shuffledPhrases.length],
     }));
 
     setCityPhrasePairs(pairs);
-  }, [phrases]);
+  }, [phrases, param]);
 
   return (
     <div>
-      {cityPhrasePairs.map((pair, index) => (
-        <p key={index}>{pair.phrase.replace("CITY", pair.city)}</p>
-      ))}
+      {cityPhrasePairs
+        .map((pair, index) => pair.phrase.replace("CITY", pair.city))
+        .join(", ")}
     </div>
   );
 }

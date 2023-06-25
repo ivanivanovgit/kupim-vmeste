@@ -5,8 +5,8 @@ import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; */
 import { useState } from "react";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
 
-const Accordion = ({ title, children }) => {
-  const [isOpen, setIsOpen] = useState(true);
+const Accordion = ({ title, children, open = true }) => {
+  const [isOpen, setIsOpen] = useState(open);
 
   return (
     <div>
@@ -24,7 +24,7 @@ const Accordion = ({ title, children }) => {
         <div>{title}</div>
       </div>
       <div
-        style={{ maxHeight: isOpen ? "200rem" : "0" }}
+        style={{ maxHeight: isOpen ? "2000rem" : "0" }}
         className={`transition-all duration-1000 ease-in-out overflow-hidden`}
       >
         {children}
