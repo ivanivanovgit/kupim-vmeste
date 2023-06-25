@@ -5,11 +5,11 @@ import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrow
 /* import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; */
 
-const Accordion = ({ id, title, children }) => {
-  const [isOpen, setIsOpen] = useState(false);
+const Accordion = ({ title, children }) => {
+  const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="mt-0 mb-0 transition-all">
+    <div className="transition-all">
       <div
         className="cursor-pointer flex items-center"
         onClick={() => setIsOpen(!isOpen)}
@@ -23,7 +23,7 @@ const Accordion = ({ id, title, children }) => {
         </div>
         <div>{title}</div>
       </div>
-      {isOpen && <div className="mt-3 transition-all">{children}</div>}
+      {isOpen && <div className="transition-all">{children}</div>}
     </div>
   );
 };
