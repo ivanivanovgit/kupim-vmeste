@@ -91,7 +91,8 @@ export default function Home() {
             src={addMessage}
             alt="Чат на карте: добавление сообщения"
             width={Constants.widthInstMessChat}
-            height={Constants.heightInstMessChat}
+            height="auto"
+            priority
           />
           <div className={stylesHome.imageCaption}>
             Добавление сообщения на карту
@@ -102,7 +103,8 @@ export default function Home() {
             src={delMessage}
             alt="Чат на карте: просмотр и удаление сообщения с карты "
             width={Constants.widthInstMessChat}
-            height={Constants.heightInstMessChat}
+            height="auto"
+            priority
           />
           <div className={stylesHome.imageCaption}>
             Удаление сообщений с карты
