@@ -1,29 +1,35 @@
 // Accordion.js
+/* import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; */
 
 import { useState } from "react";
 import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
-/* import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; */
 
 const Accordion = ({ title, children }) => {
   const [isOpen, setIsOpen] = useState(true);
 
   return (
-    <div className="transition-all">
+    <div>
       <div
         className="cursor-pointer flex items-center"
         onClick={() => setIsOpen(!isOpen)}
       >
         <div>
           <KeyboardDoubleArrowDownIcon
-            className={`transform ${
+            className={`transition-all duration-1000 transform ${
               isOpen ? "" : "rotate-[-90deg]"
-            } transition-all`}
+            } `}
           />
         </div>
         <div>{title}</div>
       </div>
-      {isOpen && <div className="transition-all">{children}</div>}
+      <div
+        className={`transition-all duration-1000 overflow-hidden ${
+          isOpen ? "max-h-screen" : "max-h-0"
+        }`}
+      >
+        {children}
+      </div>
     </div>
   );
 };

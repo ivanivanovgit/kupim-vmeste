@@ -9,7 +9,16 @@ module.exports = {
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
   theme: {
-    extend: {},
+    extend: {
+      transitionDuration: {
+        1000: "1s",
+      },
+    },
+  },
+  variants: {
+    extend: {
+      transitionDuration: ["hover", "focus"],
+    },
   },
   plugins: [],
 };
