@@ -5,12 +5,27 @@ import delMessage from "../public/images/delete-message.gif";
 import Image from "next/image";
 import { Constants } from "../src/CONSTANTS";
 import stylesHome from "../styles/Home.module.scss";
-import { StyledAccordion } from "../src/components/Auxiliary/StyledAccordion";
-import { AccordionDetails } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import { StyledAccordionSummary } from "../src/components/Auxiliary/StyledAccordionSummary";
+import {
+  StyledAccordion,
+  StyledAccordionSummary,
+  StyledAccordionDetails,
+} from "../src/components/Auxiliary/StyledAccordion";
+import KeyboardDoubleArrowDownIcon from "@mui/icons-material/KeyboardDoubleArrowDown";
+/* import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+import ArrowDropDownIcon from "@mui/icons-material/ArrowDropDown"; */
+
+import { useState } from "react";
 
 export default function Home() {
+  const [open, setOpen] = useState({ accordion1: true, accordion2: true });
+
+  const handleAccordionToggle = (id) => () => {
+    setOpen((prevOpen) => ({
+      ...prevOpen,
+      [id]: !prevOpen[id],
+    }));
+  };
+
   return (
     <div className={stylesHome.container}>
       <div className={stylesHome.title}>О чем этот сервис?</div>
@@ -55,9 +70,12 @@ export default function Home() {
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
         попутных машин" и "Где купить.
       </p>
-      <StyledAccordion>
+      <StyledAccordion
+        expanded={open["accordion1"]}
+        onChange={handleAccordionToggle("accordion1")}
+      >
         <StyledAccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<KeyboardDoubleArrowDownIcon />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
@@ -65,7 +83,7 @@ export default function Home() {
             Вкладка "Чат на карте"
           </div>
         </StyledAccordionSummary>
-        <AccordionDetails>
+        <StyledAccordionDetails>
           <p className={stylesHome.text}>
             Вкладка "Чат на карте" позволяет обмениваться сообщениями, размещая
             их на карте. Основные функции включают:
@@ -114,7 +132,7 @@ export default function Home() {
               Удаление сообщений с карты
             </div>
           </div>
-        </AccordionDetails>
+        </StyledAccordionDetails>
       </StyledAccordion>
       <div className={stylesHome.subsectionTitle}>
         Вкладка "Поиск попутных машин"

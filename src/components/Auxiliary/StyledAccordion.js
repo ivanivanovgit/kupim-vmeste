@@ -1,9 +1,9 @@
 // StyledAccordion.js
 
-import { Accordion } from "@mui/material";
+import { Accordion, AccordionSummary, AccordionDetails } from "@mui/material";
 import { styled } from "@mui/system";
 
-export const StyledAccordion = styled(Accordion)(({ theme }) => ({
+export const StyledAccordion = styled(Accordion)(() => ({
   backgroundColor: "transparent",
   boxShadow: "none",
   "&.Mui-expanded": {
@@ -27,4 +27,21 @@ export const StyledAccordion = styled(Accordion)(({ theme }) => ({
   "& .MuiAccordionDetails-root": {
     padding: 0,
   },
+}));
+
+export const StyledAccordionSummary = styled(AccordionSummary)(() => ({
+  flexDirection: "row-reverse",
+  justifyContent: "space-between",
+  transition: "all 0.5s ease",
+  "& .MuiAccordionSummary-expandIconWrapper": {
+    transform: "rotate(-90deg)",
+    marginRight: "auto",
+  },
+  "&.Mui-expanded .MuiAccordionSummary-expandIconWrapper": {
+    transform: "rotate(0deg)",
+  },
+}));
+
+export const StyledAccordionDetails = styled(AccordionDetails)(({ theme }) => ({
+  transition: "all 0.5s ease",
 }));
