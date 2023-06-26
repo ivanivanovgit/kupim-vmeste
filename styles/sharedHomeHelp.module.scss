@@ -1,0 +1,26 @@
+// sharedHomeHelp.module.scss
+@import "sharedRouteChat.module.scss";
+
+.container {
+  padding: $paddingMain + $paddingMain/2;
+}
+
+.bold {
+  @apply font-bold;
+}
+
+.text {
+  @apply text-justify;
+}
+
+.imageContainer {
+  @apply my-4 flex justify-center flex-col items-center;
+}
+
+.sectionTitle {
+  @apply text-lg my-1 font-semibold;
+}
+
+.numberedList {
+  @apply list-decimal list-inside;
+}

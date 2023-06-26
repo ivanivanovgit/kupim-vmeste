@@ -12,8 +12,9 @@ const linksArray = [
     href: "/poisk-poputnyh-mashin-dlya-perevozki-gruza",
   },
   { name: "Где купить", id: 3, href: "/gde-kupit" },
+  { name: "Помощь/F.A.Q.", id: 4, href: "/help" },
   ,
-  { name: "Блог", id: 4, href: "/my-blog" },
+  { name: "Блог", id: 5, href: "/my-blog" },
   ,
 ];
 
