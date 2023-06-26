@@ -28,6 +28,7 @@
 
 .numberedList {
   @apply list-decimal list-inside;
+  text-indent: 1rem;
 }
 
 .bulletList {
