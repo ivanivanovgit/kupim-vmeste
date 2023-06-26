@@ -1,3 +1,5 @@
+// help.jsx
+
 import addMessage from "../public/images/add-message.gif";
 import delMessage from "../public/images/delete-message.gif";
 import Image from "next/image";

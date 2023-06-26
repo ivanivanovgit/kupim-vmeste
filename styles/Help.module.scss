@@ -1,14 +1,6 @@
 // Help.module.scss
 @import "sharedHomeHelp.module.scss";
 
-.subsectionTitle {
-  @apply font-semibold;
-}
-
-.bulletList {
-  @apply list-disc list-inside;
-}
-
 .imageCaption {
   @apply mt-1 font-medium;
 }
