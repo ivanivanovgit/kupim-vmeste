@@ -5,6 +5,14 @@
   padding: $paddingMain + $paddingMain/2;
 }
 
+.imageContainerMainMap {
+  @apply float-right ml-8;
+}
+
+.textMainMap {
+  @apply mt-6;
+}
+
 .bold {
   @apply font-bold;
 }

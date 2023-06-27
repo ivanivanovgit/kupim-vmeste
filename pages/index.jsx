@@ -8,13 +8,9 @@ import mainMap from "../public/images/main-map.png";
 export default function Home() {
   return (
     <div className={stylesHome.container}>
-      <p className={stylesHome.text}>
-        <span className={stylesHome.bold}>"Купим вместе"</span> — это сервис для
-        совместных покупок (также называемых покупок вскладчину), поиска
-        попутных машин и проверенных точек продаж. Сервис разработан без
-        необходимости регистрации для удобства использования.
-      </p>
-      <div className={stylesHome.imageContainer}>
+      <div
+        className={`${stylesHome.imageContainer} ${stylesHome.imageContainerMainMap}`}
+      >
         <Image
           src={mainMap}
           alt="Чат на карте: карты онлайн с чатом"
@@ -23,6 +19,13 @@ export default function Home() {
           priority
         />
       </div>
+      <p className={`${stylesHome.text} ${stylesHome.textMainMap}`}>
+        <span className={stylesHome.bold}>"Купим вместе"</span> — это сервис для
+        совместных покупок (также называемых покупок вскладчину), поиска
+        попутных машин и проверенных точек продаж. Сервис разработан без
+        необходимости регистрации для удобства использования.
+      </p>
+
       <div className={stylesHome.sectionTitle}>Функционал сервиса.</div>
       <p className={stylesHome.text}>
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
