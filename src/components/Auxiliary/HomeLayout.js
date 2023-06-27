@@ -2,6 +2,7 @@
 import Image from "next/image";
 import { Constants } from "../../CONSTANTS";
 import mainMap from "../../../public/images/main-map.png";
+import ActiveLink from "./ActiveLink";
 
 function HomeLayout({ stylesHome }) {
   return (
@@ -18,11 +19,11 @@ function HomeLayout({ stylesHome }) {
         />
       </div>
       <p className={`${stylesHome.text} ${stylesHome.textMainMap}`}>
-        <span className={stylesHome.bold}>"Купим вместе"</span> — это сервис для
+        <span className={stylesHome.bold}>Купим вместе</span> — это сервис для
         совместных покупок (чат на карте) и поиска попутных машин.
       </p>
 
-      <div className={stylesHome.sectionTitle}>Функционал сервиса.</div>
+      <div className={stylesHome.sectionTitle}>Функционал сервиса</div>
       <p className={stylesHome.text}>
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
         попутных машин" и "Где купить", которые работают без регистрациии.
@@ -31,29 +32,44 @@ function HomeLayout({ stylesHome }) {
 
       <ul className={stylesHome.bulletList}>
         <li>
-          <span className={stylesHome.subsectionTitle}> "Чат на карте": </span>
+          <ActiveLink href="/chat-na-karte">
+            <span
+              className={`${stylesHome.subsectionTitle} ${stylesHome.homeLink}`}
+            >
+              Чат на карте:{" "}
+            </span>
+          </ActiveLink>
           это основная вкладка сервиса, на ней можно обмениваться сообщениями,
-          размещая их на карте. Таким образом, можно легко объединиться для
-          покупок вскладчину.
+          размещая их на карте. Таким образом, удобно объединяться для
+          совместных покупок (покупок вскладчину).
         </li>
         <li>
-          <span className={stylesHome.subsectionTitle}>
-            "Поиск попутных машин":{" "}
-          </span>
+          <ActiveLink href="/poisk-poputnyh-mashin-dlya-perevozki-gruza">
+            <span
+              className={`${stylesHome.subsectionTitle} ${stylesHome.homeLink}`}
+            >
+              Поиск попутных машин:{" "}
+            </span>
+          </ActiveLink>
           на данной вкладке Вы можете посмотреть или добавить информацию о
           попутных машинах для перевозки грузов.
         </li>
         <li>
-          <span className={stylesHome.subsectionTitle}>"Где купить": </span>
+          <ActiveLink href="/gde-kupit">
+            <span
+              className={`${stylesHome.subsectionTitle} ${stylesHome.homeLink}`}
+            >
+              Где купить:{" "}
+            </span>
+          </ActiveLink>
           используя эту вкладку, можно найти ближайшие магазины, рынки и другие
           точки продаж, проверенные пользователями.
         </li>
       </ul>
 
-      <div className={stylesHome.sectionTitle}>Раздел "Помощь/F.A.Q." </div>
       <p className={stylesHome.text}>
-        В данном разделе "Помощь/F.A.Q." Вы можете найти подробную инструкцию по
-        каждой из вкладок сервиса.
+        В разделе "Помощь/F.A.Q." Вы можете найти подробную инструкцию по каждой
+        из вкладок сервиса.
       </p>
       <div className={stylesHome.sectionTitle}>
         Примеры использования сервиса.
@@ -68,7 +84,7 @@ function HomeLayout({ stylesHome }) {
         </li>
         <li>
           Если после ремонта у Вас остались стройматериалы, которые вы хотите
-          продать, то вы можете оставить объявление на вкладке "Чат на карте",
+          продать, то Вы можете оставить объявление на вкладке "Чат на карте",
           чтобы найти поблизости желающих купить их.
         </li>
         <li>

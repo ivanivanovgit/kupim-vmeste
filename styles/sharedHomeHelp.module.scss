@@ -11,7 +11,7 @@
 
 .text {
   @apply text-justify;
-  text-indent: 1rem;
+  /*  text-indent: 1rem; */
 }
 
 .imageContainer {
@@ -23,14 +23,17 @@
 }
 
 .subsectionTitle {
-  @apply font-medium text-justify;
+  @apply font-medium;
 }
 
 .numberedList {
-  @apply list-decimal list-inside;
-  text-indent: 1rem;
+  @apply list-decimal pl-6 text-justify;
 }
 
 .bulletList {
-  @apply list-disc list-inside;
+  @apply list-disc pl-6  text-justify;
+}
+
+.homeLink {
+  color: #14c6c9;
 }
