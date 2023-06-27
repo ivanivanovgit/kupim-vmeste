@@ -1,0 +1,10 @@
+// HorizontHome.module.scss
+@import "sharedHomeHelp.module.scss";
+
+.imageContainerMainMap {
+  @apply float-right ml-8;
+}
+
+.textMainMap {
+  @apply mt-6;
+}
