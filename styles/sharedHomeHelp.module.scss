@@ -6,7 +6,7 @@
 }
 
 .bold {
-  @apply font-bold;
+  @apply font-bold text-lg;
 }
 
 .text {
@@ -23,7 +23,7 @@
 }
 
 .subsectionTitle {
-  @apply font-medium;
+  @apply font-medium text-justify;
 }
 
 .numberedList {
