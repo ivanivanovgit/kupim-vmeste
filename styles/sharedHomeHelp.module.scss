@@ -11,7 +11,6 @@
 
 .text {
   @apply text-justify;
-  /*  text-indent: 1rem; */
 }
 
 .imageContainer {
@@ -35,5 +34,5 @@
 }
 
 .homeLink {
-  color: #14c6c9;
+  @apply text-[#14c6c9];
 }
