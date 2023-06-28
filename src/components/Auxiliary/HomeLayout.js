@@ -1,6 +1,5 @@
 // HomeLayout.js
 import Image from "next/image";
-import { Constants } from "../../CONSTANTS";
 import mainMap from "../../../public/images/main-map.png";
 import ActiveLink from "./ActiveLink";
 
@@ -10,13 +9,15 @@ function HomeLayout({ stylesHome }) {
       <div
         className={`${stylesHome.imageContainer} ${stylesHome.imageContainerMainMap}`}
       >
-        <Image
-          src={mainMap}
-          alt="Чат на карте: карты онлайн с чатом"
-          width={Constants.widthMainMap}
-          height="auto"
-          priority
-        />
+        <div className={stylesHome.widthMainMap}>
+          <Image
+            src={mainMap}
+            alt="Чат на карте: карты онлайн с чатом"
+            width="auto"
+            height="auto"
+            priority
+          />
+        </div>
       </div>
       <p className={`${stylesHome.text} ${stylesHome.textMainMap}`}>
         <span className={stylesHome.bold}>Купим вместе</span> — это сервис для
