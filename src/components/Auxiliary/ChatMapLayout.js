@@ -49,6 +49,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const showMessage = useSelector((state) => state.chatMap.showMessage);
   // useState
   const [themes, setThemes] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
   // useRef
@@ -115,6 +116,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   // Обработчик события изменения выбранной темы в элементе select
   const handleSelectThemeChange = (event) => {
+    console.log("Changing selected theme to: ", event.target.value);
     dispatch(setSelectedTheme(event.target.value));
   };
 
@@ -184,14 +186,20 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   useEffect(() => {
     fetchThemes().then((theme) => {
       setThemes(theme);
+      setLoading(false);
     });
   }, []);
 
   useEffect(() => {
-    if (themes.length > 0 && !selectedTheme) {
+    console.log("Themes updated, current themes: ", themes);
+    if (themes.length > 0 && !selectedTheme && !loading) {
+      console.log(
+        "No selected theme and themes available, setting initial theme: ",
+        themes[0]
+      );
       dispatch(setSelectedTheme(themes[0]));
     }
-  }, [themes]);
+  }, [themes, loading]);
 
   return (
     <div className={layoutStyles.wrapper}>
@@ -240,7 +248,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           <form>
             <FormControl fullWidth size="small">
               <Select
-                value={selectedTheme}
+                value={loading ? "" : selectedTheme}
                 onChange={handleSelectThemeChange}
                 className={`${layoutStyles.mainInput} ${layoutStyles.stretchTheme}`}
                 name="themeList"

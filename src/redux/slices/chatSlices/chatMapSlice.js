@@ -9,7 +9,7 @@ const initialState = {
   createMarker: 0,
   selectedTheme: "",
   isMarkerPlaced: false,
-  searchButtonClick: null,
+  searchButtonClick: "",
   searchInput: "",
   showAllMarkers: false,
   checkDublicateMarkersMesage: "",
