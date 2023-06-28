@@ -1,9 +1,9 @@
 // Help.module.scss
 @import "sharedHomeHelp.module.scss";
 
-/* .imageCaption {
+.imageCaption {
   @apply mt-1 font-medium;
-} */
+}
 
 .numberedMainListHelp {
   counter-reset: item;

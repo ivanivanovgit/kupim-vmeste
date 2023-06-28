@@ -13,7 +13,7 @@ import localFont from "@next/font/local";
 
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
-import VisitedPagesContext from "../src/components/Auxiliary/visitedPagesContext";
+
 const firstFont = localFont({ src: "./Inter700.ttf" });
 //import { Advent_Pro } from "@next/font/google";
 // Client-side cache shared for the whole session

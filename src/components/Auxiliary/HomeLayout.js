@@ -73,7 +73,7 @@ function HomeLayout({ stylesHome }) {
         из вкладок сервиса.
       </p>
       <div className={stylesHome.sectionTitle}>
-        Примеры использования сервиса.
+        Примеры использования сервиса
       </div>
 
       <ol className={stylesHome.numberedList}>

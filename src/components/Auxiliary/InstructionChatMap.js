@@ -1,10 +1,10 @@
-// InstructionChatMap.jsx
+// InstructionChatMap.js
 
 import Image from "next/image";
-import addMessage from "../public/images/add-message.gif";
-import delMessage from "../public/images/delete-message.gif";
-import { Constants } from "../src/CONSTANTS";
-import stylesHome from "../styles/Help.module.scss";
+import addMessage from "../../../public/images/add-message.gif";
+import delMessage from "../../../public/images/delete-message.gif";
+import { Constants } from "../../CONSTANTS";
+import stylesHome from "../../../styles/Help.module.scss";
 
 function InstructionChatMap() {
   return (
