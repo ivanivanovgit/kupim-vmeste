@@ -1,4 +1,4 @@
-// InstructionAddMarkerChatMap.jsx
+// InstructionChatMap.jsx
 
 import Image from "next/image";
 import addMessage from "../public/images/add-message.gif";
@@ -6,7 +6,7 @@ import delMessage from "../public/images/delete-message.gif";
 import { Constants } from "../src/CONSTANTS";
 import stylesHome from "../styles/Help.module.scss";
 
-function InstructionAddMarkerChatMap() {
+function InstructionChatMap() {
   return (
     <>
       <div className={stylesHome.subsectionTitle}>Вкладка "Чат на карте"</div>
@@ -68,4 +68,4 @@ function InstructionAddMarkerChatMap() {
   );
 }
 
-export default InstructionAddMarkerChatMap;
+export default InstructionChatMap;
