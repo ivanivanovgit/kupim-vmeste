@@ -35,7 +35,7 @@ function ScrollTopButton() {
     <Box
       sx={{
         position: "fixed",
-        bottom: "2%",
+        bottom: "4%",
         right: "2%",
         zIndex: "9999",
       }}
