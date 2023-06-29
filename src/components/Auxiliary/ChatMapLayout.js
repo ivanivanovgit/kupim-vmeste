@@ -49,7 +49,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const showMessage = useSelector((state) => state.chatMap.showMessage);
   // useState
   const [themes, setThemes] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [loadingtheme, setLoadingTheme] = useState(true);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
   // useRef
@@ -116,7 +116,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   // Обработчик события изменения выбранной темы в элементе select
   const handleSelectThemeChange = (event) => {
-    console.log("Changing selected theme to: ", event.target.value);
     dispatch(setSelectedTheme(event.target.value));
   };
 
@@ -184,22 +183,24 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   }, [searchButtonClick]);
 
   useEffect(() => {
+    // Если выбранная тема отсутствует в списке тем, сбросить выбранную тему
+    if (selectedTheme && !themes.includes(selectedTheme)) {
+      dispatch(setSelectedTheme(""));
+    }
+  }, [themes, selectedTheme, dispatch]);
+
+  useEffect(() => {
     fetchThemes().then((theme) => {
       setThemes(theme);
-      setLoading(false);
+      setLoadingTheme(false);
     });
   }, []);
 
   useEffect(() => {
-    console.log("Themes updated, current themes: ", themes);
-    if (themes.length > 0 && !selectedTheme && !loading) {
-      console.log(
-        "No selected theme and themes available, setting initial theme: ",
-        themes[0]
-      );
+    if (themes.length > 0 && !selectedTheme && !loadingtheme) {
       dispatch(setSelectedTheme(themes[0]));
     }
-  }, [themes, loading]);
+  }, [themes, loadingtheme]);
 
   return (
     <div className={layoutStyles.wrapper}>
@@ -248,7 +249,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
           <form>
             <FormControl fullWidth size="small">
               <Select
-                value={loading ? "" : selectedTheme}
+                value={loadingtheme ? "" : selectedTheme}
                 onChange={handleSelectThemeChange}
                 className={`${layoutStyles.mainInput} ${layoutStyles.stretchTheme}`}
                 name="themeList"
