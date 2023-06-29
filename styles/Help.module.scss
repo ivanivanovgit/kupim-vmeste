@@ -2,7 +2,9 @@
 @import "sharedHomeHelp.module.scss";
 
 .imageCaption {
-  @apply mt-1 font-medium;
+  /* @apply mt-1 font-medium; */
+  margin-top: 0.25rem;
+  font-weight: 500;
 }
 
 .numberedMainListHelp {
@@ -25,5 +27,19 @@
 .numberedSubListHelp li::before {
   counter-increment: subitem;
   content: counters(item, ".") "." counter(subitem) ". ";
-  /*   margin-right: 0rem;  */
+}
+
+.anchor::before {
+  content: "";
+  display: block;
+  height: 3rem;
+  margin-top: -3rem;
+  visibility: hidden;
+}
+
+.instructionChatMap {
+  @apply text-lg mt-4 font-medium;
+}
+.medium {
+  @apply font-medium;
 }
