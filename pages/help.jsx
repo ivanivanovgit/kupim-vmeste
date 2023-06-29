@@ -5,6 +5,7 @@ import ActiveLink from "../src/components/Auxiliary/ActiveLink";
 import InstructionChatMap from "../src/components/Auxiliary/InstructionChatMap";
 import InstructionRoute from "../src/components/Auxiliary/InstructionRoute";
 import InstructionGde from "../src/components/Auxiliary/InstructionGde";
+import ScrollTopButton from "../src/components/Auxiliary/ScrollTopButton";
 
 const Help = () => {
   return (
@@ -63,6 +64,7 @@ const Help = () => {
       <InstructionChatMap />
       <InstructionRoute />
       <InstructionGde />
+      <ScrollTopButton />
     </div>
   );
 };
