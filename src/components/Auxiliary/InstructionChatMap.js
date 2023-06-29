@@ -10,12 +10,12 @@ function InstructionChatMap() {
   return (
     <>
       <div
-        className={`${stylesHome.anchor} ${stylesHome.instructionChatMap}`}
+        className={`${stylesHome.anchor} ${stylesHome.instructionHeader}`}
         id="chat-na-karte"
       >
-        Вкладка "Чат на карте"
+        Раздел "Чат на карте"
       </div>
-      <div className={`${stylesHome.text}`}>
+      <div className={stylesHome.text}>
         Вкладка "Чат на карте" позволяет обмениваться сообщениями, размещая их
         на карте. Основные функции включают:
       </div>

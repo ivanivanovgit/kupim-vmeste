@@ -3,11 +3,14 @@
 import stylesHome from "../styles/Help.module.scss";
 import ActiveLink from "../src/components/Auxiliary/ActiveLink";
 import InstructionChatMap from "../src/components/Auxiliary/InstructionChatMap";
+import InstructionRoute from "../src/components/Auxiliary/InstructionRoute";
+import InstructionGde from "../src/components/Auxiliary/InstructionGde";
+
 const Help = () => {
   return (
     <div className={stylesHome.container}>
       <div className={stylesHome.sectionTitle}>
-        Инструкция по работе сервиса "Купим вместе"
+        Инструкция по работе сервиса "Купим вместе".
       </div>
       <ol className={stylesHome.numberedMainListHelp}>
         <ActiveLink href="/help#chat-na-karte">
@@ -42,11 +45,24 @@ const Help = () => {
         <ActiveLink href="/help#search-route">
           <li>Раздел "Поиск попутных машин"</li>
         </ActiveLink>
+        <ol className={stylesHome.numberedSubListHelp}>
+          <ActiveLink href="/help#add-route">
+            <li>Добавление маршрута</li>
+          </ActiveLink>
+          <ActiveLink href="/help#delete-route">
+            <li>Удаление маршрута</li>
+          </ActiveLink>
+          <ActiveLink href="/help#clear-fields">
+            <li>Очищение полей</li>
+          </ActiveLink>
+        </ol>
         <ActiveLink href="/help#gde-kupit">
           <li>Раздел "Где купить"</li>
         </ActiveLink>
       </ol>
       <InstructionChatMap />
+      <InstructionRoute />
+      <InstructionGde />
     </div>
   );
 };
