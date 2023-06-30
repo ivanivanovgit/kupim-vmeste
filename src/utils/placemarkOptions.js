@@ -67,10 +67,6 @@ export const balloonContentTemplateRoute = `
         &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
       </button>
     </div>
-    <div class="button-share-marker-route">
-      <button id="share-marker-button-route"
-      </button>
-    </div>
     <div class="custom-orange-balloon__close">&times;</div>
   </div>
 `;
@@ -83,11 +79,6 @@ export function buildFunctionRoute() {
   );
   deleteButton.addEventListener("click", this.onButtonClick);
 
-  const shareButton = this.getParentElement().querySelector(
-    "#share-marker-button-route"
-  );
-  shareButton.addEventListener("click", this.onShareButtonClick);
-
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
   );
@@ -99,11 +90,6 @@ export function clearFunctionRoute() {
     "#delete-marker-button"
   );
   deleteButton.removeEventListener("click", this.onButtonClick);
-
-  const shareButton = this.getParentElement().querySelector(
-    "#share-marker-button-route"
-  );
-  shareButton.removeEventListener("click", this.onShareButtonClick);
 
   const closeButton = this.getParentElement().querySelector(
     ".custom-orange-balloon__close"
