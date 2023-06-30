@@ -52,7 +52,7 @@ function InstructionChatMap() {
           могут просматривать существующие темы в выпадающем списке, а также
           выбрать интересующую тему, нажав на нее в выпадающем списке. При
           выборе темы маркеры автоматически отфильтруются в зависимости от темы.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="choice-theme">
             <Image
               src={choiceTheme}
               alt="Чат на карте: Выбор темы."
@@ -67,7 +67,7 @@ function InstructionChatMap() {
           <span className={stylesHome.medium}>Добавление темы.</span> Чтобы
           добавить собственную тему нажмите на кнопку "Добавить тему", тема
           добавиться и станет выбранной.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="adding-theme">
             <Image
               src={addTheme}
               alt="Чат на карте: Добавление темы."
@@ -82,7 +82,7 @@ function InstructionChatMap() {
           <span className={stylesHome.medium}>Удаление темы.</span> Можно
           удалить тему, нажав на крестик возле выбранной темы, но только после
           удаления всех связанных с ней маркеров.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="deleting-theme">
             <Image
               src={deleteTheme}
               alt="Чат на карте: Удаление темы."
@@ -100,7 +100,7 @@ function InstructionChatMap() {
           Если Вы хотите просмотреть маркеры по всем темам, нажмите на кнопку
           "Показать маркеры по всем темам.". На карте будут показаны все
           существующие маркеры вне зависимости от темы.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="show-all-markers">
             <Image
               src={showAllMarkers}
               alt="Чат на карте: Показать маркеры по всем темам. "
@@ -113,14 +113,14 @@ function InstructionChatMap() {
             </div>
           </div>
         </li>
-        <li id="add-marker">
+        <li>
           <span className={stylesHome.medium}>
             Добавление маркера с сообщением на карту.
           </span>{" "}
           Для добавления маркера с сообщением на карту нужно выбрать или
           добавить тему, задать адрес и ввести текст сообщения, который затем
           будет отображаться в баллуне маркера на карте.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="add-marker">
             <Image
               src={addMessage}
               alt="Чат на карте: добавление сообщения"
@@ -140,7 +140,7 @@ function InstructionChatMap() {
           Чтобы просмотреть сообщение на карте, выберите мышкой необходимый
           оранжевый маркер с сообщением. В случае, если Вы хотите удалить этот
           маркер, нажмите на кнопку "Удалить" в открывшемся баллуне маркера.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="delete-marker">
             <Image
               src={delMessage}
               alt="Чат на карте: просмотр и удаление сообщения с карты "
@@ -161,7 +161,7 @@ function InstructionChatMap() {
           ссылку своему знакомому. Перейдя по этой ссылке, ваш знакомый увидит
           ваш маркер с вашим сообщением, заданной темой и соответствующим
           адресом.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="share-marker">
             <Image
               src={shareMarker}
               alt="Чат на карте: Поделиться маркером"

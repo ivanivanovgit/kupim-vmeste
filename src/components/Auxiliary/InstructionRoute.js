@@ -3,7 +3,8 @@
 import Image from "next/image";
 import stylesHome from "../../../styles/Help.module.scss";
 import addRoute from "../../../public/images/add-route.gif";
-
+import delRoute from "../../../public/images/delete-route.gif";
+import clearFields from "../../../public/images/clear-fields.gif";
 function InstructionRoute() {
   return (
     <>
@@ -27,10 +28,10 @@ function InstructionRoute() {
           местоположения, которые можно выбрать. После выбора адресов введите
           сообщение для маршрута, затем нажмите кнопку "Добавить маршрут",
           маршрут будет добавлен на карту.
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="add-route">
             <Image
               src={addRoute}
-              alt="Чат на карте: Добвление маршрута."
+              alt="Поиск попутных машин для перевозки груза: Добвление маршрута."
               width="auto"
               height="auto"
               priority
@@ -42,6 +43,16 @@ function InstructionRoute() {
           <span className={stylesHome.medium}>Удаление маршрута.</span> Чтобы
           удалить маршрут, нажмите на кнопку "Удалить" на любом из маркеров
           соответствующего маршрута.
+          <div className={stylesHome.imageContainer} id="delete-route">
+            <Image
+              src={delRoute}
+              alt="Поиск попутных машин для перевозки груза: Удаление маршрута."
+              width="auto"
+              height="auto"
+              priority
+            />
+            <div className={stylesHome.imageCaption}>Удаление маршрута</div>
+          </div>
         </li>
         <li>
           <span className={stylesHome.medium}>Очищение полей.</span> Чтобы
@@ -49,6 +60,16 @@ function InstructionRoute() {
           автоматически очистятся. Можно очищать и обычным способом, но данная
           кнопка ускоряет процесс, делая более удобным новое добавление
           маршрута.
+          <div className={stylesHome.imageContainer} id="clear-fields">
+            <Image
+              src={clearFields}
+              alt="Поиск попутных машин для перевозки груза: Очищение полей."
+              width="auto"
+              height="auto"
+              priority
+            />
+            <div className={stylesHome.imageCaption}>Очищение полей</div>
+          </div>
         </li>
       </ul>
     </>
