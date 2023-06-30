@@ -16,9 +16,9 @@ import {
 
 import {
   getPlacemarkOptions,
-  balloonContentTemplate,
-  buildFunction,
-  clearFunction,
+  balloonContentTemplateRoute,
+  buildFunctionRoute,
+  clearFunctionRoute,
 } from "../../utils/placemarkOptions";
 
 import useSetPointRoute from "../../utils/useSetPointRoute";
@@ -80,24 +80,27 @@ function RouteMap({
 
           // Создаем макет балуна с кнопкой "Удалить маркер"
           const MyBalloonContentLayout =
-            ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
-              build: buildFunction,
-              clear: clearFunction,
-              onButtonClick: async function () {
-                try {
-                  await deleteRoute(routeId);
-                  myMapRef.current.geoObjects.remove(firstPlacemark);
-                  myMapRef.current.geoObjects.remove(secondPlacemark);
-                  myMapRef.current.geoObjects.remove(multiRoute);
-                } catch (error) {
-                  console.error("Error deleting route: ", error);
-                }
-              },
-              onCloseButtonClick: function () {
-                firstPlacemark.balloon.close();
-                secondPlacemark.balloon.close();
-              },
-            });
+            ymaps.templateLayoutFactory.createClass(
+              balloonContentTemplateRoute,
+              {
+                build: buildFunctionRoute,
+                clear: clearFunctionRoute,
+                onButtonClick: async function () {
+                  try {
+                    await deleteRoute(routeId);
+                    myMapRef.current.geoObjects.remove(firstPlacemark);
+                    myMapRef.current.geoObjects.remove(secondPlacemark);
+                    myMapRef.current.geoObjects.remove(multiRoute);
+                  } catch (error) {
+                    console.error("Error deleting route: ", error);
+                  }
+                },
+                onCloseButtonClick: function () {
+                  firstPlacemark.balloon.close();
+                  secondPlacemark.balloon.close();
+                },
+              }
+            );
           ///////
 
           // создаем Placemark для первой и второй точки маршрута
@@ -237,10 +240,10 @@ function RouteMap({
               // Создаем макет балуна с кнопкой "Удалить маркер"
               const MyBalloonContentLayout =
                 ymaps.templateLayoutFactory.createClass(
-                  balloonContentTemplate,
+                  balloonContentTemplateRoute,
                   {
-                    build: buildFunction,
-                    clear: clearFunction,
+                    build: buildFunctionRoute,
+                    clear: clearFunctionRoute,
                     onButtonClick: async function () {
                       try {
                         await deleteRoute(routeId);

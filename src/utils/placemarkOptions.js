@@ -58,6 +58,61 @@ export function clearFunction() {
   this.constructor.superclass.clear.call(this);
 }
 
+export const balloonContentTemplateRoute = `
+  <div class="custom-balloon">
+    $[properties.balloonContent]
+    <div class="button-delete-marker">
+      <button id="delete-marker-button">
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Удалить
+        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+      </button>
+    </div>
+    <div class="button-share-marker-route">
+      <button id="share-marker-button-route"
+      </button>
+    </div>
+    <div class="custom-orange-balloon__close">&times;</div>
+  </div>
+`;
+
+export function buildFunctionRoute() {
+  this.constructor.superclass.build.call(this);
+
+  const deleteButton = this.getParentElement().querySelector(
+    "#delete-marker-button"
+  );
+  deleteButton.addEventListener("click", this.onButtonClick);
+
+  const shareButton = this.getParentElement().querySelector(
+    "#share-marker-button-route"
+  );
+  shareButton.addEventListener("click", this.onShareButtonClick);
+
+  const closeButton = this.getParentElement().querySelector(
+    ".custom-orange-balloon__close"
+  );
+  closeButton.addEventListener("click", this.onCloseButtonClick);
+}
+
+export function clearFunctionRoute() {
+  const deleteButton = this.getParentElement().querySelector(
+    "#delete-marker-button"
+  );
+  deleteButton.removeEventListener("click", this.onButtonClick);
+
+  const shareButton = this.getParentElement().querySelector(
+    "#share-marker-button-route"
+  );
+  shareButton.removeEventListener("click", this.onShareButtonClick);
+
+  const closeButton = this.getParentElement().querySelector(
+    ".custom-orange-balloon__close"
+  );
+  closeButton.removeEventListener("click", this.onCloseButtonClick);
+
+  this.constructor.superclass.clear.call(this);
+}
+
 export function getPlacemarkOptions(MyBalloonContentLayout, ymaps) {
   return {
     // balloon settings

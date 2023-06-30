@@ -34,7 +34,7 @@ function InstructionChatMap() {
           адресами, выбрать один из вариантов, затем нажать на кнопку "Найти".
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
-          <div className={stylesHome.imageContainer}>
+          <div className={stylesHome.imageContainer} id="search-adress">
             <Image
               src={searchAdress}
               alt="Чат на карте: Выбор адреса для маркера"

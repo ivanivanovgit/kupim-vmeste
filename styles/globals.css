@@ -93,3 +93,7 @@
   color: white;
   background-color: var(--balloon-button-background-color);
 }
+
+.button-share-marker-route {
+  display: none;
+}

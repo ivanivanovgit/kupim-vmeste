@@ -1,8 +1,8 @@
 // InstructionRoute.js
 
 import Image from "next/image";
-import { Constants } from "../../CONSTANTS";
 import stylesHome from "../../../styles/Help.module.scss";
+import addRoute from "../../../public/images/add-route.gif";
 
 function InstructionRoute() {
   return (
@@ -27,6 +27,16 @@ function InstructionRoute() {
           местоположения, которые можно выбрать. После выбора адресов введите
           сообщение для маршрута, затем нажмите кнопку "Добавить маршрут",
           маршрут будет добавлен на карту.
+          <div className={stylesHome.imageContainer}>
+            <Image
+              src={addRoute}
+              alt="Чат на карте: Добвление маршрута."
+              width="auto"
+              height="auto"
+              priority
+            />
+            <div className={stylesHome.imageCaption}>Добвление маршрута</div>
+          </div>
         </li>
         <li>
           <span className={stylesHome.medium}>Удаление маршрута.</span> Чтобы
