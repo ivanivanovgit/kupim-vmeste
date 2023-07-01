@@ -18,9 +18,9 @@ function blogSovmestnayaPokupkaTorfa() {
       >
         <CityList
           phrases={[
-            "Чат на карте в CITY",
-            "вскладчину в CITY",
-            "купим вместе в CITY",
+            "покупка торфа вскладчину в CITY",
+            "совместная покупка торфа в CITY",
+            "покупка универсального грунта в CITY",
           ]}
           param="sortBegin"
         />
