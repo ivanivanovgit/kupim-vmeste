@@ -12,7 +12,7 @@ const MyBlog = () => {
           Использование сервиса: примеры и варианты
         </div>
         <ul className={styles.bulletList}>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-sovmestnaya-pokupka-torfa">
             <li>
               <span className={styles.subsectionTitle}>
                 Совместная покупка торфа или плодородного грунта на дачу
