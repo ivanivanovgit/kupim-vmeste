@@ -33,14 +33,14 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-sovmestnaya-pokupka-plodovyh">
             <li>
               <span className={styles.subsectionTitle}>
                 Совместная покупка плодовых деревьев на участок.
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-barter-pri-pomoshchi-servisa-chat-na-karte">
             <li>
               <span className={styles.subsectionTitle}>
                 Бартер при помощи сервиса "Чат на карте"
