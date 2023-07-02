@@ -84,33 +84,34 @@ function blogSovmestnayaPokupkaTorfa() {
           вам в этом, обеспечивая удобное и простое объединение для совместных
           покупок.
         </div>
-      </div>
 
-      <Accordion
-        id="accordionBlog"
-        title={<div>Возможно вы искали:</div>}
-        /* open={true} */
-        open={false}
-      >
-        <CityList
-          phrases={[
-            "покупка торфа вскладчину в CITY",
-            "совместная покупка торфа в CITY",
-            "покупка универсального грунта в CITY",
-          ]}
-          param="sortBegin"
-          region="Москва и Московская обл."
-        />
-        <CityList
-          phrases={[
-            "покупка торфа вскладчину в CITY",
-            "совместная покупка торфа в CITY",
-            "покупка универсального грунта в CITY",
-          ]}
-          param="sortBegin"
-          region="Смоленская обл."
-        />
-      </Accordion>
+        <Accordion
+          id="accordionBlog"
+          title={<div>Возможно вы искали:</div>}
+          open={true}
+          /*    open={false} */
+        >
+          <CityList
+            phrases={[
+              "покупка торфа вскладчину в CITY",
+              "совместная покупка торфа в CITY",
+              "покупка универсального грунта в CITY",
+            ]}
+            param="sortBegin"
+            region="Москва и Московская обл."
+          />
+          <CityList
+            phrases={[
+              "покупка торфа вскладчину в CITY",
+              "совместная покупка торфа в CITY",
+              "покупка универсального грунта в CITY",
+            ]}
+            param="sortBegin"
+            region="Смоленская обл."
+          />
+        </Accordion>
+      </div>
+      Заработок на продаже мешков с торфом и грунтом: возможности и перспективы
     </>
   );
 }

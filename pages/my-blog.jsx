@@ -19,7 +19,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-zarabotok-na-prodazhe-meshkov">
             <li>
               <span className={styles.subsectionTitle}>
                 Заработок на продаже мешков с торфом и грунтом
