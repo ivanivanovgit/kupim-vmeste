@@ -26,7 +26,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-priobretenie-vintovyh-svaj">
             <li>
               <span className={styles.subsectionTitle}>
                 Приобретение винтовых свай и экономия на доставке
