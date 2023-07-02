@@ -47,7 +47,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-servis-map-chat">
             <li>
               <span className={styles.subsectionTitle}>
                 Сервис "Map-чат" поможет, если остались стройматериалы после
@@ -55,7 +55,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-pokupka-vskladchinu-dlya-prodazhi-tovarov-na-wildberries">
             <li>
               <span className={styles.subsectionTitle}>
                 Покупка вскладчину для продажи товаров на wildberries
