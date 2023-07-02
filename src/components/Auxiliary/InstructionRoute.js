@@ -20,15 +20,17 @@ function InstructionRoute() {
       </div>
       <ul className={stylesHome.bulletList}>
         <li>
-          <span className={stylesHome.medium}>Добвление маршрута.</span> Перед
-          добавлением маршрута необходимо задать начальную и конечную точку
-          маршрута, а также сообщение маршрута. Для этого начните вводить
+          <span className={stylesHome.medium} id="add-route">
+            Добавление маршрута.
+          </span>{" "}
+          Перед добавлением маршрута необходимо задать начальную и конечную
+          точку маршрута, а также сообщение маршрута. Для этого начните вводить
           соотвественно адрес пункта назначения и адрес пункта отправления. В
           процессе ввода адреса появляются подсказки для уточнения
           местоположения, которые можно выбрать. После выбора адресов введите
           сообщение для маршрута, затем нажмите кнопку "Добавить маршрут",
           маршрут будет добавлен на карту.
-          <div className={stylesHome.imageContainer} id="add-route">
+          <div className={stylesHome.imageContainer}>
             <Image
               src={addRoute}
               alt="Поиск попутных машин для перевозки груза: Добвление маршрута."
@@ -36,14 +38,16 @@ function InstructionRoute() {
               height="auto"
               priority
             />
-            <div className={stylesHome.imageCaption}>Добвление маршрута</div>
+            <div className={stylesHome.imageCaption}>Добавление маршрута</div>
           </div>
         </li>
         <li>
-          <span className={stylesHome.medium}>Удаление маршрута.</span> Чтобы
-          удалить маршрут, нажмите на кнопку "Удалить" на любом из маркеров
-          соответствующего маршрута.
-          <div className={stylesHome.imageContainer} id="delete-route">
+          <span className={stylesHome.medium} id="delete-route">
+            Удаление маршрута.
+          </span>{" "}
+          Чтобы удалить маршрут, нажмите на кнопку "Удалить" на любом из
+          маркеров соответствующего маршрута.
+          <div className={stylesHome.imageContainer}>
             <Image
               src={delRoute}
               alt="Поиск попутных машин для перевозки груза: Удаление маршрута."
@@ -55,12 +59,14 @@ function InstructionRoute() {
           </div>
         </li>
         <li>
-          <span className={stylesHome.medium}>Очищение полей.</span> Чтобы
-          очистить поля ввода, нажмите на кнопку "Очистить поля". Все поля
+          <span className={stylesHome.medium} id="clear-fields">
+            Очищение полей.
+          </span>{" "}
+          Чтобы очистить поля ввода, нажмите на кнопку "Очистить поля". Все поля
           автоматически очистятся. Можно очищать и обычным способом, но данная
           кнопка ускоряет процесс, делая более удобным новое добавление
           маршрута.
-          <div className={stylesHome.imageContainer} id="clear-fields">
+          <div className={stylesHome.imageContainer}>
             <Image
               src={clearFields}
               alt="Поиск попутных машин для перевозки груза: Очищение полей."

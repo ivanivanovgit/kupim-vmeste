@@ -7,7 +7,7 @@ function HomeLayout({ stylesHome }) {
   return (
     <div className={stylesHome.container}>
       <div
-        className={`${stylesHome.imageContainer} ${stylesHome.imageContainerMainMap}`}
+        className={`${stylesHome.imageContainerHome} ${stylesHome.imageContainerMainMap}`}
       >
         <div className={stylesHome.widthMainMap}>
           <Image
