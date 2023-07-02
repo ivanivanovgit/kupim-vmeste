@@ -4,11 +4,15 @@ import citiesData from "../../data/cities";
 import { shuffleArray } from "../../utils/shuffleArray";
 import { useEffect, useState } from "react";
 
-function CityList({ phrases, param }) {
+function CityList({ phrases, param, region }) {
   const [cityPhrasePairs, setCityPhrasePairs] = useState([]);
 
   useEffect(() => {
-    const shuffledCities = shuffleArray([...citiesData], param);
+    let filteredCities = [...citiesData];
+    if (region) {
+      filteredCities = citiesData.filter((city) => city.region === region);
+    }
+    const shuffledCities = shuffleArray(filteredCities, param);
 
     const shuffledPhrases = shuffleArray([...phrases], param);
 
@@ -18,7 +22,7 @@ function CityList({ phrases, param }) {
     }));
 
     setCityPhrasePairs(pairs);
-  }, [phrases, param]);
+  }, [phrases, param, region]);
 
   return (
     <div>
