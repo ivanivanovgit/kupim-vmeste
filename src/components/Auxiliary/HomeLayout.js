@@ -23,8 +23,6 @@ function HomeLayout({ stylesHome }) {
         <span className={stylesHome.bold}>Купим вместе</span> — это сервис для
         совместных покупок (чат на карте) и поиска попутных машин.
       </p>
-
-      <div className={stylesHome.sectionTitle}>Функционал сервиса</div>
       <p className={stylesHome.text}>
         Функционал сервиса включает три ключевые вкладки: "Чат на карте", "Поиск
         попутных машин" и "Где купить", которые работают без регистрациии.
@@ -72,7 +70,7 @@ function HomeLayout({ stylesHome }) {
         В разделе "Помощь/F.A.Q." Вы можете найти подробную инструкцию по каждой
         из вкладок сервиса.
       </p>
-      <div className={stylesHome.sectionTitle}>
+      <div className={`${stylesHome.sectionTitle} ${stylesHome.sectionMt6}`}>
         Примеры использования сервиса
       </div>
 

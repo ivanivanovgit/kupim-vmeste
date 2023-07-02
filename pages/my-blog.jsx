@@ -62,7 +62,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-karty-onlajn-s-chatom-dlya-poiska-strojmaterialov-poblizosti">
             <li>
               <span className={styles.subsectionTitle}>
                 Карты онлайн с чатом для поиска стройматериалов поблизости
