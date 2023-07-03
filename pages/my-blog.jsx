@@ -69,7 +69,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-stroitelstvo-zabora">
             <li>
               <span className={styles.subsectionTitle}>
                 Экономия на строительстве забора при помощи сервиса "Купим
@@ -77,7 +77,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-sovmestnaya-pokupka-vskladchinu-obreznogo-pilomateriala">
             <li>
               <span className={styles.subsectionTitle}>
                 Совместная покупка (вскладчину) обрезного пиломатериала
