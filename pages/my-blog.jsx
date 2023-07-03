@@ -84,7 +84,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-ekonomiya-na-pokupkah-s-aliExpress">
             <li>
               <span className={styles.subsectionTitle}>
                 Экономия на покупках с AliExpress при помощи сервиса "Купим
@@ -92,14 +92,14 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-poisk-poputnoj-mashiny-dlya-perevozki-sypuchih-materialov">
             <li>
               <span className={styles.subsectionTitle}>
                 Поиск попутной машины для перевозки сыпучих материалов
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-otpravka-gruza-poputnoj-mashinoj">
             <li>
               <span className={styles.subsectionTitle}>
                 Отправка груза попутной машиной
