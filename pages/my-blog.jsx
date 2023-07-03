@@ -106,7 +106,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-kak-najti-poputnuyu-mashinu">
             <li>
               <span className={styles.subsectionTitle}>
                 "Сарафанное радио" среди водителей или как найти попутную машину
@@ -114,14 +114,14 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-ekonomiya-na-dostavke-pri-pomoshchi-poputnoj-mashiny">
             <li>
               <span className={styles.subsectionTitle}>
                 Экономия на доставке при помощи попутной машины
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-zakaz-podhodyashchego-torfa-s-karera">
             <li>
               <span className={styles.subsectionTitle}>
                 Заказ подходящего торфа с карьера
