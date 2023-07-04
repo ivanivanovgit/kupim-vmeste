@@ -128,7 +128,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-besplatnoe-i-bez-registracii-razmeshchenie-obyavlenij">
             <li>
               <span className={styles.subsectionTitle}>
                 Бесплатное и без регистрации размещение объявлений на сервисе
