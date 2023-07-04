@@ -136,7 +136,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-puteshestvie-po-rossii-na-poputnyh-mashinah">
             <li>
               <span className={styles.subsectionTitle}>
                 Путешествие по России на попутных машинах
