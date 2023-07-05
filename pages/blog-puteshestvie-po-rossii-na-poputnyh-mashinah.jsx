@@ -1,5 +1,5 @@
 // blog-puteshestvie-po-rossii-na-poputnyh-mashinah.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogPuteshestvieRossiiPoputnyhMashinah() {
   return (
     <>
+      <Head>
+        <title>Путешествие по России на попутных машинах</title>
+        <meta
+          name="description"
+          content="Путешествие по России на попутных машинах"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Путешествие по России на попутных машинах

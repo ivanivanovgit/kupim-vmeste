@@ -1,5 +1,5 @@
 // blog-otpravka-gruza-poputnoj-mashinoj.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,15 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogOtpravkaGruzaPoputnojMashinoj() {
   return (
     <>
+      <Head>
+        <title>
+          Отправка груза попутной машиной при помощи сервиса "Купим вместе"
+        </title>
+        <meta
+          name="description"
+          content='Отправка груза попутной машиной при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Отправка груза попутной машиной

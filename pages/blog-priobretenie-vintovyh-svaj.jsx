@@ -1,4 +1,5 @@
 // blog-priobretenie-vintovyh-svaj.jsx
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -6,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogPriobretenieVintovyhSvaj() {
   return (
     <>
+      <Head>
+        <title>Cовместная покупка (вскладчину) винтовых свай</title>
+        <meta
+          name="description"
+          content="Cовместная покупка (вскладчину) винтовых свай"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Приобретение винтовых свай и экономия на доставке: советы и

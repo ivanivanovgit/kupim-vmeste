@@ -1,5 +1,5 @@
 // blog-ekonomiya-na-pokupkah-s-aliExpress.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogEkonomiyaNaPokupkahAliExpress() {
   return (
     <>
+      <Head>
+        <title>Покупки с AliExpress при помощи сервиса "Купим вместе"</title>
+        <meta
+          name="description"
+          content='Покупки с AliExpress при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Экономия на покупках с AliExpress при помощи сервиса "Купим вместе"

@@ -1,5 +1,5 @@
 // blog-besplatnoe-i-bez-registracii-razmeshchenie-obyavlenij.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,16 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogBesplatnoeBezRegistraciiRazmeshchenieObyavlenij() {
   return (
     <>
+      <Head>
+        <title>
+          Бесплатное и без регистрации размещение объявлений на сервисе "Купим
+          вместе"
+        </title>
+        <meta
+          name="description"
+          content='Бесплатное и без регистрации размещение объявлений на сервисе "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Бесплатное и без регистрации размещение объявлений на сервисе "Купим

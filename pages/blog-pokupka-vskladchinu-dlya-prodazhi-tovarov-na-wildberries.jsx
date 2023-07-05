@@ -1,5 +1,5 @@
 // blog-pokupka-vskladchinu-dlya-prodazhi-tovarov-na-wildberries.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogPokupkaVskladchinuDlyaProdazhiTovarovNaWildberries() {
   return (
     <>
+      <Head>
+        <title>Совместные покупки (вскладчину) на Wildberries</title>
+        <meta
+          name="description"
+          content="Совместные покупки (вскладчину) на Wildberries"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Покупка вскладчину для продажи товаров на Wildberries

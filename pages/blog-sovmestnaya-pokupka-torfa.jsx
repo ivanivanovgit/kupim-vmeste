@@ -1,4 +1,5 @@
 // blog-sovmestnaya-pokupka-torfa.jsx
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -6,6 +7,15 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogSovmestnayaPokupkaTorfa() {
   return (
     <>
+      <Head>
+        <title>
+          Совместная покупка (вскладчину) торфа или плодородного грунта
+        </title>
+        <meta
+          name="description"
+          content="Совместная покупка (вскладчину) торфа или плодородного грунта "
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Совместная покупка торфа или плодородного грунта на дачу

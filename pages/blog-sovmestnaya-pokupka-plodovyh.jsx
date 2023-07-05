@@ -1,5 +1,5 @@
 // blog-sovmestnaya-pokupka-plodovyh.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogSovmestnayaPokupkaPlodovyh() {
   return (
     <>
+      <Head>
+        <title>Совместная покупка (вскладчину) плодовых деревьев</title>
+        <meta
+          name="description"
+          content="Совместная покупка (вскладчину) плодовых деревьев "
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Совместная покупка плодовых деревьев на участок: опыт, советы и

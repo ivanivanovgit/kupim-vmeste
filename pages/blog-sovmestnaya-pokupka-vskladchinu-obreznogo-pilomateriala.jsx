@@ -1,5 +1,5 @@
 // blog-sovmestnaya-pokupka-vskladchinu-obreznogo-pilomateriala.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogSovmestnayaPokupkaVskladchinuObreznogoPilomateriala() {
   return (
     <>
+      <Head>
+        <title>Совместная покупка (вскладчину) обрезного пиломатериала</title>
+        <meta
+          name="description"
+          content="Совместная покупка (вскладчину) обрезного пиломатериала"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Совместная покупка (вскладчину) обрезного пиломатериала

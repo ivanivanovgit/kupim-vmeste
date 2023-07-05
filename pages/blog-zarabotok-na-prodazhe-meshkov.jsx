@@ -1,5 +1,5 @@
 // blog-zarabotok-na-prodazhe-meshkov.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,15 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogZarabotokNaProdazheMeshkov() {
   return (
     <>
+      <Head>
+        <title>
+          Бизнес на продаже мешков с грунтом при помощи сервиса "Купим вместе"
+        </title>
+        <meta
+          name="description"
+          content='Бизнес на продаже мешков с грунтом при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Заработок на продаже мешков с торфом и грунтом: возможности и

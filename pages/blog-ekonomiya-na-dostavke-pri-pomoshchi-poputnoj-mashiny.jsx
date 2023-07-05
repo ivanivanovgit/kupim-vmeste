@@ -1,5 +1,5 @@
 // blog-ekonomiya-na-dostavke-pri-pomoshchi-poputnoj-mashiny.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,13 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogEkonomiyaNaDostavkePriPomoshchiPoputnojMashiny() {
   return (
     <>
+      <Head>
+        <title>Поиск попутной машины при помощи сервиса "Купим вместе"</title>
+        <meta
+          name="description"
+          content='Поиск попутной машины при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Экономия на доставке при помощи попутной машины

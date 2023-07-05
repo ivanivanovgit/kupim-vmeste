@@ -1,5 +1,6 @@
 // blog-kak-najti-poputnuyu-mashinu.jsx
 
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +8,15 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogKakNajtiPoputnuyuMashin() {
   return (
     <>
+      <Head>
+        <title>
+          Как найти попутную машину при помощи сервиса "Купим вместе"
+        </title>
+        <meta
+          name="description"
+          content='Как найти попутную машину при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           "Сарафанное радио" среди водителей или как найти попутную машину в

@@ -1,5 +1,5 @@
 // blog-servis-map-chat.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,10 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogServisMapChat() {
   return (
     <>
+      <Head>
+        <title>Map-чат без регистрации</title>
+        <meta name="description" content="Map-чат без регистрации" />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Сервис "Map-чат" поможет, если остались стройматериалы после ремонта

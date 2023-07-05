@@ -1,5 +1,5 @@
 // blog-karty-onlajn-s-chatom-dlya-poiska-strojmaterialov-poblizosti.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,9 +7,16 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogKartyOnlajnChatomDlyaPoiskaSrojmaterialov() {
   return (
     <>
+      <Head>
+        <title>Карта онлайн с чатом для поиска стройматериалов</title>
+        <meta
+          name="description"
+          content="Карта онлайн с чатом для поиска стройматериалов"
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
-          Карты онлайн с чатом для поиска стройматериалов поблизости
+          Карта онлайн с чатом для поиска стройматериалов поблизости
         </div>
         <div className={styles.text}>
           В эпоху интернета мы имеем неограниченные возможности для обмена
@@ -72,7 +79,7 @@ function blogKartyOnlajnChatomDlyaPoiskaSrojmaterialov() {
         >
           <CityList
             phrases={[
-              "Карты онлайн с чатом для поиска стройматериалов в CITY",
+              "Карта онлайн с чатом для поиска стройматериалов в CITY",
               "покупка вскладчину при помощи карты онлайн в CITY",
               "карты онлайн без регистрации в CITY",
             ]}

@@ -1,5 +1,5 @@
 // blog-poisk-poputnoj-mashiny-dlya-perevozki-sypuchih-materialov.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,16 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogPoiskPoputnojMashinyDlyaPerevozkiSypuchihMaterialov() {
   return (
     <>
+      <Head>
+        <title>
+          Поиск попутной машины для перевозки сыпучих материалов при помощи
+          сервиса "Купим вместе"
+        </title>
+        <meta
+          name="description"
+          content='Поиск попутной машины для перевозки сыпучих материалов при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Поиск попутной машины для перевозки сыпучих материалов

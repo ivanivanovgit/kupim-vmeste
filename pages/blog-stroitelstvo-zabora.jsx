@@ -1,5 +1,5 @@
 // blog-stroitelstvo-zabora.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,9 +7,18 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogStroitelstvoZabora() {
   return (
     <>
+      <Head>
+        <title>
+          Совместная покупка (вскладчину) стройматериалов для забора
+        </title>
+        <meta
+          name="description"
+          content="Совместная покупка (вскладчину) стройматериалов для забора "
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
-          Строительство забора: потенциальные расходы
+          Экономия на строительстве забора при помощи сервиса "Купим вместе".
         </div>
         <div className={styles.text}>
           Строительство забора – это важный этап в устройстве дома или дачного

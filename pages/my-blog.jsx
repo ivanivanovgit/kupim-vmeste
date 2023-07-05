@@ -69,14 +69,14 @@ const MyBlog = () => {
             <ActiveLink href="/blog-pokupka-vskladchinu-dlya-prodazhi-tovarov-na-wildberries">
               <li>
                 <span className={styles.subsectionTitle}>
-                  Покупка вскладчину для продажи товаров на wildberries
+                  Покупка вскладчину для продажи товаров на Wildberries
                 </span>
               </li>
             </ActiveLink>
             <ActiveLink href="/blog-karty-onlajn-s-chatom-dlya-poiska-strojmaterialov-poblizosti">
               <li>
                 <span className={styles.subsectionTitle}>
-                  Карты онлайн с чатом для поиска стройматериалов поблизости
+                  Карта онлайн с чатом для поиска стройматериалов поблизости
                 </span>
               </li>
             </ActiveLink>

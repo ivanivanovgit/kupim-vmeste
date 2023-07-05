@@ -1,5 +1,5 @@
 // blog-zakaz-podhodyashchego-torfa-s-karera.jsx
-
+import Head from "next/head";
 import styles from "../styles/Blog.module.scss";
 import Accordion from "../src/components/Auxiliary/Accordion";
 import CityList from "../src/components/Auxiliary/CityList";
@@ -7,6 +7,15 @@ import CityList from "../src/components/Auxiliary/CityList";
 function blogZakazPodhodyashchegoTorfaKarera() {
   return (
     <>
+      <Head>
+        <title>
+          Покупка подходящего торфа с карьера при помощи сервиса "Купим вместе"
+        </title>
+        <meta
+          name="description"
+          content='Покупка подходящего торфа с карьера при помощи сервиса "Купим вместе"'
+        />
+      </Head>
       <div className={styles.container}>
         <div className={`${styles.sectionTitle} ${styles.centerText}`}>
           Заказ подходящего торфа с карьера
