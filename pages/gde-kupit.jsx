@@ -28,64 +28,6 @@ const Gdekupit = ({ markers }) => {
           </div>
         ),
       },
-      {
-        title: "Карта производителей черного металлопроката",
-        content: (
-          <div>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit
-            perspiciatis enim voluptatum quibusdam ullam? Porro, reiciendis.
-            Eveniet ea, perferendis, excepturi amet doloribus quisquam commodi
-            veritatis reiciendis dolor itaque, minus incidunt.Lorem ipsum dolor
-            sit amet consectetur, adipisicing elit. Suscipit perspiciatis enim
-            voluptatum quibusdam ullam? Porro, reiciendis. Eveniet ea,
-            perferendis, excepturi amet doloribus quisquam commodi veritatis
-            reiciendis dolor itaque, minus incidunt.Lorem ipsum dolor sit amet
-            consectetur, adipisicing elit. Suscipit perspiciatis enim voluptatum
-            quibusdam ullam? Porro, reiciendis. Eveniet ea, perferendis,
-            excepturi amet doloribus quisquam commodi veritatis reiciendis dolor
-            itaque, minus incidunt.Lorem ipsum dolor sit amet consectetur,
-            adipisicing elit. Suscipit perspiciatis enim voluptatum quibusdam
-            ullam? Porro, reiciendis. Eveniet ea, perferendis, excepturi amet
-            doloribus quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus
-            incidunt.Lorem ipsum dolor sit amet consectetur, adipisicing elit.
-            Suscipit perspiciatis enim voluptatum quibusdam ullam? Porro,
-            reiciendis. Eveniet ea, perferendis, excepturi amet doloribus
-            quisquam commodi veritatis reiciendis dolor itaque, minus incidunt.
-          </div>
-        ),
-      },
     ];
     return tabs;
   };

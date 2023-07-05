@@ -1,7 +1,6 @@
 // validateInput.js
 
-import { Constants } from "../CONSTANTS";
-
+import { bannedWords } from "../../pages/api/bannedWords";
 export function validateInput(userInput) {
   // Проверка на наличие URL в вводе
   if (/https?:\/\/[^\s]+/g.test(userInput)) {
@@ -21,7 +20,7 @@ export function validateInput(userInput) {
     };
   } else {
     // Проверка на запрещенные слова
-    Constants.bannedWords.forEach((bannedWord) => {
+    bannedWords.forEach((bannedWord) => {
       const regex = new RegExp(bannedWord, "gi");
       if (regex.test(userInput)) {
         userInput = userInput.replace(regex, "");
