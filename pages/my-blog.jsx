@@ -143,7 +143,7 @@ const MyBlog = () => {
               </span>
             </li>
           </ActiveLink>
-          <ActiveLink href="/">
+          <ActiveLink href="/blog-sovmestnaya-pokupka-na-optovyh-produktovyh-rynkah">
             <li>
               <span className={styles.subsectionTitle}>
                 Совместная покупка на оптовых продуктовых рынках для экономии
