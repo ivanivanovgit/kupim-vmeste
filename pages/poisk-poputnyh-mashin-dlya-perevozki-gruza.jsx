@@ -1,3 +1,4 @@
+import Head from "next/head";
 import { useTheme, useMediaQuery } from "@mui/material";
 import HorizontRoute from "../src/components/Auxiliary/HorizontRoute";
 import VerticalRoute from "../src/components/Auxiliary/VerticalRoute";
@@ -14,6 +15,13 @@ const Poiskpoputnyhmashin = () => {
 
   return (
     <>
+      <Head>
+        <title>Сервис для поиска попутной машины для перевозки грузов</title>
+        <meta
+          name="description"
+          content="Вы можете найти или добавить информацию о попутных машинах для перевозки грузов или просто попутно доехать куда-либо."
+        />
+      </Head>
       {isMatch ? (
         <VerticalRoute mapRoute={HorOrVer("mapStyleVerticalMapRoute")} />
       ) : (

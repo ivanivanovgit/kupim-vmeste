@@ -1,4 +1,5 @@
 // gde-kupit.jsx
+import Head from "next/head";
 import axios from "../src/utils/axiosBaseURL";
 import { useTheme, useMediaQuery } from "@mui/material";
 import DifferentMaps from "../src/components/Map/DifferentMaps";
@@ -91,6 +92,15 @@ const Gdekupit = ({ markers }) => {
 
   return (
     <div>
+      <Head>
+        <title>
+          Где купить: карта торфяных карьеров Московской и Смоленской областях.
+        </title>
+        <meta
+          name="description"
+          content="Где купить: карта торфяных карьеров Московской и Смоленской областях."
+        />
+      </Head>
       {isMatch ? (
         <VerticalTabsGde tabs={HorOrVer("mapStyleVerticalTabs")} />
       ) : (

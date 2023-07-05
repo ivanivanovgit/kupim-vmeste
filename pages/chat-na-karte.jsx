@@ -1,4 +1,5 @@
 // chat-na-karte.jsx
+import Head from "next/head";
 import { useTheme, useMediaQuery } from "@mui/material";
 import MapChat from "../src/components/Map/MapChat";
 import HorizontChatMap from "../src/components/Auxiliary/HorizontChatMap";
@@ -14,6 +15,13 @@ const Chatnakarte = () => {
 
   return (
     <>
+      <Head>
+        <title>Чат на карте, карты онлайн с чатом, map чат</title>
+        <meta
+          name="description"
+          content="Чат на карте: это основная вкладка сервиса, на ней можно обмениваться сообщениями, размещая их на карте. Таким образом, удобно объединяться для совместных покупок (покупок вскладчину)"
+        />
+      </Head>
       {isMatch ? (
         <VerticalChatMap mapChat={HorOrVer("mapStyleVerticalMapChat")} />
       ) : (
