@@ -59,5 +59,6 @@ export async function getStaticProps() {
 
   return {
     props: { markers },
+    revalidate: 60,
   };
 }
