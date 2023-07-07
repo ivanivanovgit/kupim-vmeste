@@ -1,4 +1,14 @@
-import { Pool } from "pg";
+import pg from "pg";
+
+const { Pool } = pg;
+
+const pool = new Pool({
+  connectionString: process.env.POSTGRES_URL + "?sslmode=requir",
+});
+
+export default pool;
+
+/* import { Pool } from "pg";
 
 const pool = new Pool({
   user: process.env.DB_USER,
@@ -8,4 +18,4 @@ const pool = new Pool({
   port: process.env.DB_PORT,
 });
 
-export default pool;
+export default pool; */

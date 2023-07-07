@@ -15,6 +15,7 @@
     "@next/font": "13.1.6",
     "@pbe/react-yandex-maps": "1.2.2",
     "@reduxjs/toolkit": "1.9.5",
+    "@vercel/postgres": "^0.4.0",
     "axios": "1.4.0",
     "next": "latest",
     "pg": "8.10.0",
@@ -22,7 +23,8 @@
     "react-dom": "18.2.0",
     "react-hook-form": "7.43.9",
     "react-redux": "8.0.5",
-    "sass": "1.58.3"
+    "sass": "1.58.3",
+    "vercel": "^31.0.1"
   },
   "devDependencies": {
     "autoprefixer": "10.4.13",
