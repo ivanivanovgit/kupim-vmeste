@@ -1,6 +1,5 @@
 // gde-kupit.jsx
 import Head from "next/head";
-/* import axios from "../src/utils/axiosBaseURL"; */
 import pool from "../src/utils/db";
 import { useTheme, useMediaQuery } from "@mui/material";
 import DifferentMaps from "../src/components/Map/DifferentMaps";
@@ -62,12 +61,3 @@ export async function getStaticProps() {
     props: { markers },
   };
 }
-
-/* export async function getStaticProps() {
-  const res = await axios.get("/api/markers");
-  const markers = res.data;
-
-  return {
-    props: { markers },
-  };
-} */
