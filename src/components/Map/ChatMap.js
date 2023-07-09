@@ -223,7 +223,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
 
   /////////  useEffect для извлечения маркеров на карту согласно выбранной теме
   useEffect(() => {
-    if (!ymaps || !myMapRef.current || !isMapLoaded) {
+    if (!ymaps || !myMapRef.current || !isMapLoaded || !selectedTheme) {
       return;
     }
     // Проверяем, существует ли clustererRef.current перед удалением маркеров
@@ -284,8 +284,6 @@ function ChatMap({ mapStyle, searchInputRef }) {
       });
     });
     ////
-
-    ////////////// TODO:  Проверка на дубликаты маркеров ymaps
   }, [
     selectedTheme,
     checkIsDuplicateCoords,
