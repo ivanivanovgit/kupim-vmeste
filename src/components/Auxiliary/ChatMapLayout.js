@@ -47,12 +47,13 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   );
   const openAlert = useSelector((state) => state.chatMap.openAlert);
   const showMessage = useSelector((state) => state.chatMap.showMessage);
+  const isAddingMarker = useSelector((state) => state.chatMap.isAddingMarker);
   // useState
   const [themes, setThemes] = useState([]);
   const [loadingtheme, setLoadingTheme] = useState(true);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
-  const [isAddingMarker, setIsAddingMarker] = useState(false);
+  /*  const [isAddingMarker, setIsAddingMarker] = useState(false); */
   // useRef
   const searchInputRef = useRef(null);
 
@@ -148,7 +149,6 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
-    setIsAddingMarker: setIsAddingMarker,
   });
 
   useEffect(() => {

@@ -15,6 +15,7 @@ const initialState = {
   checkDublicateMarkersMesage: "",
   openAlert: false,
   showMessage: "",
+  isAddingMarker: false,
 };
 
 export const chatMapSlice = createSlice({
@@ -57,6 +58,9 @@ export const chatMapSlice = createSlice({
     setShowMessage: (state, action) => {
       state.showMessage = action.payload;
     },
+    setIsAddingMarker: (state, action) => {
+      state.showMessage = action.payload;
+    },
   },
 });
 
@@ -73,6 +77,7 @@ export const {
   setCheckDublicateMarkersMesage,
   setOpenAlert,
   setShowMessage,
+  setIsAddingMarker,
 } = chatMapSlice.actions;
 
 export default chatMapSlice.reducer;

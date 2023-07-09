@@ -6,6 +6,7 @@ import {
   setSelectedTheme,
   setShowAllMarkers,
   setCheckDublicateMarkersMesage,
+  setIsAddingMarker,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
 import { useYMaps } from "@pbe/react-yandex-maps";
@@ -38,7 +39,7 @@ import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
-function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
+function ChatMap({ mapStyle, searchInputRef }) {
   const dispatch = useDispatch();
   const inputText = useSelector((state) => state.chatMap.inputText);
   const createMarker = useSelector((state) => state.chatMap.createMarker);
@@ -364,7 +365,7 @@ function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
             selectedTheme,
             inputText
           ).then(({ id: markerId }) => {
-            setIsAddingMarker(true);
+            dispatch(setIsAddingMarker(true));
             const MyBalloonContentLayout =
               ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
                 build: buildFunction,
@@ -398,7 +399,7 @@ function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
             clustererRef.current.add(addPlacemark);
             setCheckIsDuplicateCoords(checkIsDuplicateCoordsRef.current);
 
-            setIsAddingMarker(false);
+            dispatch(setIsAddingMarker(false));
             ///////
           });
           //////////////////////////
