@@ -303,6 +303,14 @@ function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
       return;
     }
 
+    dispatch(
+      setCheckDublicateMarkersMesage("Идет добавление маркера, подождите...")
+    );
+
+    setTimeout(() => {
+      dispatch(setCheckDublicateMarkersMesage(""));
+    }, 3000);
+
     // Проверка на дубликат
     checkDuplicateMarker(
       currentCoords.current[0],
@@ -349,12 +357,6 @@ function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
             }, 3000);
           }
 
-          dispatch(
-            setCheckDublicateMarkersMesage(
-              "Идет добавление маркера, подождите..."
-            )
-          );
-
           // Если дубликат не обнаружен, добавляем новый маркер
           addMarkerToDatabase(
             currentCoords.current[0],
@@ -396,13 +398,7 @@ function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
             clustererRef.current.add(addPlacemark);
             setCheckIsDuplicateCoords(checkIsDuplicateCoordsRef.current);
 
-            setTimeout(() => {
-              setIsAddingMarker(false);
-            }, 2000);
-
-            setTimeout(() => {
-              dispatch(setCheckDublicateMarkersMesage(""));
-            }, 2000);
+            setIsAddingMarker(false);
             ///////
           });
           //////////////////////////
