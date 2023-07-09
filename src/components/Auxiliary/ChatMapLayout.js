@@ -53,7 +53,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [loadingtheme, setLoadingTheme] = useState(true);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
-  /*  const [isAddingMarker, setIsAddingMarker] = useState(false); */
+
   // useRef
   const searchInputRef = useRef(null);
 

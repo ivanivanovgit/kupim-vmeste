@@ -6,15 +6,18 @@ const Footer = () => {
       sx={{
         display: "flex",
         alignItems: "center",
-        height: Constants.footerHeight,
+        minHeight: Constants.footerHeight,
         backgroundColor: Constants.FooterColor,
         justifyContent: "center",
         fontWeight: "550",
-        fontSize: "0.9rem",
+        fontSize: "0.8rem",
         color: Constants.thirdColor,
+        textAlign: "center",
+        padding: "0 0.5rem",
       }}
     >
-      {Constants.email}
+      Для добавления компании в раздел "Где купить", а также по разработке
+      сайтов или приложений пишите на почту: {Constants.email}
     </Box>
   );
 };

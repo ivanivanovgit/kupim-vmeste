@@ -11,6 +11,7 @@ import { useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
 import ActiveLink from "./ActiveLink";
 import { Constants } from "../../CONSTANTS";
+import ActiveListItemButton from "./ActiveListItemButton";
 
 const DrawerComp = ({ links }) => {
   const [open, setOpen] = useState(false);
@@ -23,15 +24,7 @@ const DrawerComp = ({ links }) => {
       >
         <List>
           {links.map(({ name, id, href }) => (
-            <ListItemButton onClick={() => setOpen(false)} key={id} divider>
-              <ListItemIcon>
-                <ListItemText sx={{ color: "white" }}>
-                  <ActiveLink key={id} href={href}>
-                    {name}
-                  </ActiveLink>
-                </ListItemText>
-              </ListItemIcon>
-            </ListItemButton>
+            <ActiveListItemButton name={name} key={id} href={href} />
           ))}
         </List>
       </Drawer>
