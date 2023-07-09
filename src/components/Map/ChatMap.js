@@ -38,7 +38,7 @@ import { getShareCoordsZoom } from "../../utils/getShareCoordsZoom";
 import { createPlacemark } from "../../utils/createPlacemark";
 import { getAddress } from "../../utils/getAddress";
 
-function ChatMap({ mapStyle, searchInputRef }) {
+function ChatMap({ mapStyle, searchInputRef, setIsAddingMarker }) {
   const dispatch = useDispatch();
   const inputText = useSelector((state) => state.chatMap.inputText);
   const createMarker = useSelector((state) => state.chatMap.createMarker);
@@ -349,6 +349,12 @@ function ChatMap({ mapStyle, searchInputRef }) {
             }, 3000);
           }
 
+          dispatch(
+            setCheckDublicateMarkersMesage(
+              "Идет добавление маркера, подождите..."
+            )
+          );
+
           // Если дубликат не обнаружен, добавляем новый маркер
           addMarkerToDatabase(
             currentCoords.current[0],
@@ -356,6 +362,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
             selectedTheme,
             inputText
           ).then(({ id: markerId }) => {
+            setIsAddingMarker(true);
             const MyBalloonContentLayout =
               ymaps.templateLayoutFactory.createClass(balloonContentTemplate, {
                 build: buildFunction,
@@ -388,6 +395,14 @@ function ChatMap({ mapStyle, searchInputRef }) {
 
             clustererRef.current.add(addPlacemark);
             setCheckIsDuplicateCoords(checkIsDuplicateCoordsRef.current);
+
+            setTimeout(() => {
+              setIsAddingMarker(false);
+            }, 2000);
+
+            setTimeout(() => {
+              dispatch(setCheckDublicateMarkersMesage(""));
+            }, 2000);
             ///////
           });
           //////////////////////////

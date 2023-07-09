@@ -52,6 +52,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   const [loadingtheme, setLoadingTheme] = useState(true);
   const [warnNothemeOrAdress, setWarnNothemeOrAdress] = useState("");
   const [deleteThemeError, setDeleteThemeError] = useState("");
+  const [isAddingMarker, setIsAddingMarker] = useState(false);
   // useRef
   const searchInputRef = useRef(null);
 
@@ -147,6 +148,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
   const mapChatWithProps = React.cloneElement(mapChat, {
     searchInputRef: searchInputRef.current,
+    setIsAddingMarker: setIsAddingMarker,
   });
 
   useEffect(() => {
@@ -350,7 +352,11 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
               maxLength={300}
               required
             />
-            <button className={layoutStyles.mainButtonStyle} type="submit">
+            <button
+              className={layoutStyles.mainButtonStyle}
+              type="submit"
+              disabled={isAddingMarker}
+            >
               Добавить на карту
             </button>
           </form>
