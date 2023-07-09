@@ -17,6 +17,7 @@ const Header = ({ links }) => {
         zIndex: "2",
         minHeight: Constants.menuHeight,
         display: "flex",
+        alignItems: "center",
         position: "sticky",
         top: "0",
         padding: Constants.menuPadding,
