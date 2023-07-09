@@ -14,8 +14,7 @@ const Footer = () => {
         color: Constants.thirdColor,
       }}
     >
-      По добавлению компании в раздел "Где купить" или разработке сервиса, сайта
-      пишите на почту: {Constants.email}
+      {Constants.email}
     </Box>
   );
 };
