@@ -1,7 +1,8 @@
 // InstructionChatMap.js
 
 import Image from "next/image";
-import searchAdress from "../../../public/images/search-adress.gif";
+import { DynamicReactPlayer } from "../../utils/DynamicReactPlayer";
+/* import searchAdress from "../../../public/images/search-adress.gif"; */
 import choiceTheme from "../../../public/images/choice-theme.gif";
 import addTheme from "../../../public/images/add-theme.gif";
 import deleteTheme from "../../../public/images/delete-theme.gif";
@@ -9,7 +10,6 @@ import showAllMarkers from "../../../public/images/show-all-markers.gif";
 import addMessage from "../../../public/images/add-message.gif";
 import delMessage from "../../../public/images/delete-message.gif";
 import shareMarker from "../../../public/images/share-marker.gif";
-
 import stylesHome from "../../../styles/Help.module.scss";
 
 function InstructionChatMap() {
@@ -37,13 +37,18 @@ function InstructionChatMap() {
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
           <div className={stylesHome.imageContainer}>
-            <Image
+            <DynamicReactPlayer
+              url="/video/add-message.m4v"
+              controls={true}
+              loop={true}
+            />
+            {/*  <Image
               src={searchAdress}
               alt="Чат на карте: Выбор адреса для маркера"
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>
               Выбор адреса для маркера
             </div>
