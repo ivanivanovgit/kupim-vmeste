@@ -74,7 +74,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
 
     const newThemes = themes.filter((theme) => theme !== selectedTheme);
     setThemes(newThemes);
-    dispatch(setSelectedTheme(newThemes.length > 0 ? newThemes[0] : ""));
+    dispatch(setSelectedTheme(newThemes?.length > 0 ? newThemes[0] : ""));
     setDeleteThemeError(`Тема \"${selectedTheme}\"  удалена успешно.`);
     setTimeout(() => {
       setDeleteThemeError(""); // Очищаем сообщение об ошибке при успешном удалении темы
@@ -152,7 +152,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   });
 
   useEffect(() => {
-    if (Object.keys(router.query).length === 0) {
+    if (Object.keys(router?.query ?? {}).length === 0) {
       // query ещё не доступен, выходим из useEffect
       return;
     }
@@ -199,7 +199,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
   }, []);
 
   useEffect(() => {
-    if (themes.length > 0 && !selectedTheme && !loadingtheme) {
+    if (themes?.length > 0 && !selectedTheme && !loadingtheme) {
       dispatch(setSelectedTheme(themes[0]));
     }
   }, [themes, loadingtheme]);
@@ -263,7 +263,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                   whiteSpace: "nowrap",
                 }}
               >
-                {themes.length === 0 && (
+                {!(themes?.length > 0) && (
                   <MenuItem
                     className={layoutStyles.MenuItemStyle}
                     value=""
@@ -272,7 +272,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
                     Тема не задана
                   </MenuItem>
                 )}
-                {themes.map((theme, index) => (
+                {themes?.map((theme, index) => (
                   <MenuItem
                     key={index}
                     className={layoutStyles.MenuItemStyle}

@@ -1,3 +1,4 @@
+// api/chat-markers/themes.js
 import pool from "../../../src/utils/db";
 
 export default async function themes(req, res) {
