@@ -28,7 +28,7 @@ function InstructionRoute() {
           сообщение для маршрута, затем нажмите кнопку "Добавить маршрут",
           маршрут будет добавлен на карту.
           <div className={stylesHome.playerWrapper}>
-            <video src="/video/add-route.m4v" controls loop />
+            <video src="/video/add-route.m4v" controls loop preload="none" />
             <div className={stylesHome.videoCaption}>
               Добавление маршрута (продолжительность 12 секунд)
             </div>

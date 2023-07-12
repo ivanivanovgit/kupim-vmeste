@@ -27,7 +27,16 @@ function InstructionChatMap() {
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
           <div className={stylesHome.playerWrapper}>
-            <video src="/video/search-adress.m4v" controls loop />
+            <video
+              src="/video/search-adress.m4v"
+              controls
+              loop
+              style={{
+                width: "100%",
+                height: "auto",
+                backgroundColor: "black",
+              }}
+            />
             <div className={stylesHome.videoCaption}>
               Выбор адреса для маркера (продолжительность 4 секунды)
             </div>
@@ -42,7 +51,16 @@ function InstructionChatMap() {
           списке. При выборе темы маркеры автоматически отфильтруются в
           зависимости от темы.
           <div className={stylesHome.playerWrapper}>
-            <video src="/video/choice-theme.m4v" controls loop />
+            <video
+              src="/video/choice-theme.m4v"
+              controls
+              loop
+              style={{
+                width: "100%",
+                height: "auto",
+                backgroundColor: "black",
+              }}
+            />
             <div className={stylesHome.videoCaption}>
               Выбор темы (продолжительность 2 секунды)
             </div>
