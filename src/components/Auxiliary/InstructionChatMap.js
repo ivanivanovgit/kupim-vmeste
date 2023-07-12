@@ -1,7 +1,6 @@
 // InstructionChatMap.js
 
 import Image from "next/image";
-import { DynamicReactPlayer } from "../../utils/DynamicReactPlayer";
 /* import searchAdress from "../../../public/images/search-adress.gif"; */
 import choiceTheme from "../../../public/images/choice-theme.gif";
 import addTheme from "../../../public/images/add-theme.gif";
@@ -36,21 +35,10 @@ function InstructionChatMap() {
           адресами, выбрать один из вариантов, затем нажать на кнопку "Найти".
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
-          <div className={stylesHome.imageContainer}>
-            <DynamicReactPlayer
-              url="/video/add-message.m4v"
-              controls={true}
-              loop={true}
-            />
-            {/*  <Image
-              src={searchAdress}
-              alt="Чат на карте: Выбор адреса для маркера"
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>
-              Выбор адреса для маркера
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/add-message.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Добавление сообщения на карту (продолжительность 17 секунд)
             </div>
           </div>
         </li>

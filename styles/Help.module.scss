@@ -1,8 +1,16 @@
 // Help.module.scss
 @import "sharedHomeHelp.module.scss";
 
-.imageCaption {
-  /* @apply mt-1 font-medium; */
+.playerWrapper {
+  width: 80%;
+  margin: 1rem auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.videoCaption {
   margin-top: 0.25rem;
   font-weight: 500;
 }
