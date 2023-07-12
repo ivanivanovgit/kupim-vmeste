@@ -51,13 +51,13 @@ function InstructionChatMap() {
           списке. При выборе темы маркеры автоматически отфильтруются в
           зависимости от темы.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/*  <Image
               src={choiceTheme}
               alt="Чат на карте: Выбор темы."
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>Выбор темы</div>
           </div>
         </li>
@@ -68,13 +68,13 @@ function InstructionChatMap() {
           Чтобы добавить собственную тему нажмите на кнопку "Добавить тему",
           тема добавиться и станет выбранной.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/*  <Image
               src={addTheme}
               alt="Чат на карте: Добавление темы."
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>Добавление темы</div>
           </div>
         </li>
@@ -85,13 +85,13 @@ function InstructionChatMap() {
           Можно удалить тему, нажав на крестик возле выбранной темы, но только
           после удаления всех связанных с ней маркеров.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/*  <Image
               src={deleteTheme}
               alt="Чат на карте: Удаление темы."
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>Удаление темы</div>
           </div>
         </li>
@@ -103,13 +103,13 @@ function InstructionChatMap() {
           "Показать маркеры по всем темам.". На карте будут показаны все
           существующие маркеры вне зависимости от темы.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/*  <Image
               src={showAllMarkers}
               alt="Чат на карте: Показать маркеры по всем темам. "
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>
               Показать маркеры по всем темам
             </div>
@@ -123,13 +123,13 @@ function InstructionChatMap() {
           добавить тему, задать адрес и ввести текст сообщения, который затем
           будет отображаться в баллуне маркера на карте.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/*  <Image
               src={addMessage}
               alt="Чат на карте: добавление сообщения"
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>
               Добавление маркера с сообщением на карту
             </div>
@@ -143,13 +143,13 @@ function InstructionChatMap() {
           оранжевый маркер с сообщением. В случае, если Вы хотите удалить этот
           маркер, нажмите на кнопку "Удалить" в открывшемся баллуне маркера.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/* <Image
               src={delMessage}
               alt="Чат на карте: просмотр и удаление сообщения с карты "
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>
               Просмотр и удаление сообщений с карты
             </div>
@@ -166,13 +166,13 @@ function InstructionChatMap() {
           увидит ваш маркер с вашим сообщением, заданной темой и соответствующим
           адресом.
           <div className={stylesHome.imageContainer}>
-            <Image
+            {/* <Image
               src={shareMarker}
               alt="Чат на карте: Поделиться маркером"
               width="auto"
               height="auto"
               priority
-            />
+            /> */}
             <div className={stylesHome.imageCaption}>Поделиться маркером</div>
           </div>
         </li>
