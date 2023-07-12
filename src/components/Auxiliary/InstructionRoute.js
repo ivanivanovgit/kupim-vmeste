@@ -1,10 +1,7 @@
 // InstructionRoute.js
 
-import Image from "next/image";
 import stylesHome from "../../../styles/Help.module.scss";
-import addRoute from "../../../public/images/add-route.gif";
-import delRoute from "../../../public/images/delete-route.gif";
-import clearFields from "../../../public/images/clear-fields.gif";
+
 function InstructionRoute() {
   return (
     <>
@@ -30,15 +27,11 @@ function InstructionRoute() {
           местоположения, которые можно выбрать. После выбора адресов введите
           сообщение для маршрута, затем нажмите кнопку "Добавить маршрут",
           маршрут будет добавлен на карту.
-          <div className={stylesHome.imageContainer}>
-            <Image
-              src={addRoute}
-              alt="Поиск попутных машин для перевозки груза: Добвление маршрута."
-              width="auto"
-              height="auto"
-              priority
-            />
-            <div className={stylesHome.imageCaption}>Добавление маршрута</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/add-route.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Добавление маршрута (продолжительность 12 секунд)
+            </div>
           </div>
         </li>
         <li>
@@ -47,15 +40,11 @@ function InstructionRoute() {
           </span>{" "}
           Чтобы удалить маршрут, нажмите на кнопку "Удалить" на любом из
           маркеров соответствующего маршрута.
-          <div className={stylesHome.imageContainer}>
-            <Image
-              src={delRoute}
-              alt="Поиск попутных машин для перевозки груза: Удаление маршрута."
-              width="auto"
-              height="auto"
-              priority
-            />
-            <div className={stylesHome.imageCaption}>Удаление маршрута</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/delete-route.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Удаление маршрута (продолжительность 4 секунды)
+            </div>
           </div>
         </li>
         <li>
@@ -66,15 +55,11 @@ function InstructionRoute() {
           автоматически очистятся. Можно очищать и обычным способом, но данная
           кнопка ускоряет процесс, делая более удобным новое добавление
           маршрута.
-          <div className={stylesHome.imageContainer}>
-            <Image
-              src={clearFields}
-              alt="Поиск попутных машин для перевозки груза: Очищение полей."
-              width="auto"
-              height="auto"
-              priority
-            />
-            <div className={stylesHome.imageCaption}>Очищение полей</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/clear-fields.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Очищение полей (продолжительность 6 секунд)
+            </div>
           </div>
         </li>
       </ul>

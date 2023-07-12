@@ -1,14 +1,5 @@
 // InstructionChatMap.js
 
-import Image from "next/image";
-/* import searchAdress from "../../../public/images/search-adress.gif"; */
-import choiceTheme from "../../../public/images/choice-theme.gif";
-import addTheme from "../../../public/images/add-theme.gif";
-import deleteTheme from "../../../public/images/delete-theme.gif";
-import showAllMarkers from "../../../public/images/show-all-markers.gif";
-import addMessage from "../../../public/images/add-message.gif";
-import delMessage from "../../../public/images/delete-message.gif";
-import shareMarker from "../../../public/images/share-marker.gif";
 import stylesHome from "../../../styles/Help.module.scss";
 
 function InstructionChatMap() {
@@ -36,9 +27,9 @@ function InstructionChatMap() {
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
           <div className={stylesHome.playerWrapper}>
-            <video src="/video/add-message.m4v" controls loop />
+            <video src="/video/search-adress.m4v" controls loop />
             <div className={stylesHome.videoCaption}>
-              Добавление сообщения на карту (продолжительность 17 секунд)
+              Выбор адреса для маркера (продолжительность 4 секунды)
             </div>
           </div>
         </li>
@@ -50,15 +41,11 @@ function InstructionChatMap() {
           списке, а также выбрать интересующую тему, нажав на нее в выпадающем
           списке. При выборе темы маркеры автоматически отфильтруются в
           зависимости от темы.
-          <div className={stylesHome.imageContainer}>
-            {/*  <Image
-              src={choiceTheme}
-              alt="Чат на карте: Выбор темы."
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>Выбор темы</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/choice-theme.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Выбор темы (продолжительность 2 секунды)
+            </div>
           </div>
         </li>
         <li>
@@ -67,15 +54,11 @@ function InstructionChatMap() {
           </span>{" "}
           Чтобы добавить собственную тему нажмите на кнопку "Добавить тему",
           тема добавиться и станет выбранной.
-          <div className={stylesHome.imageContainer}>
-            {/*  <Image
-              src={addTheme}
-              alt="Чат на карте: Добавление темы."
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>Добавление темы</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/add-theme.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Добавление темы (продолжительность 5 секунд)
+            </div>
           </div>
         </li>
         <li>
@@ -84,15 +67,11 @@ function InstructionChatMap() {
           </span>{" "}
           Можно удалить тему, нажав на крестик возле выбранной темы, но только
           после удаления всех связанных с ней маркеров.
-          <div className={stylesHome.imageContainer}>
-            {/*  <Image
-              src={deleteTheme}
-              alt="Чат на карте: Удаление темы."
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>Удаление темы</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/delete-theme.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Удаление темы (продолжительность 8 секунд)
+            </div>
           </div>
         </li>
         <li>
@@ -102,16 +81,10 @@ function InstructionChatMap() {
           Если Вы хотите просмотреть маркеры по всем темам, нажмите на кнопку
           "Показать маркеры по всем темам.". На карте будут показаны все
           существующие маркеры вне зависимости от темы.
-          <div className={stylesHome.imageContainer}>
-            {/*  <Image
-              src={showAllMarkers}
-              alt="Чат на карте: Показать маркеры по всем темам. "
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>
-              Показать маркеры по всем темам
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/show-all-markers.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Показать маркеры по всем темам (продолжительность 2 секунды)
             </div>
           </div>
         </li>
@@ -122,16 +95,10 @@ function InstructionChatMap() {
           Для добавления маркера с сообщением на карту нужно выбрать или
           добавить тему, задать адрес и ввести текст сообщения, который затем
           будет отображаться в баллуне маркера на карте.
-          <div className={stylesHome.imageContainer}>
-            {/*  <Image
-              src={addMessage}
-              alt="Чат на карте: добавление сообщения"
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>
-              Добавление маркера с сообщением на карту
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/add-message.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Добавление сообщения на карту (продолжительность 17 секунд)
             </div>
           </div>
         </li>
@@ -142,16 +109,11 @@ function InstructionChatMap() {
           Чтобы просмотреть сообщение на карте, выберите мышкой необходимый
           оранжевый маркер с сообщением. В случае, если Вы хотите удалить этот
           маркер, нажмите на кнопку "Удалить" в открывшемся баллуне маркера.
-          <div className={stylesHome.imageContainer}>
-            {/* <Image
-              src={delMessage}
-              alt="Чат на карте: просмотр и удаление сообщения с карты "
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>
-              Просмотр и удаление сообщений с карты
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/delete-message.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Просмотр и удаление сообщений с карты (продолжительность 3
+              секунды)
             </div>
           </div>
         </li>
@@ -165,15 +127,11 @@ function InstructionChatMap() {
           данную ссылку своему знакомому. Перейдя по этой ссылке, ваш знакомый
           увидит ваш маркер с вашим сообщением, заданной темой и соответствующим
           адресом.
-          <div className={stylesHome.imageContainer}>
-            {/* <Image
-              src={shareMarker}
-              alt="Чат на карте: Поделиться маркером"
-              width="auto"
-              height="auto"
-              priority
-            /> */}
-            <div className={stylesHome.imageCaption}>Поделиться маркером</div>
+          <div className={stylesHome.playerWrapper}>
+            <video src="/video/share-marker.m4v" controls loop />
+            <div className={stylesHome.videoCaption}>
+              Поделиться маркером (продолжительность 7 секунд)
+            </div>
           </div>
         </li>
       </ul>
