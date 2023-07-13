@@ -68,7 +68,7 @@ function HomeLayout({ stylesHome }) {
 
       <p className={stylesHome.text}>
         В разделе{" "}
-        <ActiveLink href="//help">
+        <ActiveLink href="/help">
           <span
             className={`${stylesHome.subsectionTitle} ${stylesHome.homeLink}`}
           >
