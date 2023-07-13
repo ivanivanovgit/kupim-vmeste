@@ -67,8 +67,15 @@ function HomeLayout({ stylesHome }) {
       </ul>
 
       <p className={stylesHome.text}>
-        В разделе "Помощь/F.A.Q." Вы можете найти подробную инструкцию по каждой
-        из вкладок сервиса.
+        В разделе{" "}
+        <ActiveLink href="//help">
+          <span
+            className={`${stylesHome.subsectionTitle} ${stylesHome.homeLink}`}
+          >
+            "Помощь/F.A.Q."
+          </span>
+        </ActiveLink>{" "}
+        Вы можете найти подробную инструкцию по каждой из вкладок сервиса.
       </p>
       <div className={`${stylesHome.sectionTitle} ${stylesHome.sectionMt6}`}>
         Примеры использования сервиса
