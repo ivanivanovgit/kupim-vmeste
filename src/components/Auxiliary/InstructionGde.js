@@ -1,19 +1,18 @@
 // InstructionGde.js
 
-import Image from "next/image";
 import { Constants } from "../../CONSTANTS";
-import stylesHome from "../../../styles/Help.module.scss";
+import stylesHelp from "../../../styles/Help.module.scss";
 
 function InstructionGde() {
   return (
     <>
       <div
-        className={`${stylesHome.anchor} ${stylesHome.instructionHeader}`}
+        className={`${stylesHelp.anchor} ${stylesHelp.instructionHeader}`}
         id="gde-kupit"
       >
         Раздел "Где купить"
       </div>
-      <div className={stylesHome.text}>
+      <div className={stylesHelp.text}>
         В разделе "Где купить" Вы можете найти ближайшие магазины, рынки и
         другие точки продаж, которые были проверены и одобрены пользователями
         сервиса. Нажимая на интересующую вкладку, Вы можете увидеть маркеры
