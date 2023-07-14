@@ -44,9 +44,10 @@ function RouteMap({
   ///////// useEffect для инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
+      dispatch(setSubmitMessage("Карта загружается..."));
       return;
     }
-
+    dispatch(setSubmitMessage(""));
     ymaps.ready(() => {
       const myMap = new ymaps.Map(mapRef.current, {
         center: Constants.coordDefault,

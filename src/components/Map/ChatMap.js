@@ -5,7 +5,7 @@ import {
   setAddress,
   setSelectedTheme,
   setShowAllMarkers,
-  setCheckDublicateMarkersMesage,
+  setMarkersMesage,
   setIsAddingMarker,
 } from "../../redux/slices/chatSlices/chatMapSlice";
 import { useRouter } from "next/router";
@@ -225,8 +225,12 @@ function ChatMap({ mapStyle, searchInputRef }) {
   /////////  useEffect для извлечения маркеров на карту согласно выбранной теме
   useEffect(() => {
     if (!ymaps || !myMapRef.current || !isMapLoaded || !selectedTheme) {
+      dispatch(setMarkersMesage("Карта загружается..."));
       return;
     }
+
+    dispatch(setMarkersMesage(""));
+
     // Проверяем, существует ли clustererRef.current перед удалением маркеров
     if (clustererRef.current) {
       // Удаляем все маркеры из кластера
@@ -304,12 +308,10 @@ function ChatMap({ mapStyle, searchInputRef }) {
       return;
     }
 
-    dispatch(
-      setCheckDublicateMarkersMesage("Идет добавление маркера, подождите...")
-    );
+    dispatch(setMarkersMesage("Идет добавление маркера, подождите..."));
 
     setTimeout(() => {
-      dispatch(setCheckDublicateMarkersMesage(""));
+      dispatch(setMarkersMesage(""));
     }, 3000);
 
     // Проверка на дубликат
@@ -322,12 +324,12 @@ function ChatMap({ mapStyle, searchInputRef }) {
         if (isDuplicate) {
           // Вывод сообщения пользователю
           dispatch(
-            setCheckDublicateMarkersMesage(
+            setMarkersMesage(
               "Маркер с этими координатами и сообщением уже существует"
             )
           );
           setTimeout(() => {
-            dispatch(setCheckDublicateMarkersMesage(""));
+            dispatch(setMarkersMesage(""));
           }, 3000);
           return;
         }
@@ -341,7 +343,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
           if (isDuplicateCoords) {
             // Вывод сообщения пользователю
             dispatch(
-              setCheckDublicateMarkersMesage(
+              setMarkersMesage(
                 "Маркер с этими координатами уже существует, добавляем с небольшим смещением"
               )
             );
@@ -354,7 +356,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
             /* setCheckIsDuplicateCoords((prev) => prev + 1); */
 
             setTimeout(() => {
-              dispatch(setCheckDublicateMarkersMesage(""));
+              dispatch(setMarkersMesage(""));
             }, 3000);
           }
 

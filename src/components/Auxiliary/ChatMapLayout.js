@@ -42,9 +42,7 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
     (state) => state.chatMap.searchButtonClick
   );
   const searchInput = useSelector((state) => state.chatMap.searchInput);
-  const checkDublicateMarkersMesage = useSelector(
-    (state) => state.chatMap.checkDublicateMarkersMesage
-  );
+  const markersMesage = useSelector((state) => state.chatMap.markersMesage);
   const openAlert = useSelector((state) => state.chatMap.openAlert);
   const showMessage = useSelector((state) => state.chatMap.showMessage);
   const isAddingMarker = useSelector((state) => state.chatMap.isAddingMarker);
@@ -367,10 +365,8 @@ function ChatMapLayout({ mapChat, layoutStyles }) {
         {deleteThemeError && (
           <div className={layoutStyles.chatError}>{deleteThemeError}</div>
         )}
-        {checkDublicateMarkersMesage && (
-          <div className={layoutStyles.chatError}>
-            {checkDublicateMarkersMesage}
-          </div>
+        {markersMesage && (
+          <div className={layoutStyles.chatError}>{markersMesage}</div>
         )}
         {showMessage && (
           <div className={layoutStyles.chatError}>{showMessage}</div>
