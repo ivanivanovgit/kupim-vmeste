@@ -16,5 +16,5 @@ export const Constants = {
   zoomDefault: 10,
   zoomMax: 21,
   offset: 3 / 111320,
-  email: "79162002107@yandex.ru",
+  email: "kupim.vmeste.com@gmail.com",
 };
