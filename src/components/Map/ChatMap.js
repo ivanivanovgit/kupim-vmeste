@@ -155,8 +155,10 @@ function ChatMap({ mapStyle, searchInputRef }) {
   ///////// useEffect для добавления перетаскиваемого маркера и инициализации карты
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
+      dispatch(setMarkersMesage("Карта загружается..."));
       return;
     }
+    dispatch(setMarkersMesage(""));
 
     let coords = Constants.coordDefault;
     let zoom = Constants.zoomDefault;
@@ -225,11 +227,8 @@ function ChatMap({ mapStyle, searchInputRef }) {
   /////////  useEffect для извлечения маркеров на карту согласно выбранной теме
   useEffect(() => {
     if (!ymaps || !myMapRef.current || !isMapLoaded || !selectedTheme) {
-      dispatch(setMarkersMesage("Карта загружается..."));
       return;
     }
-
-    dispatch(setMarkersMesage(""));
 
     // Проверяем, существует ли clustererRef.current перед удалением маркеров
     if (clustererRef.current) {
