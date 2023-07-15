@@ -9,7 +9,7 @@ import theme from "../src/Theme";
 import createEmotionCache from "../src/createEmotionCache";
 import LayOut from "../src/components/Auxiliary/LayOut";
 import "../styles/globals.css";
-import localFont from "@next/font/local";
+import localFont from "next/font/local";
 
 import { Provider } from "react-redux";
 import { store } from "../src/redux/store";
