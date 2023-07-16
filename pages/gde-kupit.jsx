@@ -13,7 +13,7 @@ const Gdekupit = ({ markers }) => {
   const HorOrVer = (st) => {
     const tabs = [
       {
-        title: "Карта торфяных карьеров",
+        title: "Карта торфяных карьеров Московской и Смоленской областях",
         content: (
           <div>
             <DifferentMaps markers={markers} st={st} idTab={1} />
@@ -21,7 +21,7 @@ const Gdekupit = ({ markers }) => {
         ),
       },
       {
-        title: "Карта производителей винтовых свай",
+        title: "Карта производителей винтовых свай в Московской области",
         content: (
           <div>
             <DifferentMaps markers={markers} st={st} idTab={2} />
