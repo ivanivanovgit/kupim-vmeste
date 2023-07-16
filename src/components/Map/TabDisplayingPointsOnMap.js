@@ -83,7 +83,7 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
       ////
       myMap.geoObjects.add(clusterer);
       ///
-      if (idTabMap === 1) {
+      if (idTabMap === 2) {
         ///
         // Создание маркера Росторф
         let rostrofPlacemark = new ymaps.Placemark(
