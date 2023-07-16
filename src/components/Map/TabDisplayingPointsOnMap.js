@@ -86,11 +86,11 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
       if (idTabMap === 1) {
         ///
         // Создание маркера Росторф
-        let myPlacemark = new ymaps.Placemark(
-          [55.365, 36.16],
+        let rostrofPlacemark = new ymaps.Placemark(
+          [55.42326, 34.82749],
           {
             balloonContent:
-              'Росторф - торфяной карьер в ЦЗ <br></br> <a href="https://www.rostorf.com">www.rostorf.com</a>', // текст балуна при клике на маркер
+              'Росторф - торфяной карьер с лицензией. Торф - 500 р./куб. м,  подходит для озеленения, дачников, садоводов. Тел: 8-930-988-22-75 <br></br> <a href="https://www.rostorf.com">www.rostorf.com</a>', // текст балуна при клике на маркер
           },
           {
             /// balloon settings
@@ -136,7 +136,60 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
         );
 
         // Добавление маркера на карту
-        myMap.geoObjects.add(myPlacemark);
+        myMap.geoObjects.add(rostrofPlacemark);
+        ///
+        // Создание маркера Росторф для грунтов
+        let rostrofPlacemark2 = new ymaps.Placemark(
+          [55.32911300332484, 36.14180775380938],
+          {
+            balloonContent:
+              'Филиал Росторфа предоставляет универсальную просеянную плодородную смесь в рассрочку для питомников, садовых центров, агрохолдингов. Тел: 8-916-200-21-07 <br></br> <a href="https://www.rostorf.com">www.rostorf.com</a>', // текст балуна при клике на маркер
+          },
+          {
+            /// balloon settings
+            balloonLayout: "default#imageWithContent",
+            balloonAutoPan: true,
+            balloonPanelMaxMapArea: 0,
+            hideIconOnBalloonOpen: false,
+            balloonOffset: [18, -120],
+
+            balloonContentLayout: ymaps.templateLayoutFactory.createClass(
+              '<div class="custom-balloon">' +
+                "$[properties.balloonContent]" +
+                '<div class="custom-balloon__close">&times;</div>' +
+                "</div>",
+              {
+                build: function () {
+                  this.constructor.superclass.build.call(this);
+                  this._$element = this.getParentElement().querySelector(
+                    ".custom-balloon__close"
+                  );
+                  this._$element.addEventListener(
+                    "click",
+                    this.onCloseClick.bind(this),
+                    { once: true }
+                  );
+                },
+                onCloseClick: function (e) {
+                  e.preventDefault();
+                  this.events.fire("userclose");
+                },
+              }
+            ),
+            /// icon settings
+            iconLayout: "default#image",
+            iconImageHref: "images/rtMarker.png",
+            iconImageSize: [30, 43],
+            iconImageOffset: [-18, -43],
+            iconContentLayout: ymaps.templateLayoutFactory.createClass(
+              "<div>$[properties.iconContent]</div>"
+            ),
+            ///
+          }
+        );
+
+        // Добавление маркера на карту
+        myMap.geoObjects.add(rostrofPlacemark2);
         ///
       }
       ///
