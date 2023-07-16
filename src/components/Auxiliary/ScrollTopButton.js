@@ -35,14 +35,18 @@ function ScrollTopButton() {
     <Box
       sx={{
         position: "fixed",
-        bottom: "9%",
+        bottom: "18%",
         right: "3%",
         zIndex: "9999",
       }}
     >
       {isVisible && (
         <Button onClick={scrollToTop} color="thirdColor">
-          <UploadSharpIcon />
+          <UploadSharpIcon
+            sx={{
+              fontSize: "2.5rem",
+            }}
+          />
         </Button>
       )}
     </Box>
