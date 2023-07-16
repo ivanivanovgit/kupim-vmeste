@@ -17,7 +17,7 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
 
       const myMap = new ymaps.Map(mapRef.current, {
         center: markers[0].coords,
-        zoom: Constants.zoomDefault,
+        zoom: Constants.zoomMin,
       });
 
       const searchControl = myMap.controls.get("searchControl");

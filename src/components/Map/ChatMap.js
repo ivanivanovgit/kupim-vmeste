@@ -194,7 +194,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
     myMapRef.current.events.add("click", function (e) {
       let coords = e.get("coords");
       currentCoords.current = coords;
-      console.log("currentCoords.current:", currentCoords.current);
+
       if (myPlacemarkRef.current) {
         myPlacemarkRef.current.geometry.setCoordinates(coords);
       } else {

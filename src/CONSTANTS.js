@@ -14,6 +14,7 @@ export const Constants = {
   widthInstMessChat: "900",
   coordDefault: [55.755864, 37.617698],
   zoomDefault: 10,
+  zoomMin: 7,
   zoomMax: 21,
   offset: 3 / 111320,
   email: "info.kupim.vmeste@gmail.com",
