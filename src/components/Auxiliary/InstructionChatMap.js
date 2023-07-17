@@ -1,8 +1,16 @@
 // InstructionChatMap.js
-
+import YouTube from "react-youtube";
 import stylesHelp from "../../../styles/Help.module.scss";
 
 function InstructionChatMap({ stylesVideo }) {
+  const opts = {
+    height: "390",
+    width: "640",
+    playerVars: {
+      autoplay: 1,
+    },
+  };
+
   return (
     <>
       <div
@@ -26,6 +34,7 @@ function InstructionChatMap({ stylesVideo }) {
           адресами, выбрать один из вариантов, затем нажать на кнопку "Найти".
           При любом способе найденный адрес отобразится в поле "Найденный
           адрес".
+          <YouTube videoId="wAV0KbrKXF8" opts={opts} />
           <div className={stylesHelp.playerWrapper}>
             <video
               src="/video/search-adress.m4v"
