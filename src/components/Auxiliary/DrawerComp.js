@@ -1,15 +1,7 @@
 // DrawerComp.js
-import {
-  Drawer,
-  IconButton,
-  List,
-  ListItemButton,
-  ListItemIcon,
-  ListItemText,
-} from "@mui/material";
+import { Drawer, IconButton, List } from "@mui/material";
 import { useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
-import ActiveLink from "./ActiveLink";
 import { Constants } from "../../CONSTANTS";
 import ActiveListItemButton from "./ActiveListItemButton";
 
