@@ -10,10 +10,10 @@ $tabContentBackgroundColor: rgba(255, 255, 255, 1);
   cursor: pointer;
 }
 
-.tab:hover {
+/* .tab:hover {
   background-color: white;
   transition: 0.5s;
-}
+} */
 
 .tab:not(:last-child) {
   margin-bottom: 0px;

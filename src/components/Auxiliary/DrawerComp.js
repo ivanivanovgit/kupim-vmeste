@@ -2,6 +2,7 @@
 import { Drawer, IconButton, List } from "@mui/material";
 import { useState } from "react";
 import MenuRoundedIcon from "@mui/icons-material/MenuRounded";
+import CloseRoundedIcon from "@mui/icons-material/CloseRounded";
 import { Constants } from "../../CONSTANTS";
 import ActiveListItemButton from "./ActiveListItemButton";
 
@@ -21,7 +22,7 @@ const DrawerComp = ({ links }) => {
         </List>
       </Drawer>
       <IconButton sx={{ marginLeft: "auto" }} onClick={() => setOpen(!open)}>
-        <MenuRoundedIcon />
+        {open ? <CloseRoundedIcon /> : <MenuRoundedIcon />}
       </IconButton>
     </>
   );

@@ -9,9 +9,9 @@ const Footer = () => {
         minHeight: Constants.footerHeight,
         backgroundColor: Constants.FooterColor,
         justifyContent: "center",
-        fontWeight: "550",
+        /*   fontWeight: "550", */
         fontSize: "0.8rem",
-        color: Constants.thirdColor,
+        /*   color: Constants.thirdColor, */
         textAlign: "center",
         padding: "0 0.5rem",
       }}
