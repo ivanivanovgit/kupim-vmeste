@@ -13,7 +13,7 @@ export const Constants = {
   heightLogo: "30",
   widthInstMessChat: "900",
   coordDefault: [55.30863143978791, 36.10639504774879],
-  zoomDefault: 10,
+  zoomDefault: 9,
   zoomMin: 7,
   zoomMax: 21,
   offset: 3 / 111320,
