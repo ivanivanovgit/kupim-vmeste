@@ -1,12 +1,12 @@
 // gde-kupit.jsx
 import Head from "next/head";
-/* import pool from "../src/utils/db"; */
+import pool from "../src/utils/db";
 import { useTheme, useMediaQuery } from "@mui/material";
 import DifferentMaps from "../src/components/Map/DifferentMaps";
 import HorizontTabsGde from "../src/components/Auxiliary/HorizontTabsGde";
 import VerticalTabsGde from "../src/components/Auxiliary/VerticalTabsGde";
-import { markers } from "../src/data/CoordMarkersGde";
-const Gdekupit = (/* { markers } */) => {
+
+const Gdekupit = ({ markers }) => {
   const theme = useTheme();
   const isMatch = useMediaQuery(theme.breakpoints.down("md"));
 
@@ -55,11 +55,11 @@ const Gdekupit = (/* { markers } */) => {
 
 export default Gdekupit;
 
-/* export async function getStaticProps() {
+export async function getStaticProps() {
   const { rows: markers } = await pool.query("SELECT * FROM markers");
 
   return {
     props: { markers },
     revalidate: 60,
   };
-} */
+}
