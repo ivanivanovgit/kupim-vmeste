@@ -18,7 +18,7 @@ Using this tab, you can find the nearest stores, markets, and other sales points
 
 ## Help/F.A.Q.
 
-In the "Help/F.A.Q." section, you can find detailed instructions for each of the service's tabs.
+In the "Help/F.A.Q." section, you can find detailed instructions for each of the service's tabs. NOTICE: If you experience any issues with the map not loading, try changing your network or disabling VPN. The Yandex.Maps service may block connections from IP addresses not located in Russia.
 
 ## Use Case Examples
 

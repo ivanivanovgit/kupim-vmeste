@@ -59,6 +59,9 @@ function HelpLayout({ stylesVideo }) {
         <ActiveLink href="/help#gde-kupit">
           <li>Раздел "Где купить"</li>
         </ActiveLink>
+        <ActiveLink href="/help#error-loading-map">
+          <li>Ошибка загрузки карты</li>
+        </ActiveLink>
       </ol>
       <InstructionChatMap stylesVideo={stylesVideo} />
       <InstructionRoute stylesVideo={stylesVideo} />
