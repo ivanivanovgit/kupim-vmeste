@@ -35,6 +35,7 @@ function RouteMap({
   const ymaps = useYMaps();
   const mapRef = useRef(null);
   const myMapRef = useRef(null);
+  const timeoutIdRef = useRef(null);
   const [selectedFirstAddress, setSelectedFirstAddress] = useState("");
   const [selectedSecondAddress, setSelectedSecondAddress] = useState("");
 
@@ -45,10 +46,24 @@ function RouteMap({
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
       dispatch(setSubmitMessage("Карта загружается..."));
+
+      timeoutIdRef.current = setTimeout(() => {
+        dispatch(
+          setSubmitMessage(
+            "API Яндекс Карт недоступен.  Попробуйте сменить сеть  или  отключить VPN."
+          )
+        );
+      }, 4000);
+
       return;
     }
+
     dispatch(setSubmitMessage(""));
+
     ymaps.ready(() => {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+
       const myMap = new ymaps.Map(mapRef.current, {
         center: Constants.coordDefault,
         zoom: Constants.zoomDefault,
@@ -127,6 +142,9 @@ function RouteMap({
       });
       ///
       return () => {
+        clearTimeout(timeoutIdRef.current);
+        timeoutIdRef.current = null;
+
         if (myMapRef.current) {
           myMapRef.current.destroy();
         }

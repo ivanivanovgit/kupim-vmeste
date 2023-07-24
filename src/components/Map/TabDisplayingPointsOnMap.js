@@ -1,5 +1,5 @@
 // TabDisplayingPointsOnMap.js
-import { useRef, useEffect } from "react";
+import { useRef, useEffect, useState } from "react";
 import { useYMaps } from "@pbe/react-yandex-maps";
 import { Constants } from "../../CONSTANTS";
 
@@ -8,12 +8,22 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
 
   function TabDisplayingPointsOnMap({ markers, st }) {
     const mapRef = useRef(null);
+    const timeoutIdRef = useRef(null);
+    const [mapLoadError, setMapLoadError] = useState(false);
     const ymaps = useYMaps();
 
     useEffect(() => {
       if (!ymaps || !mapRef.current || markers.length == 0) {
+        timeoutIdRef.current = setTimeout(() => {
+          setMapLoadError(true);
+        }, 4000);
+
         return;
       }
+
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+      setMapLoadError(false);
 
       const myMap = new ymaps.Map(mapRef.current, {
         center: markers[0].coords,
@@ -195,7 +205,17 @@ const createTabDisplayingPointsOnMap = (idTabMap) => {
       ///
     }, [ymaps, markers]);
 
-    return <div ref={mapRef} className={st} />;
+    return (
+      <div>
+        <div ref={mapRef} className={st} />
+        {mapLoadError && (
+          <div>
+            API Яндекс Карт недоступен. Попробуйте сменить сеть или отключить
+            VPN.
+          </div>
+        )}
+      </div>
+    );
   }
 
   return TabDisplayingPointsOnMap;

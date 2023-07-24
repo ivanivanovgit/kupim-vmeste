@@ -60,6 +60,7 @@ function ChatMap({ mapStyle, searchInputRef }) {
   const currentCoords = useRef(null);
   const clustererRef = useRef(null);
   const checkIsDuplicateCoordsRef = useRef(null);
+  const timeoutIdRef = useRef(null);
 
   const router = useRouter();
 
@@ -156,9 +157,21 @@ function ChatMap({ mapStyle, searchInputRef }) {
   useEffect(() => {
     if (!ymaps || !mapRef.current) {
       dispatch(setMarkersMesage("Карта загружается..."));
+
+      timeoutIdRef.current = setTimeout(() => {
+        dispatch(
+          setMarkersMesage(
+            "API Яндекс Карт недоступен.  Попробуйте сменить сеть  или  отключить VPN."
+          )
+        );
+      }, 4000);
+
       return;
     }
     dispatch(setMarkersMesage(""));
+
+    clearTimeout(timeoutIdRef.current);
+    timeoutIdRef.current = null;
 
     let coords = Constants.coordDefault;
     let zoom = Constants.zoomDefault;
@@ -217,6 +230,9 @@ function ChatMap({ mapStyle, searchInputRef }) {
     });
 
     return () => {
+      clearTimeout(timeoutIdRef.current);
+      timeoutIdRef.current = null;
+
       if (myMapRef.current) {
         myMapRef.current.destroy();
       }
